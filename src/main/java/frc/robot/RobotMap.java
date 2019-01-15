@@ -14,13 +14,46 @@ package frc.robot;
  * floating around.
  */
 public class RobotMap {
-  // For example to map the left and right motors, you could define the
-  // following variables to use with your drivetrain subsystem.
-  // public static int leftMotor = 1;
-  // public static int rightMotor = 2;
 
-  // If you are using multiple modules, make sure to define both the port
-  // number and the module. For example you with a rangefinder:
-  // public static int rangefinderPort = 1;
-  // public static int rangefinderModule = 1;
+	//Motor Controller Constants
+	public static final int MOTOR_1 = 10;
+	public static final int MOTOR_2 = 20;
+	public static final int MOTOR_3 = 30;
+	public static final int MOTOR_4 = 40;
+	public static final int MOTOR_5 = 50;
+	
+	public static final int LEFT_MOTOR_MASTER = 3;
+	public static final int LEFT_MOTOR_SLAVE_1 = 1;
+	public static final int LEFT_MOTOR_SLAVE_2 = 2;
+	public static final int RIGHT_MOTOR_MASTER = 14;
+	public static final int RIGHT_MOTOR_SLAVE_1 = 0;
+	public static final int RIGHT_MOTOR_SLAVE_2 = 13;
+	public static final int ENDMOTOR2 = 11; 
+	public static final int ELEVATOR_MOTOR_MASTER = 12;
+
+	//Spark Motor Controllers
+	public static final int ENDMOTOR1 = 0;
+	public static final int ANGLEMOTOR = 1;
+
+	//Invert direction (for WCD only)
+	public static int DIRECTION_MULTIPLIER = 1;
+	
+	//Strafe wheel multiplier (for slide drive only)
+	public static double STRAFE_MULTIPLIER = 1;
+
+	//Standard motor drive speeds for auto
+	public static final double AUTO_DRIVE_SPEED = 0.5;
+	public static final double DRIVE_SPEED = 0.65;
+
+	//Encoder distances
+	public static final double MECANUM_ENCODER_DPP = 0.075;
+	
+	//PID values
+	public static double kP_Straight = 0.03;
+	public static double kP_Turn = 0.06;
+	public static double kI_Straight = 0.0;
+	public static double kI_Turn = 0.0;
+	public static double kD_Straight = 0.0;
+	public static double kD_Turn = 0.0;
+
 }
