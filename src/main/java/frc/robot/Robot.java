@@ -7,6 +7,9 @@
 
 package frc.robot;
 
+import edu.wpi.first.networktables.NetworkTable;
+import edu.wpi.first.networktables.NetworkTableEntry;
+import edu.wpi.first.networktables.NetworkTableInstance;
 import edu.wpi.first.wpilibj.TimedRobot;
 import edu.wpi.first.wpilibj.command.Command;
 import edu.wpi.first.wpilibj.command.Scheduler;
@@ -24,50 +27,95 @@ import frc.robot.subsystems.WestCoastDriveTrain;
  * project.
  */
 public class Robot extends TimedRobot {
+
+  //Declare public fields
+	public static int driveType;
+
+ 	//Network tables
+   public static NetworkTableInstance dataTableInstance;
+   public static NetworkTable visionTable;
+   public static NetworkTable navxTable;
+   public static NetworkTableEntry robotStop;
+   public static NetworkTableEntry driveAngle;
+   public static NetworkTableEntry yVelocity;
+   public static NetworkTableEntry xVelocity;
+   public static NetworkTableEntry yDisplacement;
+   public static NetworkTableEntry xDisplacement;
+   public static NetworkTableEntry zeroGyro;
+   public static NetworkTableEntry writeVideo;
+  
+  //Declare subsystems
   public static GenericDriveTrain driveTrain;
+
+  //Declare sensors and control inputs
 	public static OI oi;
 
-	public static int driveType;
-	
-	Command autonomousCommand;
-	SendableChooser<Command> chooser = new SendableChooser<>();
+	//Declare commands
+  private Command autonomousCommand;
+  
+  //Declare Smart dashboard chooser
+	private SendableChooser<Command> chooser;
+
 
 	/**
-	 * This function is run when the robot is first started up and should be
-	 * used for any initialization code.
+   * This function is run when the robot is first started up and should be
+   * used for any initialization code.
 	 */
-	@Override
+  @Override
 	public void robotInit() {
-	
+    
+		//Initialize NetworkTables
+		dataTableInstance = NetworkTableInstance.getDefault();
+		visionTable = dataTableInstance.getTable("vision");
+		navxTable = dataTableInstance.getTable("navx");
+
+		//Initialize NetworkTable entries
+		robotStop = visionTable.getEntry("RobotStop");
+		writeVideo = visionTable.getEntry("WriteVideo");
+		driveAngle = navxTable.getEntry("DriveAngle");
+		yVelocity = navxTable.getEntry("YVelocity");
+		xVelocity = navxTable.getEntry("XVelocity");
+		yDisplacement = navxTable.getEntry("YDisplacement");
+		xDisplacement = navxTable.getEntry("XDisplacement");
+		zeroGyro = navxTable.getEntry("ZeroGyro");
+
+		//Initialize NetworkTable values
+		robotStop.setDouble(0.0);
+    
+    //Declare drive configuration
 		/* Allows for simple alteration of drive train type.  
-		 * 1: West Coast
-		 * 2: Mecanum 
-		 * default: West Coast
-		 */
-		
+    * 1: West Coast
+    * 2: Mecanum 
+    * default: West Coast
+    */
 		driveType = 1;
 		
-		switch(driveType) {
+    //Init output-input systems
+    oi = new OI();
+
+    //Initialize dashboard choosers
+    chooser = new SendableChooser<>();
+    //chooser.addDefault("Default Auto", new ExampleCommand());
+    //chooser.addObject("My Auto", new MyAutoCommand());
+    SmartDashboard.putData("Auto mode", chooser);
+    
+    //Initialize the proper drive train based on drive type
+    switch(driveType) {
 		
-		case 1: 
-			driveTrain = new WestCoastDriveTrain();
-			break;
+      case 1: 
+        driveTrain = new WestCoastDriveTrain();
+        break;
 			
-		case 2:
-			driveTrain = new MecanumDriveTrain();
-			break;
+      case 2:
+        driveTrain = new MecanumDriveTrain();
+        break;
 			
-		default:
-			driveTrain = new WestCoastDriveTrain();
+      default:
+        driveTrain = new WestCoastDriveTrain();
 		
 		}
 		
-		//Init output-input systems
-		oi = new OI();
 		
-		//chooser.addDefault("Default Auto", new ExampleCommand());
-		//chooser.addObject("My Auto", new MyAutoCommand());
-		SmartDashboard.putData("Auto mode", chooser);
 	}
 
 
@@ -92,10 +140,12 @@ public class Robot extends TimedRobot {
   public void disabledInit() {
   }
 
+
   @Override
   public void disabledPeriodic() {
     Scheduler.getInstance().run();
   }
+
 
   /**
    * This autonomous (along with the chooser code above) shows how to select
@@ -125,6 +175,7 @@ public class Robot extends TimedRobot {
     }
   }
 
+
   /**
    * This function is called periodically during autonomous.
    */
@@ -132,6 +183,7 @@ public class Robot extends TimedRobot {
   public void autonomousPeriodic() {
     Scheduler.getInstance().run();
   }
+
 
   @Override
   public void teleopInit() {
@@ -144,6 +196,7 @@ public class Robot extends TimedRobot {
     }
   }
 
+
   /**
    * This function is called periodically during operator control.
    */
@@ -152,6 +205,7 @@ public class Robot extends TimedRobot {
     Scheduler.getInstance().run();
   }
 
+  
   /**
    * This function is called periodically during test mode.
    */

@@ -7,7 +7,7 @@
 
 package frc.robot;
 
-import edu.wpi.first.wpilibj.ADXRS450_Gyro;
+import edu.wpi.first.wpilibj.Encoder;
 import edu.wpi.first.wpilibj.Joystick;
 
 /**
@@ -15,12 +15,20 @@ import edu.wpi.first.wpilibj.Joystick;
  * interface to the commands and command groups that allow control of the robot.
  */
 public class OI {
-  
-  //Create gyro object
-	public ADXRS450_Gyro mainGyro = new ADXRS450_Gyro();	
+  	
+	//Define main control system objects
+	public Encoder frontLeftEncoder, backLeftEncoder, frontRightEncoder, backRightEncoder;
 	
-	//Create joystick objects
-	public Joystick leftJoy = new Joystick(2);
-  public Joystick rightJoy = new Joystick(3);
+	//Define joystick objects and joystick button functions
+	public Joystick leftJoy, rightJoy; 
+	
+	//Default class constructor
+	public OI() {
+
+		//Create new joystick objects
+		leftJoy = new Joystick(2);
+		rightJoy = new Joystick(3);
+
+	}
   
 }
