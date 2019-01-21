@@ -24,7 +24,8 @@ import frc.robot.subsystems.WestCoastDriveTrain;
  * project.
  */
 public class Robot extends TimedRobot {
-  public static GenericDriveTrain driveTrain;
+
+  public static WestCoastDriveTrain driveTrain;
 	public static OI oi;
 
 	public static int driveType;
@@ -45,7 +46,7 @@ public class Robot extends TimedRobot {
 		 * default: West Coast
 		 */
 		
-		driveType = 1;
+/* 		driveType = 1;
 		
 		switch(driveType) {
 		
@@ -61,7 +62,8 @@ public class Robot extends TimedRobot {
 			driveTrain = new WestCoastDriveTrain();
 		
 		}
-		
+ */		
+
 		//Init output-input systems
 		oi = new OI();
 		
