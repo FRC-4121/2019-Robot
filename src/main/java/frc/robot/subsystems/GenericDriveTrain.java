@@ -19,20 +19,20 @@ import frc.robot.commands.DriveWithJoysticksCommand;
 public class GenericDriveTrain extends Subsystem {
 
     
-    // //For WCD only
-    // SpeedControllerGroup leftMotorGroup = new SpeedControllerGroup(frontLeftMotor, backLeftMotor);
-    // SpeedControllerGroup rightMotorGroup = new SpeedControllerGroup(frontRightMotor, backRightMotor);
-
-    
-    //Methods of Generic class are common to all drive train types. 
-    //Specific method code is unique to each drive train type.
+    //Specific a default command
     public void initDefaultCommand() {
         
     	//All drive trains have default command to drive with the joysticks
         setDefaultCommand(new DriveWithJoysticksCommand());
     }
     
+    //Method for driving during Teleop - used for both WCD and Mecanum
     public void drive(double leftJoyX, double leftJoyY, double leftJoyZ, double rightJoyX, double rightJoyY, double rightJoyZ) {}
     
-    public void autoDrive(double speed, double angle) {}
+    //Method for driving during Autonomous - used for WCD
+    public void autoDrive(double leftSpeed, double rightSpeed) {}
+
+    //Method for driving during Autonomous - used for Mecanum
+    public void autoDrive(double speed, double angle, double rotation) {}
+
 }

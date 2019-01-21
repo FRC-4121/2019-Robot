@@ -15,25 +15,19 @@ package frc.robot;
  */
 public class RobotMap {
 
-	//Motor Controller Constants
-	public static final int MOTOR_1 = 10;
-	public static final int MOTOR_2 = 20;
-	public static final int MOTOR_3 = 30;
-	public static final int MOTOR_4 = 40;
-	public static final int MOTOR_5 = 50;
+	//Motor Controller Constants - Mecanum
+	public static final int BACK_LEFT_MOTOR = 2;
+	public static final int BACK_RIGHT_MOTOR = 8;
+	public static final int FRONT_LEFT_MOTOR = 7;
+	public static final int FRONT_RIGHT_MOTOR = 6;
 	
-	public static final int LEFT_MOTOR_MASTER = 3;
-	public static final int LEFT_MOTOR_SLAVE_1 = 1;
-	public static final int LEFT_MOTOR_SLAVE_2 = 2;
-	public static final int RIGHT_MOTOR_MASTER = 14;
-	public static final int RIGHT_MOTOR_SLAVE_1 = 0;
-	public static final int RIGHT_MOTOR_SLAVE_2 = 13;
-	public static final int ENDMOTOR2 = 11; 
-	public static final int ELEVATOR_MOTOR_MASTER = 12;
-
-	//Spark Motor Controllers
-	public static final int ENDMOTOR1 = 0;
-	public static final int ANGLEMOTOR = 1;
+	//Motor Controller Constants - WCD
+	public static final int LEFT_MOTOR_MASTER = -1;
+	public static final int LEFT_MOTOR_SLAVE_1 = -1;
+	public static final int LEFT_MOTOR_SLAVE_2 = -1;
+	public static final int RIGHT_MOTOR_MASTER = -1;
+	public static final int RIGHT_MOTOR_SLAVE_1 = -1;
+	public static final int RIGHT_MOTOR_SLAVE_2 = -1;
 
 	//Invert direction (for WCD only)
 	public static int DIRECTION_MULTIPLIER = 1;
