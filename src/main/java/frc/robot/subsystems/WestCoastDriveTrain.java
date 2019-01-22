@@ -36,8 +36,7 @@ public class WestCoastDriveTrain extends GenericDriveTrain {
 
   // Teleop drive method
   @Override
-  public void drive(double leftJoyX, double leftJoyY, double leftJoyZ, double rightJoyX, double rightJoyY,
-      double rightJoyZ) {
+  public void drive(double leftJoyX, double leftJoyY, double rightJoyX, double rightJoyY) {
 
     if (RobotMap.DIRECTION_MULTIPLIER == 1)
 

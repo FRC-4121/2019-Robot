@@ -51,18 +51,22 @@ public class MecanumDriveTrain extends GenericDriveTrain {
     * Black: ground.  Insert into GND pin of DIO A
     * Blue: channel A.  Insert into S pin of DIO A
     * Yellow: channel B.  Insert into S pin of DIO B
+    * 
+    * Pin-out:
+    * A: Black, Red, Blue
+    * B: Empty, Empty, Yellow
     */
     
-    Robot.oi.frontLeftEncoder = new Encoder(2, 3, true);
+    Robot.oi.frontLeftEncoder = new Encoder(0, 1, true);
     Robot.oi.frontLeftEncoder.setDistancePerPulse(RobotMap.MECANUM_ENCODER_DPP);
     
-    Robot.oi.frontRightEncoder = new Encoder(0, 1, true);
+    Robot.oi.frontRightEncoder = new Encoder(2, 3, true);
     Robot.oi.frontRightEncoder.setDistancePerPulse(RobotMap.MECANUM_ENCODER_DPP);
     
-    Robot.oi.backLeftEncoder = new Encoder(6, 7, true);
+    Robot.oi.backLeftEncoder = new Encoder(4, 5, true);
     Robot.oi.backLeftEncoder.setDistancePerPulse(RobotMap.MECANUM_ENCODER_DPP);
     
-    Robot.oi.backRightEncoder = new Encoder(4, 5, true);
+    Robot.oi.backRightEncoder = new Encoder(6, 7, true);
     Robot.oi.backRightEncoder.setDistancePerPulse(RobotMap.MECANUM_ENCODER_DPP);
     
     return true;
@@ -71,10 +75,17 @@ public class MecanumDriveTrain extends GenericDriveTrain {
 
   //Teleop drive method
   @Override
-  public void drive(double leftJoyX, double leftJoyY, double leftJoyZ, double rightJoyX, double rightJoyY, double rightJoyZ) {
+  public void drive(double rightJoyX, double rightJoyY, double rightJoyZ, boolean useGyro) {
     
-    mecanumDrive.driveCartesian(leftJoyY,  leftJoyX,  rightJoyX, Robot.driveAngle.getDouble(0));
+    if(useGyro) {
+
+      mecanumDrive.driveCartesian(rightJoyX,  rightJoyY,  rightJoyZ, Robot.driveAngle.getDouble(0));
   
+    } else {
+
+      mecanumDrive.driveCartesian(rightJoyX,  rightJoyY,  rightJoyZ);
+
+    }
   }
 
 

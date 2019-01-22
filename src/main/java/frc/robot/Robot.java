@@ -88,7 +88,7 @@ public class Robot extends TimedRobot {
     * 2: Mecanum 
     * default: West Coast
     */
-		driveType = 1;
+		driveType = 2;
 		
     //Init output-input systems
     oi = new OI();

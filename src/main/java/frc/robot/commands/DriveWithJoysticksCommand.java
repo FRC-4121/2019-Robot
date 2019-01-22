@@ -13,8 +13,8 @@ import frc.robot.Robot;
 public class DriveWithJoysticksCommand extends Command {
   
   public DriveWithJoysticksCommand() {
-    // Use requires() here to declare subsystem dependencies
-    // eg. requires(chassis);
+    
+    requires(Robot.driveTrain);
   }
 
   // Called just before this Command runs the first time
@@ -25,7 +25,7 @@ public class DriveWithJoysticksCommand extends Command {
   // Called repeatedly when this Command is scheduled to run
   @Override
   protected void execute() {
-    Robot.driveTrain.drive(Robot.oi.leftJoy.getX(), Robot.oi.leftJoy.getY(), Robot.oi.rightJoy.getX(), Robot.oi.rightJoy.getY());
+    Robot.driveTrain.drive(Robot.oi.rightJoy.getX(), Robot.oi.rightJoy.getY(), Robot.oi.rightJoy.getZ(), false);
   }
 
   // Make this return true when this Command no longer needs to run execute()

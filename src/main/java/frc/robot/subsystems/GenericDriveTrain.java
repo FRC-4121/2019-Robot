@@ -26,9 +26,11 @@ public class GenericDriveTrain extends Subsystem {
         setDefaultCommand(new DriveWithJoysticksCommand());
     }
     
-    //Method for driving during Teleop - used for both WCD and Mecanum
-    public void drive(double leftJoyX, double leftJoyY, double leftJoyZ, double rightJoyX, double rightJoyY, double rightJoyZ) {}
+    //Method for driving during Teleop - used for WCD
+    public void drive(double leftJoyX, double leftJoyY, double rightJoyX, double rightJoyY) {}
     
+    public void drive(double rightJoyX, double rightJoyY, double rightJoyZ, boolean useGyro) {}
+
     //Method for driving during Autonomous - used for WCD
     public void autoDrive(double leftSpeed, double rightSpeed) {}
 
