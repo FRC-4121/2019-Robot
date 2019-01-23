@@ -59,7 +59,7 @@ public class MecanumDriveTrain extends GenericDriveTrain {
     
     Robot.oi.frontLeftEncoder = new Encoder(0, 1, true);
     Robot.oi.frontLeftEncoder.setDistancePerPulse(RobotMap.MECANUM_ENCODER_DPP);
-    
+
     Robot.oi.frontRightEncoder = new Encoder(2, 3, true);
     Robot.oi.frontRightEncoder.setDistancePerPulse(RobotMap.MECANUM_ENCODER_DPP);
     

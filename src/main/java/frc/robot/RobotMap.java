@@ -30,17 +30,18 @@ public class RobotMap {
 	public static final int RIGHT_MOTOR_SLAVE_2 = -1;
 
 	//Invert direction (for WCD only)
-	public static int DIRECTION_MULTIPLIER = 1;
+	public static final int DIRECTION_MULTIPLIER = 1;
 	
-	//Strafe wheel multiplier (for slide drive only)
-	public static double STRAFE_MULTIPLIER = 1;
+	//Speed multiplier for more accurate driving in mecanum
+	public static final double MECANUM_MULTIPLIER = 0.5;
 
 	//Standard motor drive speeds for auto
 	public static final double AUTO_DRIVE_SPEED = 0.5;
 	public static final double DRIVE_SPEED = 0.65;
 
-	//Encoder distances
+	//Encoder things
 	public static final double MECANUM_ENCODER_DPP = 0.075;
+	public static final int MECANUM_ENCODER_PPR = 90;
 	
 	//PID values
 	public static double kP_Straight = 0.03;
