@@ -138,6 +138,9 @@ public class Robot extends TimedRobot {
    */
   @Override
   public void disabledInit() {
+
+    //robotStop.setDouble(1.0);
+
   }
 
 
@@ -194,6 +197,10 @@ public class Robot extends TimedRobot {
     if (autonomousCommand != null) {
       autonomousCommand.cancel();
     }
+
+    //Zero gyro
+    robotStop.setDouble(0.0);
+    zeroGyro.setDouble(1.0);
   }
 
 
@@ -204,6 +211,7 @@ public class Robot extends TimedRobot {
   public void teleopPeriodic() {
     Scheduler.getInstance().run();
 
+    
 
     SmartDashboard.putNumber("Front Left Encoder Rate:", Robot.oi.frontLeftEncoder.getRate());
     SmartDashboard.putNumber("Front Right Encoder Rate:", Robot.oi.frontRightEncoder.getRate());

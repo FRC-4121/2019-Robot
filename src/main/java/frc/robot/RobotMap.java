@@ -44,8 +44,8 @@ public class RobotMap {
 	public static final int MECANUM_ENCODER_PPR = 90;
 	
 	//PID values
-	public static double kP_Straight = 0.03;
-	public static double kP_Turn = 0.06;
+	public static double kP_Straight = 0.1;
+	public static double kP_Turn = 0.00;
 	public static double kI_Straight = 0.0;
 	public static double kI_Turn = 0.0;
 	public static double kD_Straight = 0.0;

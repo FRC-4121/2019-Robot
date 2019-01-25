@@ -13,6 +13,7 @@ import frc.robot.*;
 import com.ctre.phoenix.motorcontrol.can.WPI_TalonSRX;
 
 import edu.wpi.first.wpilibj.drive.MecanumDrive;
+import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import edu.wpi.first.wpilibj.Encoder;
 
 
@@ -57,18 +58,27 @@ public class MecanumDriveTrain extends GenericDriveTrain {
     * B: Empty, Empty, Yellow
     */
     
-    Robot.oi.frontLeftEncoder = new Encoder(0, 1, true);
+    Robot.oi.frontLeftEncoder = new Encoder(0, 1, true, Encoder.EncodingType.k4X);
     Robot.oi.frontLeftEncoder.setDistancePerPulse(RobotMap.MECANUM_ENCODER_DPP);
 
-    Robot.oi.frontRightEncoder = new Encoder(2, 3, true);
+    Robot.oi.frontRightEncoder = new Encoder(2, 3, true, Encoder.EncodingType.k4X);
     Robot.oi.frontRightEncoder.setDistancePerPulse(RobotMap.MECANUM_ENCODER_DPP);
     
-    Robot.oi.backLeftEncoder = new Encoder(4, 5, true);
+    Robot.oi.backLeftEncoder = new Encoder(4, 5, true, Encoder.EncodingType.k4X);
     Robot.oi.backLeftEncoder.setDistancePerPulse(RobotMap.MECANUM_ENCODER_DPP);
     
-    Robot.oi.backRightEncoder = new Encoder(6, 7, true);
+    Robot.oi.backRightEncoder = new Encoder(6, 7, true, Encoder.EncodingType.k4X);
     Robot.oi.backRightEncoder.setDistancePerPulse(RobotMap.MECANUM_ENCODER_DPP);
     
+    Robot.oi.frontLeftEncoder.setSamplesToAverage(100);
+    Robot.oi.backLeftEncoder.setSamplesToAverage(100);
+    Robot.oi.frontRightEncoder.setSamplesToAverage(100);
+    Robot.oi.backRightEncoder.setSamplesToAverage(100);
+    Robot.oi.frontLeftEncoder.reset();
+    Robot.oi.frontRightEncoder.reset();
+    Robot.oi.backRightEncoder.reset();
+    Robot.oi.backLeftEncoder.reset();
+  
     return true;
   }
 
@@ -86,6 +96,11 @@ public class MecanumDriveTrain extends GenericDriveTrain {
       mecanumDrive.driveCartesian(rightJoyX,  rightJoyY,  rightJoyZ);
 
     }
+    
+    SmartDashboard.putNumber("Front Left Current:", frontLeftMotor.getOutputCurrent());
+    SmartDashboard.putNumber("Front Right Current:", frontRightMotor.getOutputCurrent());
+    SmartDashboard.putNumber("Back Left Current:", backLeftMotor.getOutputCurrent());
+    SmartDashboard.putNumber("Back Right Current:", backRightMotor.getOutputCurrent());
   }
 
 
