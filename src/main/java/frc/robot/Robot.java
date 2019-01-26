@@ -15,6 +15,7 @@ import edu.wpi.first.wpilibj.command.Command;
 import edu.wpi.first.wpilibj.command.Scheduler;
 import edu.wpi.first.wpilibj.smartdashboard.SendableChooser;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
+import frc.robot.commands.AutoDriveCommandGroup;
 import frc.robot.subsystems.GenericDriveTrain;
 import frc.robot.subsystems.MecanumDriveTrain;
 import frc.robot.subsystems.WestCoastDriveTrain;
@@ -45,7 +46,7 @@ public class Robot extends TimedRobot {
    public static NetworkTableEntry writeVideo;
   
   //Declare subsystems
-  public static GenericDriveTrain driveTrain;
+  public static GenericDriveTrain drivetrain;
 
   //Declare sensors and control inputs
 	public static OI oi;
@@ -89,33 +90,32 @@ public class Robot extends TimedRobot {
     * default: West Coast
     */
 		driveType = 2;
+	  
+    //Initialize the proper drive train based on drive type
+    switch(driveType) {
+		
+      case 1: 
+        drivetrain = new WestCoastDriveTrain();
+        break;
+			
+      case 2:
+        drivetrain = new MecanumDriveTrain();
+        break;
+			
+      default:
+        drivetrain = new WestCoastDriveTrain();
+		
+		}
 		
     //Init output-input systems
     oi = new OI();
 
     //Initialize dashboard choosers
     chooser = new SendableChooser<>();
-    //chooser.addDefault("Default Auto", new ExampleCommand());
+    chooser.addOption("Auto Test", new AutoDriveCommandGroup());
     //chooser.addObject("My Auto", new MyAutoCommand());
     SmartDashboard.putData("Auto mode", chooser);
     
-    //Initialize the proper drive train based on drive type
-    switch(driveType) {
-		
-      case 1: 
-        driveTrain = new WestCoastDriveTrain();
-        break;
-			
-      case 2:
-        driveTrain = new MecanumDriveTrain();
-        break;
-			
-      default:
-        driveTrain = new WestCoastDriveTrain();
-		
-		}
-		
-		
 	}
 
 
@@ -165,6 +165,7 @@ public class Robot extends TimedRobot {
   public void autonomousInit() {
     autonomousCommand = chooser.getSelected();
 
+    zeroGyro.setDouble(1.0);
     /*
      * String autoSelected = SmartDashboard.getString("Auto Selector",
      * "Default"); switch(autoSelected) { case "My Auto": autonomousCommand
@@ -210,13 +211,11 @@ public class Robot extends TimedRobot {
   @Override
   public void teleopPeriodic() {
     Scheduler.getInstance().run();
-
     
-
-    SmartDashboard.putNumber("Front Left Encoder Rate:", Robot.oi.frontLeftEncoder.getRate());
-    SmartDashboard.putNumber("Front Right Encoder Rate:", Robot.oi.frontRightEncoder.getRate());
-    SmartDashboard.putNumber("Back Right Encoder Rate:", Robot.oi.backRightEncoder.getRate());
-    SmartDashboard.putNumber("Back Left Encoder Rate:", Robot.oi.backLeftEncoder.getRate());
+    // SmartDashboard.putNumber("Front Left Encoder Distance:", Robot.oi.frontLeftEncoder.getDistance());
+    // SmartDashboard.putNumber("Front Right Encoder Distance:", Robot.oi.frontRightEncoder.getDistance());
+    // SmartDashboard.putNumber("Back Right Encoder Distance:", Robot.oi.backRightEncoder.getDistance());
+    // SmartDashboard.putNumber("Back Left Encoder Distance:", Robot.oi.backLeftEncoder.getDistance());
   }
 
   
