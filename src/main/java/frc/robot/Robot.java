@@ -44,6 +44,7 @@ public class Robot extends TimedRobot {
    public static NetworkTableEntry xDisplacement;
    public static NetworkTableEntry zeroGyro;
    public static NetworkTableEntry writeVideo;
+   public static NetworkTableEntry autoAngle;
   
   //Declare subsystems
   public static GenericDriveTrain drivetrain;
@@ -57,6 +58,7 @@ public class Robot extends TimedRobot {
   //Declare Smart dashboard chooser
 	private SendableChooser<Command> chooser;
 
+  public static double autoTesterAngle = 0;
 
 	/**
    * This function is run when the robot is first started up and should be
@@ -78,7 +80,8 @@ public class Robot extends TimedRobot {
 		xVelocity = navxTable.getEntry("XVelocity");
 		yDisplacement = navxTable.getEntry("YDisplacement");
 		xDisplacement = navxTable.getEntry("XDisplacement");
-		zeroGyro = navxTable.getEntry("ZeroGyro");
+    zeroGyro = navxTable.getEntry("ZeroGyro");
+    autoAngle = navxTable.getEntry("AutoAngle");
 
 		//Initialize NetworkTable values
 		robotStop.setDouble(0.0);
@@ -111,6 +114,10 @@ public class Robot extends TimedRobot {
     oi = new OI();
 
     //Initialize dashboard choosers
+
+
+    autoAngle.setDouble(0);
+
     chooser = new SendableChooser<>();
     chooser.addOption("Auto Test", new AutoDriveCommandGroup());
     //chooser.addObject("My Auto", new MyAutoCommand());
@@ -163,9 +170,11 @@ public class Robot extends TimedRobot {
    */
   @Override
   public void autonomousInit() {
+    autoTesterAngle = autoAngle.getDouble(0);
+    zeroGyro.setDouble(1.0);
+    
     autonomousCommand = chooser.getSelected();
 
-    zeroGyro.setDouble(1.0);
     /*
      * String autoSelected = SmartDashboard.getString("Auto Selector",
      * "Default"); switch(autoSelected) { case "My Auto": autonomousCommand

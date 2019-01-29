@@ -8,6 +8,7 @@
 package frc.robot.commands;
 
 import edu.wpi.first.wpilibj.command.CommandGroup;
+import frc.robot.Robot;
 
 public class AutoDriveCommandGroup extends CommandGroup {
   /**
@@ -15,6 +16,6 @@ public class AutoDriveCommandGroup extends CommandGroup {
    */
   public AutoDriveCommandGroup() {
     
-    addSequential(new AutoDrive(0, 2));
+    addSequential(new AutoDrive(45, 2));
   }
 }
