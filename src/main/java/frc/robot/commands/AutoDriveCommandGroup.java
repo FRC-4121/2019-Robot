@@ -16,6 +16,6 @@ public class AutoDriveCommandGroup extends CommandGroup {
    */
   public AutoDriveCommandGroup() {
     
-    addSequential(new AutoDrive(45, 2));
+    addSequential(new AutoDrive(45, 2, 0));
   }
 }

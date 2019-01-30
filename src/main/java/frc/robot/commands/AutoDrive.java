@@ -9,9 +9,10 @@ import frc.robot.extraClasses.PIDControl;
 
 public class AutoDrive extends Command {
 
-  double targetAngle;  //drive angle
+    double targetAngle;  //drive angle
 	double stopTime;  //timeout time
-	double angleCorrection, angleError;
+    double angleCorrection, angleError;
+    double orientAngle;
 	double startTime;
 	
 	PIDControl pidControl;
@@ -22,12 +23,13 @@ public class AutoDrive extends Command {
 	public int rightEncoderStart;
 	
 	//Class constructor
-    public AutoDrive(double ang, double time) { //intakes distance, direction, angle, and stop time
+    public AutoDrive(double ang, double time, double orientAng) { //intakes distance, direction, angle, and stop time
     	
     	requires(Robot.drivetrain);
     	
     	//Set local variables
-    	targetAngle = ang;
+        targetAngle = ang;
+        orientAngle = orientAng;
     	stopTime = time;
     	    	
     	//Set up PID control
@@ -64,11 +66,12 @@ public class AutoDrive extends Command {
     protected void execute() {
     	
 //    	angleCorrection = pidControl.Run(Robot.oi.MainGyro.getAngle(), targetAngle);
-    angleError = Robot.driveAngle.getDouble(0)-targetAngle;
-    angleCorrection = RobotMap.kP_Straight*angleError;
-    Robot.drivetrain.autoDrive(RobotMap.AUTO_DRIVE_SPEED, targetAngle, 0);    	    	
-	SmartDashboard.putString("Angle Correction", Double.toString(angleCorrection));
-	SmartDashboard.putString("Angle Error", Double.toString(angleError));
+        angleError = Robot.driveAngle.getDouble(0)%360-orientAngle;
+        //angleCorrection = RobotMap.kP_Straight*angleError;
+        Robot.drivetrain.autoDrive(RobotMap.AUTO_DRIVE_SPEED, targetAngle, 0);    	    	
+        
+        //SmartDashboard.putString("Angle Correction", Double.toString(angleCorrection));
+        SmartDashboard.putString("Angle Error", Double.toString(angleError));
 
     }
 
