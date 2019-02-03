@@ -9,6 +9,11 @@ package frc.robot;
 
 import edu.wpi.first.wpilibj.Encoder;
 import edu.wpi.first.wpilibj.Joystick;
+import edu.wpi.first.wpilibj.buttons.Button;
+import edu.wpi.first.wpilibj.buttons.JoystickButton;
+
+import frc.robot.commands.ChangeTeleopSpeed;
+
 
 /**
  * This class is the glue that binds the controls on the physical operator
@@ -20,14 +25,20 @@ public class OI {
 	public Encoder frontLeftEncoder, backLeftEncoder, frontRightEncoder, backRightEncoder;
 	
 	//Define joystick objects and joystick button functions
-	public Joystick leftJoy, rightJoy; 
+	public Joystick leftJoy, rightJoy;
+	public Button changeDriveSpeed;
 	
 	//Default class constructor
 	public OI() {
 
 		//Create new joystick objects
-		//leftJoy = new Joystick(2);
 		rightJoy = new Joystick(0);
+
+		//Define Joystick buttons
+		changeDriveSpeed = new JoystickButton(rightJoy, 2);
+
+		//Define Joystick button commands
+		changeDriveSpeed.whenPressed(new ChangeTeleopSpeed());
 
 	}
   

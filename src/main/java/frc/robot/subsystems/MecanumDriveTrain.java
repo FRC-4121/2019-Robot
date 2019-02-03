@@ -22,6 +22,10 @@ import edu.wpi.first.wpilibj.Encoder;
  */
 public class MecanumDriveTrain extends GenericDriveTrain {
 
+  //Define local variables
+  double gyroAngle;
+  double speedX, speedY, speedZ;
+
 	//Initialize motor controllers
   WPI_TalonSRX frontLeftMotor = new WPI_TalonSRX(RobotMap.FRONT_LEFT_MOTOR);
   //frontLeftMotor.
@@ -88,18 +92,31 @@ public class MecanumDriveTrain extends GenericDriveTrain {
   @Override
   public void drive(double rightJoyX, double rightJoyY, double rightJoyZ, boolean useGyro) {
     
-
-    mecanumDrive.setSafetyEnabled(false);
-		
-		mecanumDrive.setMaxOutput(0.8);
+    //Set properties of drive
+    mecanumDrive.setSafetyEnabled(false);	
+    mecanumDrive.setMaxOutput(0.8);
+    
+    //Get joystick values and scale
+    speedX = rightJoyX * RobotMap.DRIVE_SPEED;
+    speedY = rightJoyY * RobotMap.DRIVE_SPEED;
+    speedZ = rightJoyZ * RobotMap.DRIVE_SPEED;
 
     if(useGyro) {
 
-      mecanumDrive.driveCartesian(rightJoyX,  rightJoyY,  rightJoyZ, Robot.driveAngle.getDouble(0));
+      if (Math.abs(Robot.driveAngle.getDouble(0)) < 360.0)
+      {
+        gyroAngle = Robot.driveAngle.getDouble(0);
+      }
+      else
+      {
+        gyroAngle = Robot.driveAngle.getDouble(0) % 360.0;
+      }
+  
+      mecanumDrive.driveCartesian(speedX,  speedY,  speedZ, gyroAngle);
   
     } else {
 
-      mecanumDrive.driveCartesian(rightJoyX,  rightJoyY,  rightJoyZ);
+      mecanumDrive.driveCartesian(speedX,  speedY,  speedZ);
 
     }
 
@@ -109,6 +126,9 @@ public class MecanumDriveTrain extends GenericDriveTrain {
     SmartDashboard.putNumber("Front Right Current:", frontRightMotor.getOutputCurrent());
     SmartDashboard.putNumber("Back Left Current:", backLeftMotor.getOutputCurrent());
     SmartDashboard.putNumber("Back Right Current:", backRightMotor.getOutputCurrent());
+    SmartDashboard.putString("Gyro Angle", Double.toString(gyroAngle));
+    SmartDashboard.putString("Gyro Yaw", Double.toString(Robot.gyroYaw.getDouble(0)));
+
   }
 
 

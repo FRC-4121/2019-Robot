@@ -38,11 +38,13 @@ public class Robot extends TimedRobot {
    public static NetworkTable navxTable;
    public static NetworkTableEntry robotStop;
    public static NetworkTableEntry driveAngle;
+   public static NetworkTableEntry gyroYaw;
    public static NetworkTableEntry yVelocity;
    public static NetworkTableEntry xVelocity;
    public static NetworkTableEntry yDisplacement;
    public static NetworkTableEntry xDisplacement;
    public static NetworkTableEntry zeroGyro;
+   //public static NetworkTableEntry zeroDisplace;
    public static NetworkTableEntry writeVideo;
      
   //Declare subsystems
@@ -72,15 +74,19 @@ public class Robot extends TimedRobot {
 		//Initialize NetworkTable entries
 		robotStop = visionTable.getEntry("RobotStop");
 		writeVideo = visionTable.getEntry("WriteVideo");
-		driveAngle = navxTable.getEntry("DriveAngle");
+    driveAngle = navxTable.getEntry("GyroAngle");
+    gyroYaw = navxTable.getEntry("GyroYaw");
 		yVelocity = navxTable.getEntry("YVelocity");
 		xVelocity = navxTable.getEntry("XVelocity");
 		yDisplacement = navxTable.getEntry("YDisplacement");
 		xDisplacement = navxTable.getEntry("XDisplacement");
     zeroGyro = navxTable.getEntry("ZeroGyro");
+    //zeroDisplace = navxTable.getEntry("ZeroDisplace");
 
 		//Initialize NetworkTable values
-		robotStop.setDouble(0.0);
+    robotStop.setDouble(0.0);
+    zeroGyro.setDouble(0.0);
+    //zeroDisplace.setDouble(0.0);
     
     //Declare drive configuration
 		/* Allows for simple alteration of drive train type.  
@@ -129,9 +135,9 @@ public class Robot extends TimedRobot {
    */
   @Override
   public void robotPeriodic() {
-    if(Robot.driveAngle.getDouble(0) > 359 || Robot.driveAngle.getDouble(0) < -359){
-      Robot.zeroGyro.setDouble(1);
-    }
+    //if(Robot.driveAngle.getDouble(0) > 359 || Robot.driveAngle.getDouble(0) < -359){
+    //  Robot.zeroGyro.setDouble(1);
+    //}
 
   }
 
@@ -167,8 +173,10 @@ public class Robot extends TimedRobot {
    */
   @Override
   public void autonomousInit() {
-    zeroGyro.setDouble(1.0);
     
+    zeroGyro.setDouble(1.0);
+    //zeroDisplace.setDouble(1.0);
+
     autonomousCommand = chooser.getSelected();
 
     /*
@@ -204,9 +212,11 @@ public class Robot extends TimedRobot {
       autonomousCommand.cancel();
     }
 
-    //Zero gyro
+    //Zero gyro and displacement
     robotStop.setDouble(0.0);
-    zeroGyro.setDouble(1.0);
+    //zeroGyro.setDouble(1.0);
+    //zeroDisplace.setDouble(1.0);
+
   }
 
 

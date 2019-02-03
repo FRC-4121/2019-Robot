@@ -1,5 +1,7 @@
 package frc.robot.commands;
 
+import java.text.DecimalFormat;
+
 import edu.wpi.first.wpilibj.Timer;
 import edu.wpi.first.wpilibj.command.Command;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
@@ -9,10 +11,11 @@ import frc.robot.extraClasses.PIDControl;
 
 public class AutoDrive extends Command {
 
-    double targetAngle;  //drive angle
-	double stopTime;  //timeout time
-    double angleCorrection, angleError;
-    double orientAngle;
+    double driveAngle;  //drive angle
+    double stopTime;  //timeout time
+    double gyroAngle;
+    double angleCorrection;
+    double robotAngle;      //angle of the robot with respect to robot front
 	double startTime;
 	
 	PIDControl pidControl;
@@ -23,13 +26,13 @@ public class AutoDrive extends Command {
 	public int rightEncoderStart;
 	
 	//Class constructor
-    public AutoDrive(double ang, double time, double orientAng) { //intakes distance, direction, angle, and stop time
+    public AutoDrive(double ang, double time, double orientAng) {
     	
     	requires(Robot.drivetrain);
     	
     	//Set local variables
-        targetAngle = ang;
-        orientAngle = orientAng;
+        driveAngle = ang;
+        robotAngle = orientAng;
     	stopTime = time;
     	    	
     	//Set up PID control
@@ -57,21 +60,40 @@ public class AutoDrive extends Command {
         timer.start();
         startTime= timer.get();
         angleCorrection = 0;
-        angleError = 0;
         
     }
 
     
     // Called repeatedly when this Command is scheduled to run
     protected void execute() {
-    	
-//    	angleCorrection = pidControl.Run(Robot.oi.MainGyro.getAngle(), targetAngle);
-        angleError = Robot.driveAngle.getDouble(0)%360-orientAngle;
-        //angleCorrection = RobotMap.kP_Straight*angleError;
-        Robot.drivetrain.autoDrive(RobotMap.AUTO_DRIVE_SPEED, targetAngle, 0);    	    	
         
-        //SmartDashboard.putString("Angle Correction", Double.toString(angleCorrection));
-        SmartDashboard.putString("Angle Error", Double.toString(angleError));
+        gyroAngle = Robot.driveAngle.getDouble(0);
+
+        //if (Math.abs(Robot.driveAngle.getDouble(0)) < 358.0)
+        //{
+        //  gyroAngle = Robot.driveAngle.getDouble(0);
+        //}
+        //else
+        //{
+        //  gyroAngle = Robot.driveAngle.getDouble(0) % 360.0;
+        //}
+    
+        //if (Robot.gyroYaw.getDouble(0) >= 0.0)
+        //{
+        //  gyroAngle = Robot.gyroYaw.getDouble(0);
+        //}
+        //else
+        //{
+        //  gyroAngle = 180.0 + (180 - Math.abs(Robot.gyroYaw.getDouble(0)));
+        //}
+        
+        angleCorrection = pidControl.Run(gyroAngle, robotAngle);
+
+        Robot.drivetrain.autoDrive(RobotMap.AUTO_DRIVE_SPEED, driveAngle, -angleCorrection*0.3);    	    	
+        
+        SmartDashboard.putString("Angle Correction", Double.toString(angleCorrection));
+        SmartDashboard.putString("Gyro Yaw", Double.toString(Robot.gyroYaw.getDouble(0)));
+        SmartDashboard.putString("Gyro Angle", Double.toString(gyroAngle));
 
     }
 

@@ -36,19 +36,21 @@ public class RobotMap {
 	public static final double MECANUM_MULTIPLIER = 0.5;
 
 	//Standard motor drive speeds for auto
-	public static final double AUTO_DRIVE_SPEED = .75;
-	public static final double DRIVE_SPEED = 0.65;
+	public static final double AUTO_DRIVE_SPEED = 0.65;
+	public static double DRIVE_SPEED = 0.65;
+	public static final double DRIVE_SPEED_FAST = 1.0;
+	public static final double DRIVE_SPEED_SLOW = 0.25;
 
 	//Encoder things
 	public static final double MECANUM_ENCODER_DPP = 0.075;
 	public static final int MECANUM_ENCODER_PPR = 90;
 	
 	//PID values
-	public static double kP_Straight = 0.1;
-	public static double kP_Turn = 0.00;
+	public static double kP_Straight = 0.05;
+	public static double kP_Turn = 0.05;
 	public static double kI_Straight = 0.0;
 	public static double kI_Turn = 0.0;
-	public static double kD_Straight = 0.0;
-	public static double kD_Turn = 0.0;
+	public static double kD_Straight = 0.004;
+	public static double kD_Turn = 0.004;
 
 }
