@@ -36,58 +36,6 @@ public class MecanumDriveTrain extends GenericDriveTrain {
   //Initialize robot drive - mecanum style
   MecanumDrive mecanumDrive = new MecanumDrive(frontLeftMotor, frontRightMotor, backLeftMotor, backRightMotor);
 
-  
-  //Initialize encoders
-  //public boolean encoderConfig = initEncoders();
-
-  
-  //Define the encoders for each wheel
-  // public boolean initEncoders() {
-    
-  //   /*
-  //   * Wiring of mecanum encoders: AndyMark am-3132
-  //   * 
-  //   * There are four wires attached to the encoder: red, black, blue, yellow.
-  //   * 
-  //   * These will be inserted into TWO DIO pins/numbers on the roboRIO
-  //   * 
-  //   * Constructor:  Encoder(A, B, true)
-  //   * 
-  //   * Red: power (5V). Insert into 5V pin of DIO A
-  //   * Black: ground.  Insert into GND pin of DIO A
-  //   * Blue: channel A.  Insert into S pin of DIO A
-  //   * Yellow: channel B.  Insert into S pin of DIO B
-  //   * 
-  //   * Pin-out:
-  //   * A: Black, Red, Blue
-  //   * B: Empty, Empty, Yellow
-  //   */
-    
-  //   Robot.oi.frontLeftEncoder = new Encoder(0, 1, true, Encoder.EncodingType.k4X);
-  //   Robot.oi.frontLeftEncoder.setDistancePerPulse(RobotMap.MECANUM_ENCODER_DPP);
-
-  //   Robot.oi.frontRightEncoder = new Encoder(2, 3, true, Encoder.EncodingType.k4X);
-  //   Robot.oi.frontRightEncoder.setDistancePerPulse(RobotMap.MECANUM_ENCODER_DPP);
-    
-  //   Robot.oi.backLeftEncoder = new Encoder(4, 5, true, Encoder.EncodingType.k4X);
-  //   Robot.oi.backLeftEncoder.setDistancePerPulse(RobotMap.MECANUM_ENCODER_DPP);
-    
-  //   Robot.oi.backRightEncoder = new Encoder(6, 7, true, Encoder.EncodingType.k4X);
-  //   Robot.oi.backRightEncoder.setDistancePerPulse(RobotMap.MECANUM_ENCODER_DPP);
-    
-  //   Robot.oi.frontLeftEncoder.setSamplesToAverage(100);
-  //   Robot.oi.backLeftEncoder.setSamplesToAverage(100);
-  //   Robot.oi.frontRightEncoder.setSamplesToAverage(100);
-  //   Robot.oi.backRightEncoder.setSamplesToAverage(100);
-  //   Robot.oi.frontLeftEncoder.reset();
-  //   Robot.oi.frontRightEncoder.reset();
-  //   Robot.oi.backRightEncoder.reset();
-  //   Robot.oi.backLeftEncoder.reset();
-  
-  //   return true;
-  // }
-
-
   //Teleop drive method
   @Override
   public void drive(double rightJoyX, double rightJoyY, double rightJoyZ, boolean useGyro) {

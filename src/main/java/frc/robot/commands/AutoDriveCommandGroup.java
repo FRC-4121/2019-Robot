@@ -18,7 +18,7 @@ public class AutoDriveCommandGroup extends CommandGroup {
     
     addSequential(new AutoDrive(90, 1.0, 0));
     addSequential(new AutoDrive(-10, 2.0, 0));
-    addSequential(new AutoDrive(90, 1.0, 0));
+    //addSequential(new AutoDrive(90, 1.0, 0));
     addSequential(new AutoRotate(90, 0.5));
     addSequential(new AutoDrive(90, 1.5, 90));
     addSequential(new AutoRotate(180, 0.5));

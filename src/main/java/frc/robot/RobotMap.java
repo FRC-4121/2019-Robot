@@ -16,8 +16,8 @@ package frc.robot;
 public class RobotMap {
 
 	//Motor Controller Constants - Mecanum
-	public static final int BACK_LEFT_MOTOR = 2;
-	public static final int BACK_RIGHT_MOTOR = 8;
+	public static final int BACK_LEFT_MOTOR = 8;
+	public static final int BACK_RIGHT_MOTOR = 2;
 	public static final int FRONT_LEFT_MOTOR = 7;
 	public static final int FRONT_RIGHT_MOTOR = 6;
 	
