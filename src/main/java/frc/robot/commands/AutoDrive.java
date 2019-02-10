@@ -80,11 +80,11 @@ public class AutoDrive extends Command {
 
         if (robotAngle == 180 || robotAngle == -180)
         {
-            if (gyroAngle > 0 && gyroAngle < 180)
+            if (gyroAngle >= 0 && gyroAngle < 179.5)
             {
                 angleCorrection = pidControl.Run(gyroAngle, 180.0);
             }
-            else
+            else if(gyroAngle <= 0 && gyroAngle > -179.5)
             {
                 angleCorrection = pidControl.Run(gyroAngle, -180.0);
             }

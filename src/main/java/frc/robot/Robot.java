@@ -16,6 +16,7 @@ import edu.wpi.first.wpilibj.command.Scheduler;
 import edu.wpi.first.wpilibj.smartdashboard.SendableChooser;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import frc.robot.commands.AutoDriveCommandGroup;
+import frc.robot.subsystems.ArmLiftSubsystem;
 import frc.robot.subsystems.GenericDriveTrain;
 import frc.robot.subsystems.MecanumDriveTrain;
 import frc.robot.subsystems.WestCoastDriveTrain;
@@ -49,6 +50,7 @@ public class Robot extends TimedRobot {
      
   //Declare subsystems
   public static GenericDriveTrain drivetrain;
+  public static ArmLiftSubsystem arm;
 
   //Declare sensors and control inputs
 	public static OI oi;
@@ -110,7 +112,9 @@ public class Robot extends TimedRobot {
       default:
         drivetrain = new WestCoastDriveTrain();
 		
-		}
+    }
+    
+    arm = new ArmLiftSubsystem();
 		
     //Init output-input systems
     oi = new OI();

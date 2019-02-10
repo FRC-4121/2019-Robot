@@ -13,6 +13,7 @@ import edu.wpi.first.wpilibj.buttons.Button;
 import edu.wpi.first.wpilibj.buttons.JoystickButton;
 
 import frc.robot.commands.ChangeTeleopSpeed;
+import frc.robot.commands.TestArmCommand;
 
 
 /**
@@ -26,7 +27,7 @@ public class OI {
 	
 	//Define joystick objects and joystick button functions
 	public Joystick leftJoy, rightJoy;
-	public Button changeDriveSpeed;
+	public Button changeDriveSpeed, testArmMotor;
 	
 	//Default class constructor
 	public OI() {
@@ -36,9 +37,11 @@ public class OI {
 
 		//Define Joystick buttons
 		changeDriveSpeed = new JoystickButton(rightJoy, 2);
+		testArmMotor = new JoystickButton(rightJoy, 1);
 
 		//Define Joystick button commands
 		changeDriveSpeed.whenPressed(new ChangeTeleopSpeed());
+		testArmMotor.whenPressed(new TestArmCommand(2));
 
 	}
   

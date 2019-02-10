@@ -29,6 +29,9 @@ public class RobotMap {
 	public static final int RIGHT_MOTOR_SLAVE_1 = -1;
 	public static final int RIGHT_MOTOR_SLAVE_2 = -1;
 
+	//Motor Controller - Spark for Arm
+	public static final int ARM_MOTOR = 1;
+
 	//Invert direction (for WCD only)
 	public static final int DIRECTION_MULTIPLIER = 1;
 	
@@ -45,12 +48,21 @@ public class RobotMap {
 	public static final double MECANUM_ENCODER_DPP = 0.075;
 	public static final int MECANUM_ENCODER_PPR = 90;
 	
-	//PID values
+	//PID values for mecanum
 	public static double kP_Straight = 0.05;
 	public static double kP_Turn = 0.05;
 	public static double kI_Straight = 0.0;
 	public static double kI_Turn = 0.0;
 	public static double kD_Straight = 0.004;
 	public static double kD_Turn = 0.004;
+
+	//PID values for arm lift motor control
+	public static double kP_Arm = 0.1;
+	public static double kI_Arm = 0;
+	public static double kD_Arm = 1;
+	public static double kIz_Arm = 0;
+	public static double kFf_Arm = 0;
+	public static double kMaxOutput_Arm = 1;
+	public static double kMinOutput_Arm = -1;
 
 }

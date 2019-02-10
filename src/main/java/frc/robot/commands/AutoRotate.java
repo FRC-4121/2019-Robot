@@ -62,11 +62,27 @@ public class AutoRotate extends Command {
 
     angleCorrection = 0.0;
     
-    if(gyroAngle < 179 || gyroAngle > -179){
+    // if(gyroAngle < 179 || gyroAngle > -179){
             
-            angleCorrection = pidControl.Run(gyroAngle, robotAngle);
+    //         angleCorrection = pidControl.Run(gyroAngle, robotAngle);
 
-    }
+    // }
+
+    if (robotAngle == 180 || robotAngle == -180)
+        {
+            if (gyroAngle >= 0 && gyroAngle < 179.5)
+            {
+                angleCorrection = pidControl.Run(gyroAngle, 180.0);
+            }
+            else if(gyroAngle <= 0 && gyroAngle > -179.5)
+            {
+                angleCorrection = pidControl.Run(gyroAngle, -180.0);
+            }
+        }
+        else
+        {
+            angleCorrection = pidControl.Run(gyroAngle, robotAngle);
+        }
 
     Robot.drivetrain.autoDrive(0.0, 0.0, -angleCorrection*RobotMap.AUTO_DRIVE_SPEED * speedMultiplier);    	    	
         
