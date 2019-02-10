@@ -21,7 +21,8 @@ public class AutoRotate extends Command {
   double angleCorrection;   //PID calculated correction factor
   double direction;         //direction to rotate
 	double startTime;         //time at start of movement
-	double stopTime;          //timeout time
+  double stopTime;          //timeout time
+  double speedMultiplier;
 	
 	PIDControl pidControl;
 
@@ -29,13 +30,14 @@ public class AutoRotate extends Command {
 
 
   //Class constructor
-  public AutoRotate(double ang, double time) {
+  public AutoRotate(double ang, double time, double speed) {
 
     requires(Robot.drivetrain);
 
     //Initialize internal variables
     robotAngle = ang;
     stopTime = time;
+    speedMultiplier = speed;
 
     //Set up PID control
     pidControl = new PIDControl(RobotMap.kP_Turn, RobotMap.kI_Turn, RobotMap.kD_Turn);
@@ -56,33 +58,21 @@ public class AutoRotate extends Command {
   @Override
   protected void execute() {
 
-    gyroAngle = Robot.driveAngle.getDouble(0);
+    gyroAngle = Robot.gyroYaw.getDouble(0);
 
-    //if (Math.abs(Robot.driveAngle.getDouble(0)) < 358.0)
-    //{
-    //  gyroAngle = Robot.driveAngle.getDouble(0);
-    //}
-    //else
-    //{
-    //  gyroAngle = Robot.driveAngle.getDouble(0) % 360.0;
-    //}
+    angleCorrection = 0.0;
+    
+    if(gyroAngle < 179 || gyroAngle > -179){
+            
+            angleCorrection = pidControl.Run(gyroAngle, robotAngle);
 
-    //if (Robot.gyroYaw.getDouble(0) >= 0.0)
-    //{
-    //  gyroAngle = Robot.gyroYaw.getDouble(0);
-    //}
-    //else
-    //{
-    //  gyroAngle = 180.0 + (180 - Math.abs(Robot.gyroYaw.getDouble(0)));
-    //}
+    }
 
-    angleCorrection = pidControl.Run(gyroAngle, robotAngle);
-
-    Robot.drivetrain.autoDrive(0.0, 0.0, -angleCorrection*0.3);    	    	
+    Robot.drivetrain.autoDrive(0.0, 0.0, -angleCorrection*RobotMap.AUTO_DRIVE_SPEED * speedMultiplier);    	    	
         
     SmartDashboard.putString("Angle Correction", Double.toString(angleCorrection));
-    SmartDashboard.putString("Gyro Yaw", Double.toString(Robot.gyroYaw.getDouble(0)));
-    SmartDashboard.putString("Gyro Angle", Double.toString(gyroAngle));
+    SmartDashboard.putString("Gyro Yaw", Double.toString(gyroAngle));
+    SmartDashboard.putString("Gyro Angle", Double.toString(Robot.driveAngle.getDouble(0)));
 
   }
 

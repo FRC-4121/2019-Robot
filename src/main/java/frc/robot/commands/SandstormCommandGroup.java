@@ -8,24 +8,18 @@
 package frc.robot.commands;
 
 import edu.wpi.first.wpilibj.command.CommandGroup;
+import frc.robot.Robot;
 
-public class AutoDriveCommandGroup extends CommandGroup {
+public class SandstormCommandGroup extends CommandGroup {
   /**
    * Add your docs here.
    */
-  public AutoDriveCommandGroup() {
-    
+  public SandstormCommandGroup() {
+
     addSequential(new AutoDrive(90, 1.0, 0, 0.625));
-    addSequential(new AutoDrive(-10, 1.5, 0, 0.625));
-    addSequential(new AutoDrive(90, 1.0, 0, 0.625));
-    addSequential(new AutoRotate(90, 0.5, 0.375));
-    addSequential(new AutoDrive(90, 1.5, 90, 0.625));
-    addSequential(new AutoRotate(180, 0.5, 0.375));
-    //addSequential(new AutoDrive(-90, 1.5, 180, 0.625));
-    //addSequential(new AutoRotate(-90, 0.5, 0.375));
-    //addSequential(new AutoDrive(90, 1.5, -90, 1.0));
-    //addSequential(new AutoRotate(0, 0.5, 0.375));
-    //addSequential(new AutoDrive(90, 0.75, 0, 1.0));
+    addSequential(new AutoDrive(90, 0.75, 0, 1.0));
+    addSequential(new AutoDrive(190, 1.5, 0, 1.0));
+    addSequential(new AutoDrive(90, 0.75, 0, 1.0));
 
   }
 }

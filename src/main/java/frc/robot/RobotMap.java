@@ -36,7 +36,7 @@ public class RobotMap {
 	public static final double MECANUM_MULTIPLIER = 0.5;
 
 	//Standard motor drive speeds for auto
-	public static final double AUTO_DRIVE_SPEED = 0.65;
+	public static final double AUTO_DRIVE_SPEED = 0.8;
 	public static double DRIVE_SPEED = 0.65;
 	public static final double DRIVE_SPEED_FAST = 1.0;
 	public static final double DRIVE_SPEED_SLOW = 0.25;

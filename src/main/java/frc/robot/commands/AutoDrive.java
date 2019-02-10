@@ -16,7 +16,8 @@ public class AutoDrive extends Command {
     double gyroAngle;
     double angleCorrection;
     double robotAngle;      //angle of the robot with respect to robot front
-	double startTime;
+    double startTime;
+    double speedMultiplier;
 	
 	PIDControl pidControl;
 
@@ -26,14 +27,15 @@ public class AutoDrive extends Command {
 	public int rightEncoderStart;
 	
 	//Class constructor
-    public AutoDrive(double ang, double time, double orientAng) {
+    public AutoDrive(double ang, double time, double orientAng, double speed) {
     	
     	requires(Robot.drivetrain);
     	
     	//Set local variables
         driveAngle = ang;
         robotAngle = orientAng;
-    	stopTime = time;
+        stopTime = time;
+        speedMultiplier = speed;
     	    	
     	//Set up PID control
     	pidControl = new PIDControl(RobotMap.kP_Straight, RobotMap.kI_Straight, RobotMap.kD_Straight);
@@ -67,33 +69,36 @@ public class AutoDrive extends Command {
     // Called repeatedly when this Command is scheduled to run
     protected void execute() {
         
-        gyroAngle = Robot.driveAngle.getDouble(0);
+        gyroAngle = Robot.gyroYaw.getDouble(0);
 
-        //if (Math.abs(Robot.driveAngle.getDouble(0)) < 358.0)
-        //{
-        //  gyroAngle = Robot.driveAngle.getDouble(0);
+        angleCorrection = 0.0;
+        //if(gyroAngle < 179 || gyroAngle > -179){
+        //    
+        //    angleCorrection = pidControl.Run(gyroAngle, robotAngle);
+        //
         //}
-        //else
-        //{
-        //  gyroAngle = Robot.driveAngle.getDouble(0) % 360.0;
-        //}
-    
-        //if (Robot.gyroYaw.getDouble(0) >= 0.0)
-        //{
-        //  gyroAngle = Robot.gyroYaw.getDouble(0);
-        //}
-        //else
-        //{
-        //  gyroAngle = 180.0 + (180 - Math.abs(Robot.gyroYaw.getDouble(0)));
-        //}
-        
-        angleCorrection = pidControl.Run(gyroAngle, robotAngle);
 
-        Robot.drivetrain.autoDrive(RobotMap.AUTO_DRIVE_SPEED, driveAngle, -angleCorrection*0.3);    	    	
+        if (robotAngle == 180 || robotAngle == -180)
+        {
+            if (gyroAngle > 0 && gyroAngle < 180)
+            {
+                angleCorrection = pidControl.Run(gyroAngle, 180.0);
+            }
+            else
+            {
+                angleCorrection = pidControl.Run(gyroAngle, -180.0);
+            }
+        }
+        else
+        {
+            angleCorrection = pidControl.Run(gyroAngle, robotAngle);
+        }
+
+        Robot.drivetrain.autoDrive(RobotMap.AUTO_DRIVE_SPEED * speedMultiplier, driveAngle, -angleCorrection*0.3);    	    	
         
         SmartDashboard.putString("Angle Correction", Double.toString(angleCorrection));
-        SmartDashboard.putString("Gyro Yaw", Double.toString(Robot.gyroYaw.getDouble(0)));
-        SmartDashboard.putString("Gyro Angle", Double.toString(gyroAngle));
+        SmartDashboard.putString("Gyro Yaw", Double.toString(gyroAngle));
+        SmartDashboard.putString("Gyro Angle", Double.toString(Robot.driveAngle.getDouble(0)));
 
     }
 
