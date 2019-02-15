@@ -15,22 +15,28 @@ package frc.robot;
  */
 public class RobotMap {
 
-	//Motor Controller Constants - Mecanum
+	//Motor Controller Constants - Mecanum Drive
 	public static final int BACK_LEFT_MOTOR = 8;
 	public static final int BACK_RIGHT_MOTOR = 2;
 	public static final int FRONT_LEFT_MOTOR = 7;
 	public static final int FRONT_RIGHT_MOTOR = 6;
 	
+	//Motor Controller - Spark for Arm
+	public static final int ARM_MOTOR = 1;
+
+	//Motor Controller Constants - Mechanism Talons
+	public static final int CLIMB_MOTOR_1 = 3;
+	public static final int CLIMB_MOTOR_2 = 4;
+	public static final int INTAKE_MOTOR = 5;
+	
 	//Motor Controller Constants - WCD
+	//Not for 2019 Season Use
 	public static final int LEFT_MOTOR_MASTER = -1;
 	public static final int LEFT_MOTOR_SLAVE_1 = -1;
 	public static final int LEFT_MOTOR_SLAVE_2 = -1;
 	public static final int RIGHT_MOTOR_MASTER = -1;
 	public static final int RIGHT_MOTOR_SLAVE_1 = -1;
 	public static final int RIGHT_MOTOR_SLAVE_2 = -1;
-
-	//Motor Controller - Spark for Arm
-	public static final int ARM_MOTOR = 1;
 
 	//Invert direction (for WCD only)
 	public static final int DIRECTION_MULTIPLIER = 1;
@@ -43,10 +49,6 @@ public class RobotMap {
 	public static double DRIVE_SPEED = 0.65;
 	public static final double DRIVE_SPEED_FAST = 1.0;
 	public static final double DRIVE_SPEED_SLOW = 0.25;
-
-	//Encoder things
-	public static final double MECANUM_ENCODER_DPP = 0.075;
-	public static final int MECANUM_ENCODER_PPR = 90;
 	
 	//PID values for mecanum
 	public static double kP_Straight = 0.05;

@@ -7,6 +7,7 @@
 
 package frc.robot;
 
+import edu.wpi.first.wpilibj.DigitalInput;
 import edu.wpi.first.wpilibj.Encoder;
 import edu.wpi.first.wpilibj.Joystick;
 import edu.wpi.first.wpilibj.buttons.Button;
@@ -28,6 +29,9 @@ public class OI {
 	//Define joystick objects and joystick button functions
 	public Joystick leftJoy, rightJoy;
 	public Button changeDriveSpeed, testArmMotor;
+
+	//Define limit switches
+	public DigitalInput intakeLimitSwitch, climbTopLimitSwitch, climbBottomLimitSwitch;
 	
 	//Default class constructor
 	public OI() {
@@ -35,11 +39,16 @@ public class OI {
 		//Create new joystick objects
 		rightJoy = new Joystick(0);
 
-		//Define Joystick buttons
+		//Initialize limit switches
+		intakeLimitSwitch = new DigitalInput(0);
+		climbTopLimitSwitch = new DigitalInput(1);
+		climbBottomLimitSwitch = new DigitalInput(2);
+
+		//Initialize Joystick buttons
 		changeDriveSpeed = new JoystickButton(rightJoy, 2);
 		testArmMotor = new JoystickButton(rightJoy, 1);
 
-		//Define Joystick button commands
+		//Configure Joystick button commands
 		changeDriveSpeed.whenPressed(new ChangeTeleopSpeed());
 		testArmMotor.whenPressed(new TestArmCommand(2));
 

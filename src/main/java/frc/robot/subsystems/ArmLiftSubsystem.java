@@ -38,9 +38,6 @@ public class ArmLiftSubsystem extends Subsystem {
     armPID.setFF(RobotMap.kFf_Arm);
     armPID.setOutputRange(RobotMap.kMinOutput_Arm, RobotMap.kMaxOutput_Arm);
 
-
-
-
   }
 
   @Override
