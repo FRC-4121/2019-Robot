@@ -14,7 +14,11 @@ import edu.wpi.first.wpilibj.buttons.Button;
 import edu.wpi.first.wpilibj.buttons.JoystickButton;
 
 import frc.robot.commands.ChangeTeleopSpeed;
-import frc.robot.commands.TestArmCommand;
+//import frc.robot.commands.TestClimbUp;
+//import frc.robot.commands.TestClimbDown;
+import frc.robot.commands.TestArmRotationsCommand;
+import frc.robot.commands.TestArmSpeedCommand;
+
 
 
 /**
@@ -28,7 +32,7 @@ public class OI {
 	
 	//Define joystick objects and joystick button functions
 	public Joystick leftJoy, rightJoy;
-	public Button changeDriveSpeed, testArmMotor;
+	public Button changeDriveSpeed, testArmMotorSpeedMode, testArmMotorPositionMode, testArmStop;
 
 	//Define limit switches
 	public DigitalInput intakeLimitSwitch, climbTopLimitSwitch, climbBottomLimitSwitch;
@@ -46,11 +50,14 @@ public class OI {
 
 		//Initialize Joystick buttons
 		changeDriveSpeed = new JoystickButton(rightJoy, 2);
-		testArmMotor = new JoystickButton(rightJoy, 1);
+		testArmMotorSpeedMode = new JoystickButton(rightJoy, 1);
+		testArmMotorPositionMode = new JoystickButton(rightJoy, 3);
+		testArmStop = new JoystickButton(rightJoy, 5);
 
 		//Configure Joystick button commands
 		changeDriveSpeed.whenPressed(new ChangeTeleopSpeed());
-		testArmMotor.whenPressed(new TestArmCommand(2));
+		testArmMotorSpeedMode.whileHeld(new TestArmSpeedCommand());
+		testArmMotorPositionMode.whenPressed(new TestArmRotationsCommand());
 
 	}
   

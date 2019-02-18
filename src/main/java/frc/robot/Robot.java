@@ -20,6 +20,7 @@ import frc.robot.subsystems.ArmLiftSubsystem;
 import frc.robot.subsystems.GenericDriveTrain;
 import frc.robot.subsystems.MecanumDriveTrain;
 import frc.robot.subsystems.WestCoastDriveTrain;
+import frc.robot.subsystems.HabClimberSubsystem;
 
 /**
  * The VM is configured to automatically run this class, and to call the
@@ -51,6 +52,7 @@ public class Robot extends TimedRobot {
   //Declare subsystems
   public static GenericDriveTrain drivetrain;
   public static ArmLiftSubsystem arm;
+  public static HabClimberSubsystem climber;
 
   //Declare sensors and control inputs
 	public static OI oi;
@@ -115,6 +117,7 @@ public class Robot extends TimedRobot {
     }
     
     arm = new ArmLiftSubsystem();
+    climber = new HabClimberSubsystem();
 		
     //Init output-input systems
     oi = new OI();
@@ -231,6 +234,8 @@ public class Robot extends TimedRobot {
   public void teleopPeriodic() {
     Scheduler.getInstance().run();
     
+    //SmartDashboard.putBoolean("Arm Idle Mode", Robot.arm.isBrakeMode());
+
     // SmartDashboard.putNumber("Front Left Encoder Distance:", Robot.oi.frontLeftEncoder.getDistance());
     // SmartDashboard.putNumber("Front Right Encoder Distance:", Robot.oi.frontRightEncoder.getDistance());
     // SmartDashboard.putNumber("Back Right Encoder Distance:", Robot.oi.backRightEncoder.getDistance());

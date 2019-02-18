@@ -93,7 +93,8 @@ public class AutoDrive extends Command {
         {
             angleCorrection = pidControl.Run(gyroAngle, robotAngle);
         }
-
+        
+        //possibly substitute driveAngle with driveAngle - gyroAngle to allow for proper slewing
         Robot.drivetrain.autoDrive(RobotMap.AUTO_DRIVE_SPEED * speedMultiplier, driveAngle, -angleCorrection*0.3);    	    	
         
         SmartDashboard.putString("Angle Correction", Double.toString(angleCorrection));

@@ -9,7 +9,6 @@ package frc.robot.subsystems;
 
 import com.ctre.phoenix.motorcontrol.can.WPI_TalonSRX;
 
-import edu.wpi.first.wpilibj.DoubleSolenoid;
 import edu.wpi.first.wpilibj.command.Subsystem;
 import frc.robot.RobotMap;
 
@@ -18,15 +17,21 @@ import frc.robot.RobotMap;
  */
 public class HabClimberSubsystem extends Subsystem {
   
-  WPI_TalonSRX motor1 = new WPI_TalonSRX(RobotMap.CLIMB_MOTOR_1);
-  WPI_TalonSRX motor2 = new WPI_TalonSRX(RobotMap.CLIMB_MOTOR_2);
+  // WPI_TalonSRX motor1 = new WPI_TalonSRX(RobotMap.CLIMB_MOTOR_1);
+  // WPI_TalonSRX motor2 = new WPI_TalonSRX(RobotMap.CLIMB_MOTOR_2);
 
-  DoubleSolenoid climbSolenoid = new DoubleSolenoid(0, 1);
+  // DoubleSolenoid climbSolenoid = new DoubleSolenoid(0, 1);
+
+  WPI_TalonSRX backRightMotor = new WPI_TalonSRX(RobotMap.BACK_RIGHT_MOTOR);
 
   @Override
   public void initDefaultCommand() {}
 
-  public void climb(){
+  public void climb(double dir){
     //where we climb, awaiting further instructions
+
+    backRightMotor.set(dir*0.75);
+
+
   }
 }

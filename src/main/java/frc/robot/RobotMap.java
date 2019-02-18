@@ -16,18 +16,16 @@ package frc.robot;
 public class RobotMap {
 
 	//Motor Controller Constants - Mecanum Drive
-	public static final int BACK_LEFT_MOTOR = 8;
-	public static final int BACK_RIGHT_MOTOR = 2;
-	public static final int FRONT_LEFT_MOTOR = 7;
-	public static final int FRONT_RIGHT_MOTOR = 6;
-	
-	//Motor Controller - Spark for Arm
-	public static final int ARM_MOTOR = 1;
+	public static final int BACK_LEFT_MOTOR = 0;
+	public static final int BACK_RIGHT_MOTOR = 1;
+	public static final int FRONT_LEFT_MOTOR = 2;
+	public static final int FRONT_RIGHT_MOTOR = 3;
 
 	//Motor Controller Constants - Mechanism Talons
-	public static final int CLIMB_MOTOR_1 = 3;
-	public static final int CLIMB_MOTOR_2 = 4;
-	public static final int INTAKE_MOTOR = 5;
+	public static final int CLIMB_LIFT = 4;
+	public static final int CLIMB_DRIVE = 5;
+	public static final int INTAKE_MOTOR = 6;
+	public static final int ARM_MOTOR_ID = 7;
 	
 	//Motor Controller Constants - WCD
 	//Not for 2019 Season Use
@@ -49,7 +47,15 @@ public class RobotMap {
 	public static double DRIVE_SPEED = 0.65;
 	public static final double DRIVE_SPEED_FAST = 1.0;
 	public static final double DRIVE_SPEED_SLOW = 0.25;
+
+	//Arm motor speed
+	public static final double ARM_SPEED = 0.3;
 	
+	//Encoder config values
+	public static boolean kSensorPhase = true;
+	public static boolean kMotorInvert = true;
+	public static int kTimeoutMs = 10;
+
 	//PID values for mecanum
 	public static double kP_Straight = 0.05;
 	public static double kP_Turn = 0.05;
@@ -59,12 +65,22 @@ public class RobotMap {
 	public static double kD_Turn = 0.004;
 
 	//PID values for arm lift motor control
-	public static double kP_Arm = 0.1;
+	public static double kP_Arm = 0.15;
 	public static double kI_Arm = 0;
 	public static double kD_Arm = 1;
-	public static double kIz_Arm = 0;
 	public static double kFf_Arm = 0;
-	public static double kMaxOutput_Arm = 1;
-	public static double kMinOutput_Arm = -1;
+
+	//Variables for arm lift commands
+	public static double pickUpHatchAndUnlockHatchLvl1Revs = 12.98;
+	public static double lockHatchAndPlaceHatchLvl1Revs = 3.34;
+	public static double placeHatchLvl2Revs = 64.65;
+	public static double unlockHatchLvl2Revs = 58.63;
+	public static double placeBallRocketLvl1Revs = 45.37;
+	public static double placeBallCargoShipRevs = 65.85;
+	public static double placeBallRocketLvl2Revs = 102.64;
+
+	//Testing variables
+	public static double ARM_REVOLUTIONS = 5;
+	
 
 }
