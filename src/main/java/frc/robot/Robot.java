@@ -21,6 +21,7 @@ import frc.robot.subsystems.GenericDriveTrain;
 import frc.robot.subsystems.MecanumDriveTrain;
 import frc.robot.subsystems.WestCoastDriveTrain;
 import frc.robot.subsystems.HabClimberSubsystem;
+import frc.robot.subsystems.IntakeSubsystem;
 
 /**
  * The VM is configured to automatically run this class, and to call the
@@ -53,6 +54,7 @@ public class Robot extends TimedRobot {
   public static GenericDriveTrain drivetrain;
   public static ArmLiftSubsystem arm;
   public static HabClimberSubsystem climber;
+  public static IntakeSubsystem end;
 
   //Declare sensors and control inputs
 	public static OI oi;
@@ -61,7 +63,16 @@ public class Robot extends TimedRobot {
   private Command autonomousCommand;
   
   //Declare Smart dashboard chooser
-	private SendableChooser<Command> chooser;
+  private SendableChooser<String> autoStyleChooser;
+  private SendableChooser<String> autoSideChooser;
+  private SendableChooser<String> autoTargetChooser;
+  
+  //Variables for auto logic
+  public String mySide;
+  public String myTarget;
+  public String myStyle;
+
+  public boolean autoCommandStarted;
 
 	/**
    * This function is run when the robot is first started up and should be
@@ -116,19 +127,34 @@ public class Robot extends TimedRobot {
 		
     }
     
+    //Init other subsystems
     arm = new ArmLiftSubsystem();
+    end = new IntakeSubsystem();
     climber = new HabClimberSubsystem();
 		
     //Init output-input systems
     oi = new OI();
 
-    //Initialize dashboard chooser
+    //Initialize dashboard choosers
+    autoSideChooser = new SendableChooser<>();
+    autoStyleChooser = new SendableChooser<>();
+    autoTargetChooser = new SendableChooser<>();
 
-    chooser = new SendableChooser<>();
-    chooser.addOption("Auto Test", new AutoDriveCommandGroup());
-    //chooser.addObject("My Auto", new MyAutoCommand());
-    SmartDashboard.putData("Auto mode", chooser);
+    autoSideChooser.setDefaultOption("Left", "Left");
+    autoSideChooser.addOption("Center", "Center");
+    autoSideChooser.addOption("Right", "Right");
     
+    autoStyleChooser.setDefaultOption("Full Auto", "Auto");
+    autoStyleChooser.addOption("Driver Assist", "Sandstorm");
+
+    autoTargetChooser.setDefaultOption("Cargo Front", "Front");
+    autoTargetChooser.addOption("Cargo Side", "Side");
+    autoTargetChooser.addOption("Straight", "Straight");
+
+    //chooser.addObject("My Auto", new MyAutoCommand());
+    SmartDashboard.putData("Auto Side", autoSideChooser);
+    SmartDashboard.putData("Auto Style", autoStyleChooser);
+    SmartDashboard.putData("Auto Target", autoTargetChooser);    
 	}
 
 
@@ -142,10 +168,7 @@ public class Robot extends TimedRobot {
    */
   @Override
   public void robotPeriodic() {
-    //if(Robot.driveAngle.getDouble(0) > 359 || Robot.driveAngle.getDouble(0) < -359){
-    //  Robot.zeroGyro.setDouble(1);
-    //}
-
+    
   }
 
   /**
@@ -155,8 +178,6 @@ public class Robot extends TimedRobot {
    */
   @Override
   public void disabledInit() {
-
-    //robotStop.setDouble(1.0);
 
   }
 
@@ -184,18 +205,60 @@ public class Robot extends TimedRobot {
     zeroGyro.setDouble(1.0);
     //zeroDisplace.setDouble(1.0);
 
-    autonomousCommand = chooser.getSelected();
+    myStyle = autoStyleChooser.getSelected();
+    mySide = autoSideChooser.getSelected();
+    myTarget = autoTargetChooser.getSelected();
+    
+    autoCommandStarted = false;
 
-    /*
-     * String autoSelected = SmartDashboard.getString("Auto Selector",
-     * "Default"); switch(autoSelected) { case "My Auto": autonomousCommand
-     * = new MyAutoCommand(); break; case "Default Auto": default:
-     * autonomousCommand = new ExampleCommand(); break; }
-     */
+    autonomousCommand = null;
 
-    // schedule the autonomous command (example)
+    if(myStyle.equals("Sandstorm"))
+    {
+      autonomousCommand = null;
+    } 
+    else 
+    {
+      if(mySide.equals("Left"))
+      {
+        if(myTarget.equals("Front"))
+        {
+          //autonomousCommand = new AutoRobotLeftCargoFront();
+        } 
+        else if(myTarget.equals("Side"))
+        {
+          //autonomousCommand = new AutoRobotLeftCargoSide();
+        }
+        else
+        {
+          //autonomousCommand = new AutoDefaultStraight();
+        }
+      }
+      else if(mySide.equals("Right"))
+      {
+        if(myTarget.equals("Front"))
+        {
+          //autonomousCommand = new AutoRobotRightCargoFront();
+        }
+        else if(myTarget.equals("Side"))
+        {
+          //autonomousCommand = new AutoRobotRightCargoSide();
+        }
+        else
+        {
+          //autonomousCommand = new AutoDefaultStraight();
+        }
+      }
+      else
+      {
+        //autonomousCommand = new AutoDefaultStraight();
+      }
+    }
+
+    // schedule the autonomous command
     if (autonomousCommand != null) {
       autonomousCommand.start();
+      autoCommandStarted = true;
     }
   }
 

@@ -17,21 +17,21 @@ import frc.robot.RobotMap;
  */
 public class HabClimberSubsystem extends Subsystem {
   
-  // WPI_TalonSRX motor1 = new WPI_TalonSRX(RobotMap.CLIMB_MOTOR_1);
-  // WPI_TalonSRX motor2 = new WPI_TalonSRX(RobotMap.CLIMB_MOTOR_2);
-
-  // DoubleSolenoid climbSolenoid = new DoubleSolenoid(0, 1);
-
-  WPI_TalonSRX backRightMotor = new WPI_TalonSRX(RobotMap.BACK_RIGHT_MOTOR);
+  WPI_TalonSRX climbLift = new WPI_TalonSRX(RobotMap.CLIMB_LIFT);
+  WPI_TalonSRX climbDrive = new WPI_TalonSRX(RobotMap.CLIMB_DRIVE);
 
   @Override
   public void initDefaultCommand() {}
 
-  public void climb(double dir){
-    //where we climb, awaiting further instructions
+  //Basic steps: deploy guide wheels, raise lift WHILE ALSO DRIVING with wheels, then pull lift back up
 
-    backRightMotor.set(dir*0.75);
+  public void deployLift(double direction){  //1 is up, -1 is down
+    
+    climbLift.set(direction * RobotMap.CLIMB_LIFT_SPEED);
+  }
 
+  public void driveWheels(){
 
+    climbDrive.set(RobotMap.CLIMB_DRIVE_SPEED);
   }
 }

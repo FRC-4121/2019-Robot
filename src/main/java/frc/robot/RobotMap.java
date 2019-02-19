@@ -50,7 +50,11 @@ public class RobotMap {
 
 	//Arm motor speed
 	public static final double ARM_SPEED = 0.3;
-	
+
+	//Climber motor speeds
+	public static final double CLIMB_LIFT_SPEED = 0.75;
+	public static final double CLIMB_DRIVE_SPEED = 0.5;
+
 	//Encoder config values
 	public static boolean kSensorPhase = true;
 	public static boolean kMotorInvert = true;
