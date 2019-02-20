@@ -24,10 +24,10 @@ public class ArmLiftSubsystem extends Subsystem {
 
   public boolean encoderConfig = initEncoders();
 
-  public boolean initEncoders(){
+  public boolean initEncoders() {
 
     //Choose the encoder type and general config
-    armMotor.configSelectedFeedbackSensor(FeedbackDevice.CTRE_MagEncoder_Relative, 0, RobotMap.kTimeoutMs);
+    armMotor.configSelectedFeedbackSensor(FeedbackDevice.CTRE_MagEncoder_Relative, RobotMap.kPIDLoopIdx, RobotMap.kTimeoutMs);
     armMotor.setSensorPhase(RobotMap.kSensorPhase);
     armMotor.setInverted(RobotMap.kMotorInvert);
 
@@ -37,16 +37,16 @@ public class ArmLiftSubsystem extends Subsystem {
 		armMotor.configPeakOutputForward(1, RobotMap.kTimeoutMs);
     armMotor.configPeakOutputReverse(-1, RobotMap.kTimeoutMs);
 
-    armMotor.configAllowableClosedloopError(0, 0, RobotMap.kTimeoutMs);
+    armMotor.configAllowableClosedloopError(0, RobotMap.kPIDLoopIdx, RobotMap.kTimeoutMs);
   
     //Config Position Closed Loop gains in slot0, typically kF stays zero.
-		armMotor.config_kF(0, RobotMap.kFf_Arm, RobotMap.kTimeoutMs);
-		armMotor.config_kP(0, RobotMap.kP_Arm, RobotMap.kTimeoutMs);
-		armMotor.config_kI(0, RobotMap.kI_Arm, RobotMap.kTimeoutMs);
-		armMotor.config_kD(0, RobotMap.kD_Arm, RobotMap.kTimeoutMs);
+		armMotor.config_kF(RobotMap.kPIDLoopIdx, RobotMap.kFf_Arm, RobotMap.kTimeoutMs);
+		armMotor.config_kP(RobotMap.kPIDLoopIdx, RobotMap.kP_Arm, RobotMap.kTimeoutMs);
+		armMotor.config_kI(RobotMap.kPIDLoopIdx, RobotMap.kI_Arm, RobotMap.kTimeoutMs);
+		armMotor.config_kD(RobotMap.kPIDLoopIdx, RobotMap.kD_Arm, RobotMap.kTimeoutMs);
 
 		//Zero the encoder
-		armMotor.setSelectedSensorPosition(0, 0, RobotMap.kTimeoutMs);
+		armMotor.setSelectedSensorPosition(RobotMap.ARM_ENCODER_START_POS, RobotMap.kPIDLoopIdx, RobotMap.kTimeoutMs);
 
     return true;
   }
@@ -55,21 +55,28 @@ public class ArmLiftSubsystem extends Subsystem {
   public void initDefaultCommand() {}
 
   //Run motor command
-  public void runAtSpeed(double speed){
+  public void runAtSpeed(boolean runUp) {
 
-    armMotor.set(speed);
+    if(runUp){
+      
+      armMotor.set(RobotMap.ARM_SPEED_UP);
+    }
+    else
+    {
+      armMotor.set(RobotMap.ARM_SPEED_DOWN);
+    }
   }
 
   //Halt the arm
-  public void stopArm(){
+  public void stopArm() {
     
-    armMotor.set(0.0);
+    armMotor.set(RobotMap.STOP_SPEED);
   }
 
   //Run to a specific # of rotations
-  public void runToPosition(double revolutions){
+  public void runToPosition(double revolutions) {
 
-    targetPositionRotations = revolutions * 10.0 * 4096;
+    targetPositionRotations = revolutions * RobotMap.kEncoderPPR;
 
 		armMotor.set(ControlMode.Position, targetPositionRotations);
   }
@@ -79,58 +86,58 @@ public class ArmLiftSubsystem extends Subsystem {
    * heights.  Hatch pickup and release each have an individual height
    * due to mechanism design.  The pairs of hatch functions should be 
    * called in sequence with the input from a limit switch.
+   * 
+   * These should probably be removed in favor of individual commands that use the RobotMap values
+   * in the above runToPosition method, after testing has been completed.
    */
-  public void pickUpHatch(){
 
-    targetPositionRotations = RobotMap.pickUpHatchAndUnlockHatchLvl1Revs * 10.0 * 4096;
-    armMotor.set(ControlMode.Position, targetPositionRotations);
+  public void goToFloor() {
+
+    runToPosition(RobotMap.floorRevs);
   }
 
-  public void lockHatch(){
+  public void pickUpHatch() {
+
+    runToPosition(RobotMap.pickUpHatchAndUnlockHatchLvl1Revs);
+  }
+
+  public void lockHatch() {
     
-    targetPositionRotations = RobotMap.lockHatchAndPlaceHatchLvl1Revs * 10.0 * 4096;
-    armMotor.set(ControlMode.Position, targetPositionRotations);
+    runToPosition(RobotMap.lockHatchAndPlaceHatchLvl1Revs);
   }
 
-  public void placeHatchLvl1(){
+  public void placeHatchLvl1() {
     
-    targetPositionRotations = RobotMap.lockHatchAndPlaceHatchLvl1Revs * 10.0 * 4096;
-    armMotor.set(ControlMode.Position, targetPositionRotations);
+    runToPosition(RobotMap.lockHatchAndPlaceHatchLvl1Revs);
   }
 
-  public void unlockHatchLvl1(){
+  public void unlockHatchLvl1() {
 
-    targetPositionRotations = RobotMap.pickUpHatchAndUnlockHatchLvl1Revs * 10.0 * 4096;
-    armMotor.set(ControlMode.Position, targetPositionRotations);
+    runToPosition(RobotMap.pickUpHatchAndUnlockHatchLvl1Revs);
   }
 
-  public void placeHatchLvl2(){
+  public void placeHatchLvl2() {
 
-    targetPositionRotations = RobotMap.placeHatchLvl2Revs * 10.0 * 4096;
-    armMotor.set(ControlMode.Position, targetPositionRotations);
+    runToPosition(RobotMap.placeHatchLvl2Revs);
   }
 
-  public void unlockHatchLvl2(){
+  public void unlockHatchLvl2() {
 
-    targetPositionRotations = RobotMap.unlockHatchLvl2Revs * 10.0 * 4096;
-    armMotor.set(ControlMode.Position, targetPositionRotations);
+    runToPosition(RobotMap.unlockHatchLvl2Revs);
   }
 
-  public void placeBallCargoShip(){
+  public void placeBallCargoShip() {
 
-    targetPositionRotations = RobotMap.placeBallCargoShipRevs * 10.0 * 4096;
-    armMotor.set(ControlMode.Position, targetPositionRotations);
+    runToPosition(RobotMap.placeBallCargoShipRevs);
   }
 
-  public void placeBallRocketLvl1(){
+  public void placeBallRocketLvl1() {
 
-    targetPositionRotations = RobotMap.placeBallRocketLvl1Revs * 10.0 * 4096;
-    armMotor.set(ControlMode.Position, targetPositionRotations);
+    runToPosition(RobotMap.placeBallRocketLvl1Revs);
   }
 
-  public void placeBallRocketLvl2(){
+  public void placeBallRocketLvl2() {
 
-    targetPositionRotations = RobotMap.placeBallRocketLvl2Revs * 10.0 * 4096;
-    armMotor.set(ControlMode.Position, targetPositionRotations);
+    runToPosition(RobotMap.placeBallRocketLvl2Revs);
   }
 }

@@ -16,19 +16,19 @@ package frc.robot;
 public class RobotMap {
 
 	//Motor Controller Constants - Mecanum Drive
-	public static final int BACK_LEFT_MOTOR = 5;
-	public static final int BACK_RIGHT_MOTOR = 1;
-	public static final int FRONT_LEFT_MOTOR = 4;
-	public static final int FRONT_RIGHT_MOTOR = 0;
+	public static final int BACK_LEFT_MOTOR_ID = 5;
+	public static final int BACK_RIGHT_MOTOR_ID = 1;
+	public static final int FRONT_LEFT_MOTOR_ID = 4;
+	public static final int FRONT_RIGHT_MOTOR_ID = 0;
 
 	//Motor Controller Constants - Mechanism Talons
-	public static final int CLIMB_LIFT = 7;
-	public static final int CLIMB_DRIVE = 6;
-	public static final int INTAKE_MOTOR = 2;
+	public static final int CLIMB_LIFT_ID = 7;
+	public static final int CLIMB_DRIVE_ID = 6;
+	public static final int INTAKE_MOTOR_ID = 2;
 	public static final int ARM_MOTOR_ID = 3;
 	
 	//Motor Controller Constants - WCD
-	//Not for 2019 Season Use
+	//(Not for 2019 Season Use)
 	public static final int LEFT_MOTOR_MASTER = -1;
 	public static final int LEFT_MOTOR_SLAVE_1 = -1;
 	public static final int LEFT_MOTOR_SLAVE_2 = -1;
@@ -36,55 +36,63 @@ public class RobotMap {
 	public static final int RIGHT_MOTOR_SLAVE_1 = -1;
 	public static final int RIGHT_MOTOR_SLAVE_2 = -1;
 
+	//Limit switch ids
+	public static final int HATCH_DRIVE_LIMIT_SWITCH_ID = 0;
+	public static final int BALL_LIMIT_SWITCH_ID = 1;
+	public static final int CLIMB_TOP_LIMIT_SWITCH_ID = 2;
+	public static final int CLIMB_BOTTOM_LIMIT_SWITCH_ID = 3;
+
 	//Invert direction (for WCD only)
-	public static final int DIRECTION_MULTIPLIER = 1;
+	public static int DIRECTION_MULTIPLIER = -1;
 	
 	//Speed multiplier for more accurate driving in mecanum
 	public static final double MECANUM_MULTIPLIER = 0.5;
 
-	//Standard motor drive speeds for auto
+	//Motor speeds
 	public static final double AUTO_DRIVE_SPEED = 0.8;
 	public static double DRIVE_SPEED = 0.65;
 	public static final double DRIVE_SPEED_FAST = 1.0;
 	public static final double DRIVE_SPEED_SLOW = 0.25;
-
-	//Arm motor speed
-	public static final double ARM_SPEED = 0.3;
-
-	//Climber motor speeds
+	public static final double INTAKE_SPEED = 0.5;
+	public static final double ARM_SPEED_UP = 0.5;
+	public static final double ARM_SPEED_DOWN = 0.2;
 	public static final double CLIMB_LIFT_SPEED = 0.75;
 	public static final double CLIMB_DRIVE_SPEED = 0.5;
+	public static final double STOP_SPEED = 0;
 
 	//Encoder config values
-	public static boolean kSensorPhase = true;
-	public static boolean kMotorInvert = true;
-	public static int kTimeoutMs = 10;
+	public static final int kEncoderPPR = 4096;
+	public static final boolean kSensorPhase = true;
+	public static final boolean kMotorInvert = true;
+	public static final int kTimeoutMs = 10;
+	public static final int kPIDLoopIdx = 0;
+	public static final int ARM_ENCODER_START_POS = 0;
 
 	//PID values for mecanum
-	public static double kP_Straight = 0.05;
-	public static double kP_Turn = 0.05;
-	public static double kI_Straight = 0.0;
-	public static double kI_Turn = 0.0;
-	public static double kD_Straight = 0.004;
-	public static double kD_Turn = 0.004;
+	public static final double kP_Straight = 0.05;
+	public static final double kP_Turn = 0.05;
+	public static final double kI_Straight = 0.0;
+	public static final double kI_Turn = 0.0;
+	public static final double kD_Straight = 0.004;
+	public static final double kD_Turn = 0.004;
 
 	//PID values for arm lift motor control
-	public static double kP_Arm = 0.15;
-	public static double kI_Arm = 0;
-	public static double kD_Arm = 1;
-	public static double kFf_Arm = 0;
+	public static final double kP_Arm = 0.15;
+	public static final double kI_Arm = 0;
+	public static final double kD_Arm = 1;
+	public static final double kFf_Arm = 0;
 
-	//Variables for arm lift commands
-	public static double pickUpHatchAndUnlockHatchLvl1Revs = 12.98;
-	public static double lockHatchAndPlaceHatchLvl1Revs = 3.34;
-	public static double placeHatchLvl2Revs = 64.65;
-	public static double unlockHatchLvl2Revs = 58.63;
-	public static double placeBallRocketLvl1Revs = 45.37;
-	public static double placeBallCargoShipRevs = 65.85;
-	public static double placeBallRocketLvl2Revs = 102.64;
+	//Revolution variables for arm lift commands
+	public static final double floorRevs = 0;
+	public static final double pickUpHatchAndUnlockHatchLvl1Revs = 12.98;
+	public static final double lockHatchAndPlaceHatchLvl1Revs = 3.34;
+	public static final double placeHatchLvl2Revs = 64.65;
+	public static final double unlockHatchLvl2Revs = 58.63;
+	public static final double placeBallRocketLvl1Revs = 45.37;
+	public static final double placeBallCargoShipRevs = 65.85;
+	public static final double placeBallRocketLvl2Revs = 102.64;
 
 	//Testing variables
-	public static double ARM_REVOLUTIONS = 5;
-	
+	public static final double ARM_REVOLUTIONS = 20;
 
 }

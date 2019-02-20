@@ -12,14 +12,13 @@ import frc.robot.Robot;
 
 public class TestClimbCommand extends Command {
   
-  double direction;
+  boolean climbUp;
 
-  public TestClimbCommand(double dir) {
+  public TestClimbCommand(boolean runUp) {
  
-    //1 runs wheels down (pushes robot up)
-    direction = dir;
     requires(Robot.climber);
 
+    climbUp = runUp;
   }
 
   // Called just before this Command runs the first time
@@ -32,7 +31,7 @@ public class TestClimbCommand extends Command {
   @Override
   protected void execute() {
 
-    Robot.climber.deployLift(direction);
+    Robot.climber.deployLift(climbUp);
   }
 
   // Make this return true when this Command no longer needs to run execute()
@@ -54,6 +53,8 @@ public class TestClimbCommand extends Command {
   // Called once after isFinished returns true
   @Override
   protected void end() {
+
+    Robot.climber.stopClimb();
   }
 
   // Called when another command which requires one or more of the same

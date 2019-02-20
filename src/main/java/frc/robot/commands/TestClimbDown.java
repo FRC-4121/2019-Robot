@@ -14,6 +14,6 @@ public class TestClimbDown extends CommandGroup {
    * Add your docs here.
    */
   public TestClimbDown() {
-    addSequential(new TestClimbCommand(-1));
+    addSequential(new TestClimbCommand(false));
   }
 }

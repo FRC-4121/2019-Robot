@@ -9,16 +9,13 @@ package frc.robot.commands;
 
 import edu.wpi.first.wpilibj.command.Command;
 import frc.robot.Robot;
+import frc.robot.RobotMap;
 
 public class TakeInBall extends Command {
-  
-  public double motorSpeed;
-  
-  public TakeInBall(double speed) {
+ 
+  public TakeInBall() {
     
     requires(Robot.end);
-
-    motorSpeed = speed;
   }
 
   // Called just before this Command runs the first time
@@ -31,7 +28,7 @@ public class TakeInBall extends Command {
   @Override
   protected void execute() {
 
-    Robot.end.run(motorSpeed);
+    Robot.end.run(RobotMap.INTAKE_SPEED);
   }
 
   // Make this return true when this Command no longer needs to run execute()
@@ -45,6 +42,7 @@ public class TakeInBall extends Command {
   @Override
   protected void end() {
     
+    Robot.end.stop();
   }
 
   // Called when another command which requires one or more of the same

@@ -8,7 +8,6 @@
 package frc.robot.commands;
 
 import edu.wpi.first.wpilibj.command.CommandGroup;
-import frc.robot.Robot;
 
 public class SandstormCommandGroup extends CommandGroup {
   /**
@@ -16,10 +15,10 @@ public class SandstormCommandGroup extends CommandGroup {
    */
   public SandstormCommandGroup() {
 
-    addSequential(new AutoDrive(90, 1.0, 0, 0.625));
-    addSequential(new AutoDrive(90, 0.75, 0, 1.0));
-    addSequential(new AutoDrive(190, 1.5, 0, 1.0));
-    addSequential(new AutoDrive(90, 0.75, 0, 1.0));
+    addSequential(new AutoDrive(90, 0, 1.0, 0.625));
+    addSequential(new AutoDrive(90, 0, 0.75, 1.0));
+    addSequential(new AutoDrive(190, 0, 1.5, 1.0));
+    addSequential(new AutoDrive(90, 0, 0.75, 1.0));
 
   }
 }

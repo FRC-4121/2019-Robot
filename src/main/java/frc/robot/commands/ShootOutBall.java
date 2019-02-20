@@ -9,8 +9,12 @@ package frc.robot.commands;
 
 import edu.wpi.first.wpilibj.command.Command;
 import frc.robot.Robot;
+import frc.robot.RobotMap;
 
 public class ShootOutBall extends Command {
+  
+  //Need to add a timer here.
+
   public ShootOutBall() {
     
     requires(Robot.end);
@@ -24,18 +28,21 @@ public class ShootOutBall extends Command {
   // Called repeatedly when this Command is scheduled to run
   @Override
   protected void execute() {
-    Robot.end.run(0.5);
+    Robot.end.run(-RobotMap.INTAKE_SPEED);
   }
 
   // Make this return true when this Command no longer needs to run execute()
   @Override
   protected boolean isFinished() {
+    
     return true;
   }
 
   // Called once after isFinished returns true
   @Override
   protected void end() {
+
+    Robot.end.stop();
   }
 
   // Called when another command which requires one or more of the same

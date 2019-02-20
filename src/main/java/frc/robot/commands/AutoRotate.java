@@ -28,7 +28,6 @@ public class AutoRotate extends Command {
 
 	public Timer timer = new Timer();
 
-
   //Class constructor
   public AutoRotate(double ang, double time, double speed) {
 
@@ -51,7 +50,6 @@ public class AutoRotate extends Command {
     timer.start();
     startTime= timer.get();
     angleCorrection = 0.0;
-
   }
 
   // Called repeatedly when this Command is scheduled to run
@@ -62,12 +60,6 @@ public class AutoRotate extends Command {
 
     angleCorrection = 0.0;
     
-    // if(gyroAngle < 179 || gyroAngle > -179){
-            
-    //         angleCorrection = pidControl.Run(gyroAngle, robotAngle);
-
-    // }
-
     if (robotAngle == 180 || robotAngle == -180)
         {
             if (gyroAngle >= 0 && gyroAngle < 179.5)

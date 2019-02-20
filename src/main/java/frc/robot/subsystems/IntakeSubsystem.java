@@ -12,12 +12,9 @@ import com.ctre.phoenix.motorcontrol.can.WPI_TalonSRX;
 import edu.wpi.first.wpilibj.command.Subsystem;
 import frc.robot.RobotMap;
 
-/**
- * Add your docs here.
- */
 public class IntakeSubsystem extends Subsystem {
 
-  WPI_TalonSRX intakeMotor = new WPI_TalonSRX(RobotMap.INTAKE_MOTOR);
+  WPI_TalonSRX intakeMotor = new WPI_TalonSRX(RobotMap.INTAKE_MOTOR_ID);
 
   @Override
   public void initDefaultCommand() {}
@@ -26,4 +23,10 @@ public class IntakeSubsystem extends Subsystem {
     
     intakeMotor.set(speed);
   }
+
+  public void stop(){
+
+    intakeMotor.set(RobotMap.STOP_SPEED);
+  }
+  
 }

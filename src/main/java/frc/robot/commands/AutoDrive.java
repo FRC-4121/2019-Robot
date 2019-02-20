@@ -1,7 +1,5 @@
 package frc.robot.commands;
 
-import java.text.DecimalFormat;
-
 import edu.wpi.first.wpilibj.Timer;
 import edu.wpi.first.wpilibj.command.Command;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
@@ -27,7 +25,7 @@ public class AutoDrive extends Command {
 	public int rightEncoderStart;
 	
 	//Class constructor
-    public AutoDrive(double ang, double time, double orientAng, double speed) {
+    public AutoDrive(double ang, double orientAng, double time, double speed) {
     	
     	requires(Robot.drivetrain);
     	
@@ -39,19 +37,6 @@ public class AutoDrive extends Command {
     	    	
     	//Set up PID control
     	pidControl = new PIDControl(RobotMap.kP_Straight, RobotMap.kI_Straight, RobotMap.kD_Straight);
-    	
-    	//pidOutput = new PIDOutput() {
-//	
-//    		@Override
-//    		public void pidWrite(double d) {
-//    			Robot.driveTrain.autoDrive(direction*RobotMap.AUTO_DRIVE_SPEED - d, direction*RobotMap.AUTO_DRIVE_SPEED + d);
-//    		}
-//    	};
-//    	
-//    	pid = new PIDController(0.045, 0.0, 0.0, Robot.oi.MainGyro, pidOutput);    	
-//    	pid.setAbsoluteTolerance(RobotMap.ANGLE_TOLERANCE);
-//    	pid.setContinuous();
-//    	pid.setSetpoint(angle);
     	
     }
 
@@ -72,12 +57,7 @@ public class AutoDrive extends Command {
         gyroAngle = Robot.gyroYaw.getDouble(0);
 
         angleCorrection = 0.0;
-        //if(gyroAngle < 179 || gyroAngle > -179){
-        //    
-        //    angleCorrection = pidControl.Run(gyroAngle, robotAngle);
-        //
-        //}
-
+        
         if (robotAngle == 180 || robotAngle == -180)
         {
             if (gyroAngle >= 0 && gyroAngle < 179.5)

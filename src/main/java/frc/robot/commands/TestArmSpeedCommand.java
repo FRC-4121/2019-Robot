@@ -9,16 +9,15 @@ package frc.robot.commands;
 
 import edu.wpi.first.wpilibj.command.Command;
 import frc.robot.Robot;
-import frc.robot.RobotMap;
 
 public class TestArmSpeedCommand extends Command {
 
-  public double motorSpeed;
+  public boolean direction;
 
-  public TestArmSpeedCommand(double speed) {
+  public TestArmSpeedCommand(boolean runUp) {
     
     requires(Robot.arm);
-    motorSpeed = speed;
+    direction = runUp;
   }
 
   // Called just before this Command runs the first time
@@ -30,7 +29,7 @@ public class TestArmSpeedCommand extends Command {
   @Override
   protected void execute() {
 
-    Robot.arm.runAtSpeed(motorSpeed);
+    Robot.arm.runAtSpeed(direction);
 
   }
 
@@ -38,20 +37,14 @@ public class TestArmSpeedCommand extends Command {
   @Override
   protected boolean isFinished() {
     
-    boolean stopYet = true;
-
-    //if (RobotMap.STOP_ARM)
-    //{
-    //  stopYet = true;
-    //}
-    
-    return stopYet;
-
+    return true;
   }
 
   // Called once after isFinished returns true
   @Override
   protected void end() {
+
+    Robot.arm.stopArm();
   }
 
   // Called when another command which requires one or more of the same

@@ -15,13 +15,12 @@ import edu.wpi.first.wpilibj.command.Command;
 import edu.wpi.first.wpilibj.command.Scheduler;
 import edu.wpi.first.wpilibj.smartdashboard.SendableChooser;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
-import frc.robot.commands.AutoDriveCommandGroup;
 import frc.robot.subsystems.ArmLiftSubsystem;
 import frc.robot.subsystems.GenericDriveTrain;
-import frc.robot.subsystems.MecanumDriveTrain;
-import frc.robot.subsystems.WestCoastDriveTrain;
 import frc.robot.subsystems.HabClimberSubsystem;
 import frc.robot.subsystems.IntakeSubsystem;
+import frc.robot.subsystems.MecanumDriveTrain;
+import frc.robot.subsystems.WestCoastDriveTrain;
 
 /**
  * The VM is configured to automatically run this class, and to call the

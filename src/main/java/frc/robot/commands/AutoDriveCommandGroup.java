@@ -15,17 +15,17 @@ public class AutoDriveCommandGroup extends CommandGroup {
    */
   public AutoDriveCommandGroup() {
     
-    //addSequential(new AutoDrive(45, 3.0, 45, 0.625));
+    //addSequential(new AutoDrive(45, 45, 3.0, 0.625));
     addSequential(new AutoRotate(45, .5, 0.375));
-    addSequential(new AutoDrive(90, 3.0, 45, 0.625));
+    addSequential(new AutoDrive(90, 45, 3.0, 0.625));
     // addSequential(new AutoRotate(180, .5, 0.375));
-    // addSequential(new AutoDrive(90, 3.0, 180, 0.625));
+    // addSequential(new AutoDrive(90, 180, 3.0, 0.625));
     // addSequential(new AutoRotate(180, 0.75, 0.375));
-    // addSequential(new AutoDrive(-90, 1.5, 180, 0.625));
+    // addSequential(new AutoDrive(-90, 180, 1.5, 0.625));
     //addSequential(new AutoRotate(-90, 0.5, 0.375));
-    //addSequential(new AutoDrive(90, 1.5, -90, 1.0));
+    //addSequential(new AutoDrive(90, -90, 1.5, 1.0));
     //addSequential(new AutoRotate(0, 0.5, 0.375));
-    //addSequential(new AutoDrive(90, 0.75, 0, 1.0));
+    //addSequential(new AutoDrive(90, 0, 0.75, 1.0));
 
   }
 }
