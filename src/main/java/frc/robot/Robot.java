@@ -15,6 +15,11 @@ import edu.wpi.first.wpilibj.command.Command;
 import edu.wpi.first.wpilibj.command.Scheduler;
 import edu.wpi.first.wpilibj.smartdashboard.SendableChooser;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
+import frc.robot.commands.AutoDefaultStraight;
+import frc.robot.commands.AutoRobotLeftCargoFront;
+import frc.robot.commands.AutoRobotLeftCargoSide;
+import frc.robot.commands.AutoRobotRightCargoFront;
+import frc.robot.commands.AutoRobotRightCargoSide;
 import frc.robot.subsystems.ArmLiftSubsystem;
 import frc.robot.subsystems.GenericDriveTrain;
 import frc.robot.subsystems.HabClimberSubsystem;
@@ -35,19 +40,19 @@ public class Robot extends TimedRobot {
 	public static int driveType;
 
  	//Network tables
-   public static NetworkTableInstance dataTableInstance;
-   public static NetworkTable visionTable;
-   public static NetworkTable navxTable;
-   public static NetworkTableEntry robotStop;
-   public static NetworkTableEntry driveAngle;
-   public static NetworkTableEntry gyroYaw;
-   public static NetworkTableEntry yVelocity;
-   public static NetworkTableEntry xVelocity;
-   public static NetworkTableEntry yDisplacement;
-   public static NetworkTableEntry xDisplacement;
-   public static NetworkTableEntry zeroGyro;
-   //public static NetworkTableEntry zeroDisplace;
-   public static NetworkTableEntry writeVideo;
+  public static NetworkTableInstance dataTableInstance;
+  public static NetworkTable visionTable;
+  public static NetworkTable navxTable;
+  public static NetworkTableEntry robotStop;
+  public static NetworkTableEntry driveAngle;
+  public static NetworkTableEntry gyroYaw;
+  public static NetworkTableEntry yVelocity;
+  public static NetworkTableEntry xVelocity;
+  public static NetworkTableEntry yDisplacement;
+  public static NetworkTableEntry xDisplacement;
+  public static NetworkTableEntry zeroGyro;
+  //public static NetworkTableEntry zeroDisplace;
+  public static NetworkTableEntry writeVideo;
      
   //Declare subsystems
   public static GenericDriveTrain drivetrain;
@@ -150,7 +155,6 @@ public class Robot extends TimedRobot {
     autoTargetChooser.addOption("Cargo Side", "Side");
     autoTargetChooser.addOption("Straight", "Straight");
 
-    //chooser.addObject("My Auto", new MyAutoCommand());
     SmartDashboard.putData("Auto Side", autoSideChooser);
     SmartDashboard.putData("Auto Style", autoStyleChooser);
     SmartDashboard.putData("Auto Target", autoTargetChooser);    
@@ -212,6 +216,7 @@ public class Robot extends TimedRobot {
 
     autonomousCommand = null;
 
+    //Logic tree for choosing our auto program
     if(myStyle.equals("Sandstorm"))
     {
       autonomousCommand = null;
@@ -222,35 +227,35 @@ public class Robot extends TimedRobot {
       {
         if(myTarget.equals("Front"))
         {
-          //autonomousCommand = new AutoRobotLeftCargoFront();
+          autonomousCommand = new AutoRobotLeftCargoFront();
         } 
         else if(myTarget.equals("Side"))
         {
-          //autonomousCommand = new AutoRobotLeftCargoSide();
+          autonomousCommand = new AutoRobotLeftCargoSide();
         }
         else
         {
-          //autonomousCommand = new AutoDefaultStraight();
+          autonomousCommand = new AutoDefaultStraight();
         }
       }
       else if(mySide.equals("Right"))
       {
         if(myTarget.equals("Front"))
         {
-          //autonomousCommand = new AutoRobotRightCargoFront();
+          autonomousCommand = new AutoRobotRightCargoFront();
         }
         else if(myTarget.equals("Side"))
         {
-          //autonomousCommand = new AutoRobotRightCargoSide();
+          autonomousCommand = new AutoRobotRightCargoSide();
         }
         else
         {
-          //autonomousCommand = new AutoDefaultStraight();
+          autonomousCommand = new AutoDefaultStraight();
         }
       }
-      else
+      else //Center starting position; may add some more options here in the future
       {
-        //autonomousCommand = new AutoDefaultStraight();
+        autonomousCommand = new AutoDefaultStraight();
       }
     }
 
@@ -296,12 +301,6 @@ public class Robot extends TimedRobot {
   public void teleopPeriodic() {
     Scheduler.getInstance().run();
     
-    //SmartDashboard.putBoolean("Arm Idle Mode", Robot.arm.isBrakeMode());
-
-    // SmartDashboard.putNumber("Front Left Encoder Distance:", Robot.oi.frontLeftEncoder.getDistance());
-    // SmartDashboard.putNumber("Front Right Encoder Distance:", Robot.oi.frontRightEncoder.getDistance());
-    // SmartDashboard.putNumber("Back Right Encoder Distance:", Robot.oi.backRightEncoder.getDistance());
-    // SmartDashboard.putNumber("Back Left Encoder Distance:", Robot.oi.backLeftEncoder.getDistance());
   }
 
   
