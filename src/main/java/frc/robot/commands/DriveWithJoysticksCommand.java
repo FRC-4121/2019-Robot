@@ -25,7 +25,7 @@ public class DriveWithJoysticksCommand extends Command {
   // Called repeatedly when this Command is scheduled to run
   @Override
   protected void execute() {
-    Robot.drivetrain.drive(-Robot.oi.rightJoy.getY(), Robot.oi.rightJoy.getX(), Robot.oi.rightJoy.getZ(), true);
+    Robot.drivetrain.drive(-Robot.oi.rightJoy.getY(), Robot.oi.rightJoy.getX(), Robot.oi.rightJoy.getZ(), false);
   }
 
   // Make this return true when this Command no longer needs to run execute()

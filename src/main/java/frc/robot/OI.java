@@ -14,10 +14,14 @@ import edu.wpi.first.wpilibj.buttons.Button;
 import edu.wpi.first.wpilibj.buttons.JoystickButton;
 
 import frc.robot.commands.ChangeTeleopSpeed;
+import frc.robot.commands.ShootOutBall;
+import frc.robot.commands.TakeInBall;
 //import frc.robot.commands.TestClimbUp;
 //import frc.robot.commands.TestClimbDown;
 import frc.robot.commands.TestArmRotationsCommand;
 import frc.robot.commands.TestArmSpeedCommand;
+import frc.robot.commands.TestClimbCommand;
+import frc.robot.commands.TestClimbDrive;
 
 
 
@@ -32,10 +36,12 @@ public class OI {
 	
 	//Define joystick objects and joystick button functions
 	public Joystick leftJoy, rightJoy;
-	public Button changeDriveSpeed, testArmMotorSpeedMode, testArmMotorPositionMode, testArmStop;
+	public Button changeDriveSpeed, testArmMotorSpeedMode, testArmMotorPositionMode;
+	public Button testClimbUp, testClimbDown, testIntake, testOuttake, testArmDown;
+	public Button testClimbDrive;
 
 	//Define limit switches
-	public DigitalInput intakeLimitSwitch, climbTopLimitSwitch, climbBottomLimitSwitch;
+	public DigitalInput hatchLimitSwitch, ballLimitSwitch, climbTopLimitSwitch, climbBottomLimitSwitch;
 	
 	//Default class constructor
 	public OI() {
@@ -44,21 +50,33 @@ public class OI {
 		rightJoy = new Joystick(0);
 
 		//Initialize limit switches
-		intakeLimitSwitch = new DigitalInput(0);
-		climbTopLimitSwitch = new DigitalInput(1);
-		climbBottomLimitSwitch = new DigitalInput(2);
+		hatchLimitSwitch = new DigitalInput(0);
+		ballLimitSwitch = new DigitalInput(1);
+		climbTopLimitSwitch = new DigitalInput(2);
+		climbBottomLimitSwitch = new DigitalInput(3);
 
 		//Initialize Joystick buttons
 		changeDriveSpeed = new JoystickButton(rightJoy, 2);
-		testArmMotorSpeedMode = new JoystickButton(rightJoy, 1);
-		testArmMotorPositionMode = new JoystickButton(rightJoy, 3);
-		testArmStop = new JoystickButton(rightJoy, 5);
+		testArmMotorSpeedMode = new JoystickButton(rightJoy, 3);
+		testArmDown = new JoystickButton(rightJoy, 4);
+		//testArmMotorPositionMode = new JoystickButton(rightJoy, 3);
+		testIntake = new JoystickButton(rightJoy, 5);
+		testOuttake = new JoystickButton(rightJoy, 6);
+		testClimbUp = new JoystickButton(rightJoy, 7);
+		testClimbDown = new JoystickButton(rightJoy, 8);
+		testClimbDrive = new JoystickButton(rightJoy, 9);
 
+		//THESE ARE A PROBLEM!!!
 		//Configure Joystick button commands
 		changeDriveSpeed.whenPressed(new ChangeTeleopSpeed());
-		testArmMotorSpeedMode.whileHeld(new TestArmSpeedCommand());
-		testArmMotorPositionMode.whenPressed(new TestArmRotationsCommand());
-
+		testIntake.whileHeld(new TakeInBall(-0.5));
+		testOuttake.whileHeld(new ShootOutBall());
+		testArmMotorSpeedMode.whileHeld(new TestArmSpeedCommand(0.5));
+		testArmDown.whileHeld(new TestArmSpeedCommand(-0.5));
+		//testArmMotorPositionMode.whenPressed(new TestArmRotationsCommand());
+		testClimbUp.whileHeld(new TestClimbCommand(1));
+		testClimbDown.whileHeld(new TestClimbCommand(-1));
+		testClimbDrive.whileHeld(new TestClimbDrive());
 	}
   
 }

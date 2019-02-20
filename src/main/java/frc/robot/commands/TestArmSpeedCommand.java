@@ -13,10 +13,12 @@ import frc.robot.RobotMap;
 
 public class TestArmSpeedCommand extends Command {
 
-  public TestArmSpeedCommand() {
+  public double motorSpeed;
+
+  public TestArmSpeedCommand(double speed) {
     
     requires(Robot.arm);
-
+    motorSpeed = speed;
   }
 
   // Called just before this Command runs the first time
@@ -28,7 +30,7 @@ public class TestArmSpeedCommand extends Command {
   @Override
   protected void execute() {
 
-    Robot.arm.runAtSpeed(RobotMap.ARM_SPEED);
+    Robot.arm.runAtSpeed(motorSpeed);
 
   }
 

@@ -24,8 +24,7 @@ public class HabClimberSubsystem extends Subsystem {
   public void initDefaultCommand() {}
 
   //Basic steps: deploy guide wheels, raise lift WHILE ALSO DRIVING with wheels, then pull lift back up
-
-  public void deployLift(double direction){  //1 is up, -1 is down
+  public void deployLift(double direction){  //1 is run wheels down, -1 is run wheels up
     
     climbLift.set(direction * RobotMap.CLIMB_LIFT_SPEED);
   }
