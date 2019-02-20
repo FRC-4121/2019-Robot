@@ -39,11 +39,11 @@ public class Robot extends TimedRobot {
   //Declare public fields
 	public static int driveType;
 
- 	//Network tables
+ 	//Network tables and entries
   public static NetworkTableInstance dataTableInstance;
   public static NetworkTable visionTable;
   public static NetworkTable navxTable;
-  public static NetworkTableEntry robotStop;
+  
   public static NetworkTableEntry driveAngle;
   public static NetworkTableEntry gyroYaw;
   public static NetworkTableEntry yVelocity;
@@ -52,7 +52,20 @@ public class Robot extends TimedRobot {
   public static NetworkTableEntry xDisplacement;
   public static NetworkTableEntry zeroGyro;
   //public static NetworkTableEntry zeroDisplace;
+  
   public static NetworkTableEntry writeVideo;
+  public static NetworkTableEntry robotStop;
+  public NetworkTableEntry ballDistance;
+  public NetworkTableEntry ballAngle;
+  public NetworkTableEntry ballOffset;
+  public NetworkTableEntry ballScreenPercent;
+  public NetworkTableEntry foundBall;
+  public NetworkTableEntry tapeOffset;
+  public NetworkTableEntry foundTape;
+  public NetworkTableEntry visionTargetAngle;
+  public NetworkTableEntry visionTargetDistance;
+  public NetworkTableEntry visionTargetOffset;
+  public NetworkTableEntry foundVisionTarget;
      
   //Declare subsystems
   public static GenericDriveTrain drivetrain;
@@ -78,6 +91,7 @@ public class Robot extends TimedRobot {
 
   public boolean autoCommandStarted;
 
+
 	/**
    * This function is run when the robot is first started up and should be
    * used for any initialization code.
@@ -92,7 +106,19 @@ public class Robot extends TimedRobot {
 
 		//Initialize NetworkTable entries
 		robotStop = visionTable.getEntry("RobotStop");
-		writeVideo = visionTable.getEntry("WriteVideo");
+    writeVideo = visionTable.getEntry("WriteVideo");
+    ballOffset = visionTable.getEntry("BallOffset");
+    ballDistance = visionTable.getEntry("BallDistance");
+    ballAngle = visionTable.getEntry("BallAngle");
+    ballScreenPercent = visionTable.getEntry("BallScreenPercent");
+    foundBall = visionTable.getEntry("FoundBall");
+    tapeOffset = visionTable.getEntry("TapeOffset");
+    foundTape = visionTable.getEntry("FoundTape");
+    visionTargetDistance = visionTable.getEntry("VisionTargetDistance");
+    visionTargetAngle = visionTable.getEntry("VisionTargetAngle");
+    visionTargetOffset = visionTable.getEntry("VisionTargetOffset");
+    foundVisionTarget = visionTable.getEntry("FoundVisionTarget");
+    
     driveAngle = navxTable.getEntry("GyroAngle");
     gyroYaw = navxTable.getEntry("GyroYaw");
 		yVelocity = navxTable.getEntry("YVelocity");
@@ -111,8 +137,9 @@ public class Robot extends TimedRobot {
 		/* Allows for simple alteration of drive train type.  
     * 1: West Coast
     * 2: Mecanum 
-    * default: West Coast
+    * 2019 default: Mecanum
     */
+
 		driveType = 2;
 	  
     //Initialize the proper drive train based on drive type
@@ -127,7 +154,7 @@ public class Robot extends TimedRobot {
         break;
 			
       default:
-        drivetrain = new WestCoastDriveTrain();
+        drivetrain = new MecanumDriveTrain();
 		
     }
     
@@ -144,7 +171,7 @@ public class Robot extends TimedRobot {
     autoStyleChooser = new SendableChooser<>();
     autoTargetChooser = new SendableChooser<>();
 
-    autoSideChooser.setDefaultOption("Left", "Left");
+    autoSideChooser.addOption("Left", "Left");
     autoSideChooser.addOption("Center", "Center");
     autoSideChooser.addOption("Right", "Right");
     
