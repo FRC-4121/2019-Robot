@@ -17,6 +17,5 @@ public class AutoDefaultStraight extends CommandGroup {
     
     addSequential(new AutoDriveOffHab());
     addSequential(new AutoDrive(90, 0, 3, 0.625));
-
   }
 }

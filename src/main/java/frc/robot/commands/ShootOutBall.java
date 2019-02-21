@@ -7,22 +7,31 @@
 
 package frc.robot.commands;
 
+import edu.wpi.first.wpilibj.Timer;
 import edu.wpi.first.wpilibj.command.Command;
 import frc.robot.Robot;
 import frc.robot.RobotMap;
 
 public class ShootOutBall extends Command {
   
-  //Need to add a timer here.
+  Timer timer = new Timer();
 
-  public ShootOutBall() {
+  double startTime;
+  double stopTime;
+
+  public ShootOutBall(double time) {
     
     requires(Robot.end);
+
+    stopTime = time;
   }
 
   // Called just before this Command runs the first time
   @Override
   protected void initialize() {
+
+    timer.start();
+    startTime = timer.get();
   }
 
   // Called repeatedly when this Command is scheduled to run
@@ -35,7 +44,9 @@ public class ShootOutBall extends Command {
   @Override
   protected boolean isFinished() {
     
-    return true;
+    double currentTime = timer.get();
+
+    return currentTime > stopTime;
   }
 
   // Called once after isFinished returns true

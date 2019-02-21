@@ -20,7 +20,6 @@ import frc.robot.commands.TestClimbDrive;
 import frc.robot.commands.TestClimbUp;
 
 
-
 /**
  * This class is the glue that binds the controls on the physical operator
  * interface to the commands and command groups that allow control of the robot.
@@ -43,7 +42,6 @@ public class OI {
 		ballLimitSwitch = new DigitalInput(RobotMap.BALL_LIMIT_SWITCH_ID);
 		climbTopLimitSwitch = new DigitalInput(RobotMap.CLIMB_TOP_LIMIT_SWITCH_ID);
 		climbBottomLimitSwitch = new DigitalInput(RobotMap.CLIMB_BOTTOM_LIMIT_SWITCH_ID);
-
 
 		//Joystick Configuration
 
@@ -86,8 +84,8 @@ public class OI {
 
 		//Configure Joystick button commands
 		changeDriveSpeed.whenPressed(new ChangeTeleopSpeed());
-		testIntake.whileHeld(new TakeInBall());
-		testOuttake.whileHeld(new ShootOutBall());
+		testIntake.whenPressed(new TakeInBall(4.0));
+		testOuttake.whenPressed(new ShootOutBall(2.0));
 		testArmUp.whileHeld(new TestArmSpeedCommand(true));
 		testArmDown.whileHeld(new TestArmSpeedCommand(false));
 		//testArmMotorPositionMode.whenPressed(new TestArmRotationsCommand());

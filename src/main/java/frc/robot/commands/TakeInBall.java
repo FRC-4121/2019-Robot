@@ -7,21 +7,33 @@
 
 package frc.robot.commands;
 
+import edu.wpi.first.wpilibj.Timer;
 import edu.wpi.first.wpilibj.command.Command;
 import frc.robot.Robot;
 import frc.robot.RobotMap;
 
 public class TakeInBall extends Command {
  
-  public TakeInBall() {
+  Timer timer = new Timer();
+
+  double startTime;
+  double stopTime;
+
+  public TakeInBall(double time) {
     
     requires(Robot.end);
+
+    stopTime = time;
   }
 
   // Called just before this Command runs the first time
   @Override
   protected void initialize() {
-
+    
+    //Timer is only to make sure the motor stops if a ball rolls away accidentally
+    //Use long times as a result
+    timer.start();
+    startTime = timer.get();
   }
 
   // Called repeatedly when this Command is scheduled to run
@@ -34,8 +46,12 @@ public class TakeInBall extends Command {
   // Make this return true when this Command no longer needs to run execute()
   @Override
   protected boolean isFinished() {
-    return true;
-    //return Robot.oi.ballLimitSwitch.get();
+    
+    double currentTime = timer.get();
+
+    //Check if limit switch is tripped or if timed out.  If true, stop command
+    return (currentTime > stopTime) || Robot.oi.ballLimitSwitch.get();
+
   }
 
   // Called once after isFinished returns true

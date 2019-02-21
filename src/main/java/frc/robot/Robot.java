@@ -89,9 +89,7 @@ public class Robot extends TimedRobot {
   public String myTarget;
   public String myStyle;
 
-  public boolean autoCommandStarted;
-
-
+  
 	/**
    * This function is run when the robot is first started up and should be
    * used for any initialization code.
@@ -238,9 +236,7 @@ public class Robot extends TimedRobot {
     myStyle = autoStyleChooser.getSelected();
     mySide = autoSideChooser.getSelected();
     myTarget = autoTargetChooser.getSelected();
-    
-    autoCommandStarted = false;
-
+   
     autonomousCommand = null;
 
     //Logic tree for choosing our auto program
@@ -289,7 +285,6 @@ public class Robot extends TimedRobot {
     // schedule the autonomous command
     if (autonomousCommand != null) {
       autonomousCommand.start();
-      autoCommandStarted = true;
     }
   }
 
@@ -327,7 +322,10 @@ public class Robot extends TimedRobot {
   @Override
   public void teleopPeriodic() {
     Scheduler.getInstance().run();
-    
+
+    //Testing POV
+    int POVAxis = Robot.oi.rightJoy.getPOV();
+    System.out.println(POVAxis);
   }
 
   

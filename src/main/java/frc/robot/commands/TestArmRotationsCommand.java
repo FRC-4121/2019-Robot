@@ -44,7 +44,8 @@ public class TestArmRotationsCommand extends Command {
       thereYet = true;
     }
 
-    SmartDashboard.putNumber("Arm Encoder Value: ", encoderValue / 4096);
+    SmartDashboard.putNumber("Arm Encoder Value: ", encoderValue);
+    SmartDashboard.putNumber("Arm Rotations: ", encoderValue / 4096);
 
     return thereYet;
   }

@@ -12,12 +12,12 @@ import frc.robot.Robot;
 
 public class TestArmSpeedCommand extends Command {
 
-  public boolean direction;
+  public boolean armUp;
 
   public TestArmSpeedCommand(boolean runUp) {
     
     requires(Robot.arm);
-    direction = runUp;
+    armUp = runUp;
   }
 
   // Called just before this Command runs the first time
@@ -29,7 +29,7 @@ public class TestArmSpeedCommand extends Command {
   @Override
   protected void execute() {
 
-    Robot.arm.runAtSpeed(direction);
+    Robot.arm.runAtSpeed(armUp);
 
   }
 
