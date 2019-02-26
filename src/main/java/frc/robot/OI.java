@@ -13,6 +13,8 @@ import edu.wpi.first.wpilibj.buttons.Button;
 import edu.wpi.first.wpilibj.buttons.JoystickButton;
 import frc.robot.commands.ChangeTeleopSpeed;
 import frc.robot.commands.ShootOutBall;
+import frc.robot.commands.StopArm;
+import frc.robot.commands.StopIntake;
 import frc.robot.commands.TakeInBall;
 import frc.robot.commands.TestArmSpeedCommand;
 import frc.robot.commands.TestClimbDown;
@@ -33,15 +35,16 @@ public class OI {
 	public Button testClimbDrive;
 
 	//Define limit switches
-	public DigitalInput hatchLimitSwitch, ballLimitSwitch, climbTopLimitSwitch, climbBottomLimitSwitch;
+	public DigitalInput hatchLimitSwitch, hatchLoadedLimitSwitch, ballLimitSwitch, climbTopLimitSwitch, climbBottomLimitSwitch;
 	
 	public OI() {
 
 		//Initialize limit switches
 		hatchLimitSwitch = new DigitalInput(RobotMap.HATCH_DRIVE_LIMIT_SWITCH_ID);
+		hatchLoadedLimitSwitch = new DigitalInput(RobotMap.HATCH_LOADED_LIMIT_SWITCH_ID);
 		ballLimitSwitch = new DigitalInput(RobotMap.BALL_LIMIT_SWITCH_ID);
-		climbTopLimitSwitch = new DigitalInput(RobotMap.CLIMB_TOP_LIMIT_SWITCH_ID);
-		climbBottomLimitSwitch = new DigitalInput(RobotMap.CLIMB_BOTTOM_LIMIT_SWITCH_ID);
+		//climbTopLimitSwitch = new DigitalInput(RobotMap.CLIMB_TOP_LIMIT_SWITCH_ID);
+		//climbBottomLimitSwitch = new DigitalInput(RobotMap.CLIMB_BOTTOM_LIMIT_SWITCH_ID);
 
 		//Joystick Configuration
 
@@ -84,10 +87,13 @@ public class OI {
 
 		//Configure Joystick button commands
 		changeDriveSpeed.whenPressed(new ChangeTeleopSpeed());
-		testIntake.whenPressed(new TakeInBall(4.0));
+		testIntake.whileHeld(new TakeInBall());//speed limit slowed for testing w/o limit switch
+		testIntake.whenReleased(new StopIntake());
 		testOuttake.whenPressed(new ShootOutBall(2.0));
 		testArmUp.whileHeld(new TestArmSpeedCommand(true));
 		testArmDown.whileHeld(new TestArmSpeedCommand(false));
+		testArmUp.whenReleased(new StopArm());
+		testArmDown.whenReleased(new StopArm());
 		//testArmMotorPositionMode.whenPressed(new TestArmRotationsCommand());
 		testClimbUp.whileHeld(new TestClimbUp());
 		testClimbDown.whileHeld(new TestClimbDown());

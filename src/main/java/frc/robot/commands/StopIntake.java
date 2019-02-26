@@ -7,57 +7,36 @@
 
 package frc.robot.commands;
 
-import edu.wpi.first.wpilibj.Timer;
 import edu.wpi.first.wpilibj.command.Command;
 import frc.robot.Robot;
-import frc.robot.RobotMap;
 
-public class TakeInBall extends Command {
- 
-  Timer timer = new Timer();
-
-  double startTime;
-  double stopTime;
-
-  public TakeInBall() {
-    
+public class StopIntake extends Command {
+  public StopIntake() {
+    // Use requires() here to declare subsystem dependencies
+    // eg. requires(chassis);
     requires(Robot.end);
-
   }
 
   // Called just before this Command runs the first time
   @Override
   protected void initialize() {
-    
-    //Timer is only to make sure the motor stops if a ball rolls away accidentally
-    //Use long times as a result
-    timer.start();
-    startTime = timer.get();
   }
 
   // Called repeatedly when this Command is scheduled to run
   @Override
   protected void execute() {
-
-    Robot.end.run(RobotMap.INTAKE_SPEED);
+    Robot.end.stop();
   }
 
   // Make this return true when this Command no longer needs to run execute()
   @Override
   protected boolean isFinished() {
-    
-    double currentTime = timer.get();
-
-    //Check if limit switch is tripped or if timed out.  If true, stop command
-    //return (currentTime > stopTime) || !Robot.oi.ballLimitSwitch.get();
     return true;
   }
 
   // Called once after isFinished returns true
   @Override
   protected void end() {
-    
-    //Robot.end.stop();
   }
 
   // Called when another command which requires one or more of the same

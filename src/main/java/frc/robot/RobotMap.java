@@ -38,9 +38,10 @@ public class RobotMap {
 
 	//Limit switch ids
 	public static final int HATCH_DRIVE_LIMIT_SWITCH_ID = 0;
-	public static final int BALL_LIMIT_SWITCH_ID = 1;
+	public static final int BALL_LIMIT_SWITCH_ID = 2;
 	public static final int CLIMB_TOP_LIMIT_SWITCH_ID = 2;
 	public static final int CLIMB_BOTTOM_LIMIT_SWITCH_ID = 3;
+	public static final int HATCH_LOADED_LIMIT_SWITCH_ID = 4;
 
 	//Invert direction (for WCD only)
 	public static int DIRECTION_MULTIPLIER = -1;
@@ -53,9 +54,10 @@ public class RobotMap {
 	public static double DRIVE_SPEED = 0.65;
 	public static final double DRIVE_SPEED_FAST = 1.0;
 	public static final double DRIVE_SPEED_SLOW = 0.25;
-	public static final double INTAKE_SPEED = 0.5;
+	public static final double INTAKE_SPEED = 0.2;
+	public static final double OUTTAKE_SPEED = 0.5;
 	public static final double ARM_SPEED_UP = 0.5;
-	public static final double ARM_SPEED_DOWN = 0.2;
+	public static final double ARM_SPEED_DOWN = -0.1;
 	public static final double CLIMB_LIFT_SPEED = 0.75;
 	public static final double CLIMB_DRIVE_SPEED = 0.5;
 	public static final double STOP_SPEED = 0;

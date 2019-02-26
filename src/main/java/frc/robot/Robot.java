@@ -46,6 +46,7 @@ public class Robot extends TimedRobot {
   
   public static NetworkTableEntry driveAngle;
   public static NetworkTableEntry gyroYaw;
+  public static NetworkTableEntry gyroPitch;
   public static NetworkTableEntry yVelocity;
   public static NetworkTableEntry xVelocity;
   public static NetworkTableEntry yDisplacement;
@@ -119,6 +120,7 @@ public class Robot extends TimedRobot {
     
     driveAngle = navxTable.getEntry("GyroAngle");
     gyroYaw = navxTable.getEntry("GyroYaw");
+    gyroPitch = navxTable.getEntry("GyroPitch");
 		yVelocity = navxTable.getEntry("YVelocity");
 		xVelocity = navxTable.getEntry("XVelocity");
 		yDisplacement = navxTable.getEntry("YDisplacement");
@@ -196,7 +198,12 @@ public class Robot extends TimedRobot {
    */
   @Override
   public void robotPeriodic() {
-    
+
+    SmartDashboard.putBoolean("Hatch Drive Limit", Robot.oi.hatchLimitSwitch.get());
+    SmartDashboard.putBoolean("Hatch Loaded Limit", Robot.oi.hatchLoadedLimitSwitch.get());
+    SmartDashboard.putBoolean("Ball Limit", Robot.oi.ballLimitSwitch.get());
+    //SmartDashboard.putBoolean("Climb Top Limit", Robot.oi.climbTopLimitSwitch.get());
+    //SmartDashboard.putBoolean("Climb Bottom Limit", Robot.oi.climbBottomLimitSwitch.get());
   }
 
   /**
@@ -323,9 +330,6 @@ public class Robot extends TimedRobot {
   public void teleopPeriodic() {
     Scheduler.getInstance().run();
 
-    //Testing POV
-    int POVAxis = Robot.oi.rightJoy.getPOV();
-    System.out.println(POVAxis);
   }
 
   

@@ -44,7 +44,7 @@ public class TestArmSpeedCommand extends Command {
   @Override
   protected void end() {
 
-    Robot.arm.stopArm();
+    
   }
 
   // Called when another command which requires one or more of the same
