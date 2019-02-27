@@ -16,6 +16,7 @@ import frc.robot.commands.ShootOutBall;
 import frc.robot.commands.StopArm;
 import frc.robot.commands.StopIntake;
 import frc.robot.commands.TakeInBall;
+import frc.robot.commands.TestArmRotationsCommand;
 import frc.robot.commands.TestArmSpeedCommand;
 import frc.robot.commands.TestClimbDown;
 import frc.robot.commands.TestClimbDrive;
@@ -76,9 +77,9 @@ public class OI {
 
 		//Initialize Joystick buttons
 		changeDriveSpeed = new JoystickButton(rightJoy, 2);
-		testArmUp = new JoystickButton(rightJoy, 3);
+		//testArmUp = new JoystickButton(rightJoy, 3);
 		testArmDown = new JoystickButton(rightJoy, 4);
-		//testArmMotorPositionMode = new JoystickButton(rightJoy, 3);
+		testArmMotorPositionMode = new JoystickButton(rightJoy, 3);
 		testIntake = new JoystickButton(rightJoy, 5);
 		testOuttake = new JoystickButton(rightJoy, 6);
 		testClimbUp = new JoystickButton(rightJoy, 7);
@@ -90,11 +91,11 @@ public class OI {
 		testIntake.whileHeld(new TakeInBall());//speed limit slowed for testing w/o limit switch
 		testIntake.whenReleased(new StopIntake());
 		testOuttake.whenPressed(new ShootOutBall(2.0));
-		testArmUp.whileHeld(new TestArmSpeedCommand(true));
+		//testArmUp.whileHeld(new TestArmSpeedCommand(true));
 		testArmDown.whileHeld(new TestArmSpeedCommand(false));
-		testArmUp.whenReleased(new StopArm());
+		//testArmUp.whenReleased(new StopArm());
 		testArmDown.whenReleased(new StopArm());
-		//testArmMotorPositionMode.whenPressed(new TestArmRotationsCommand());
+		testArmMotorPositionMode.whenPressed(new TestArmRotationsCommand(.5));
 		testClimbUp.whileHeld(new TestClimbUp());
 		testClimbDown.whileHeld(new TestClimbDown());
 		testClimbDrive.whileHeld(new TestClimbDrive());

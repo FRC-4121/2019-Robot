@@ -204,6 +204,14 @@ public class Robot extends TimedRobot {
     SmartDashboard.putBoolean("Ball Limit", Robot.oi.ballLimitSwitch.get());
     //SmartDashboard.putBoolean("Climb Top Limit", Robot.oi.climbTopLimitSwitch.get());
     //SmartDashboard.putBoolean("Climb Bottom Limit", Robot.oi.climbBottomLimitSwitch.get());
+
+    SmartDashboard.putNumber("Arm Current:", Robot.arm.armMotor.getOutputCurrent());
+
+    double encoderValue = (double) Robot.arm.armMotor.getSelectedSensorPosition();
+
+    SmartDashboard.putNumber("Arm Encoder Value: ", encoderValue);
+    SmartDashboard.putNumber("Arm Rotations: ", encoderValue / 4096);
+
   }
 
   /**
@@ -314,6 +322,9 @@ public class Robot extends TimedRobot {
     if (autonomousCommand != null) {
       autonomousCommand.cancel();
     }
+
+    
+    Robot.arm.armMotor.setSelectedSensorPosition(0);
 
     //Zero gyro and displacement
     robotStop.setDouble(0.0);

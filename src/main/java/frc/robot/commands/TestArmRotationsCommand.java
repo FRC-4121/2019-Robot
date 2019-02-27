@@ -14,9 +14,13 @@ import frc.robot.RobotMap;
 
 public class TestArmRotationsCommand extends Command {
   
-  public TestArmRotationsCommand() {
+  double revolutionsToGo;
+
+  public TestArmRotationsCommand(double revolutions) {
     
     requires(Robot.arm);
+
+    revolutionsToGo = revolutions;
   }
 
   // Called just before this Command runs the first time
@@ -28,7 +32,7 @@ public class TestArmRotationsCommand extends Command {
   @Override
   protected void execute() {
 
-    Robot.arm.runToPosition(RobotMap.ARM_REVOLUTIONS);
+    Robot.arm.runToPosition(revolutionsToGo);
   }
 
   // Make this return true when this Command no longer needs to run execute()
@@ -39,10 +43,10 @@ public class TestArmRotationsCommand extends Command {
 
     double encoderValue = (double) Robot.arm.armMotor.getSelectedSensorPosition();
 
-    if(encoderValue == RobotMap.ARM_REVOLUTIONS * RobotMap.kEncoderPPR){
+    // if(encoderValue == revolutionsToGo * RobotMap.kEncoderPPR){
 
-      thereYet = true;
-    }
+    //   thereYet = true;
+    // }
 
     SmartDashboard.putNumber("Arm Encoder Value: ", encoderValue);
     SmartDashboard.putNumber("Arm Rotations: ", encoderValue / 4096);

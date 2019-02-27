@@ -79,7 +79,7 @@ public class RobotMap {
 	public static final double kD_Turn = 0.004;
 
 	//PID values for arm lift motor control
-	public static final double kP_Arm = 0.15;
+	public static final double kP_Arm = .75;
 	public static final double kI_Arm = 0;
 	public static final double kD_Arm = 1;
 	public static final double kFf_Arm = 0;
