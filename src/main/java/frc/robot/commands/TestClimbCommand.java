@@ -63,7 +63,6 @@ public class TestClimbCommand extends Command {
   @Override
   protected void end() {
 
-    Robot.climber.stopClimb();
   }
 
   // Called when another command which requires one or more of the same

@@ -38,7 +38,6 @@ public class TestClimbDrive extends Command {
   @Override
   protected void end() {
 
-    Robot.climber.stopClimbDrive();
   }
 
   // Called when another command which requires one or more of the same

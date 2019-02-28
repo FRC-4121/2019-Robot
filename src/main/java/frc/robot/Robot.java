@@ -7,6 +7,8 @@
 
 package frc.robot;
 
+import com.ctre.phoenix.motorcontrol.ControlMode;
+
 import edu.wpi.first.networktables.NetworkTable;
 import edu.wpi.first.networktables.NetworkTableEntry;
 import edu.wpi.first.networktables.NetworkTableInstance;
@@ -325,6 +327,7 @@ public class Robot extends TimedRobot {
 
     
     Robot.arm.armMotor.setSelectedSensorPosition(0);
+    Robot.arm.armMotor.set(ControlMode.Position, 0);
 
     //Zero gyro and displacement
     robotStop.setDouble(0.0);

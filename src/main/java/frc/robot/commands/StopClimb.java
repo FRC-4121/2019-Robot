@@ -7,53 +7,37 @@
 
 package frc.robot.commands;
 
-import edu.wpi.first.wpilibj.Timer;
 import edu.wpi.first.wpilibj.command.Command;
 import frc.robot.Robot;
-import frc.robot.RobotMap;
 
-public class ShootOutBall extends Command {
-  
-  Timer timer = new Timer();
-
-  double startTime;
-  double stopTime;
-
-  public ShootOutBall(double time) {
+public class StopClimb extends Command {
+  public StopClimb() {
     
-    requires(Robot.end);
-
-    stopTime = time;
+    requires(Robot.climber);
   }
 
   // Called just before this Command runs the first time
   @Override
   protected void initialize() {
-
-    timer.start();
-    startTime = timer.get();
   }
 
   // Called repeatedly when this Command is scheduled to run
   @Override
   protected void execute() {
-    Robot.end.run(RobotMap.OUTTAKE_SPEED);
+
+    Robot.climber.stopClimb();
+    Robot.climber.stopClimbDrive();
   }
 
   // Make this return true when this Command no longer needs to run execute()
   @Override
   protected boolean isFinished() {
-    
-    double currentTime = timer.get();
-
-    return currentTime > stopTime;
+    return false;
   }
 
   // Called once after isFinished returns true
   @Override
   protected void end() {
-
-    Robot.end.stop();
   }
 
   // Called when another command which requires one or more of the same

@@ -11,12 +11,13 @@ import edu.wpi.first.wpilibj.DigitalInput;
 import edu.wpi.first.wpilibj.Joystick;
 import edu.wpi.first.wpilibj.buttons.Button;
 import edu.wpi.first.wpilibj.buttons.JoystickButton;
+import frc.robot.commands.ArmToPositionCommand;
 import frc.robot.commands.ChangeTeleopSpeed;
 import frc.robot.commands.ShootOutBall;
 import frc.robot.commands.StopArm;
+import frc.robot.commands.StopClimb;
 import frc.robot.commands.StopIntake;
 import frc.robot.commands.TakeInBall;
-import frc.robot.commands.TestArmRotationsCommand;
 import frc.robot.commands.TestArmSpeedCommand;
 import frc.robot.commands.TestClimbDown;
 import frc.robot.commands.TestClimbDrive;
@@ -31,7 +32,7 @@ public class OI {
 
 	//Define joystick objects and joystick button functions
 	public Joystick leftJoy, rightJoy;
-	public Button changeDriveSpeed, testArmUp, testArmMotorPositionMode;
+	public Button changeDriveSpeed, testArmUp, testArmMotorPositionMode, testArm2;
 	public Button testClimbUp, testClimbDown, testIntake, testOuttake, testArmDown;
 	public Button testClimbDrive;
 
@@ -77,28 +78,33 @@ public class OI {
 
 		//Initialize Joystick buttons
 		changeDriveSpeed = new JoystickButton(rightJoy, 2);
-		//testArmUp = new JoystickButton(rightJoy, 3);
+		testArmUp = new JoystickButton(rightJoy, 3);
 		testArmDown = new JoystickButton(rightJoy, 4);
-		testArmMotorPositionMode = new JoystickButton(rightJoy, 3);
+		testArmMotorPositionMode = new JoystickButton(rightJoy, 11);
 		testIntake = new JoystickButton(rightJoy, 5);
 		testOuttake = new JoystickButton(rightJoy, 6);
 		testClimbUp = new JoystickButton(rightJoy, 7);
 		testClimbDown = new JoystickButton(rightJoy, 8);
 		testClimbDrive = new JoystickButton(rightJoy, 9);
+		testArm2 = new JoystickButton(rightJoy, 12);
 
 		//Configure Joystick button commands
 		changeDriveSpeed.whenPressed(new ChangeTeleopSpeed());
 		testIntake.whileHeld(new TakeInBall());//speed limit slowed for testing w/o limit switch
 		testIntake.whenReleased(new StopIntake());
 		testOuttake.whenPressed(new ShootOutBall(2.0));
-		//testArmUp.whileHeld(new TestArmSpeedCommand(true));
+		testArmUp.whileHeld(new TestArmSpeedCommand(true));
 		testArmDown.whileHeld(new TestArmSpeedCommand(false));
-		//testArmUp.whenReleased(new StopArm());
+		testArmUp.whenReleased(new StopArm());
 		testArmDown.whenReleased(new StopArm());
-		testArmMotorPositionMode.whenPressed(new TestArmRotationsCommand(.5));
+		testArmMotorPositionMode.whenPressed(new ArmToPositionCommand(1.7));
+		testArm2.whenPressed(new ArmToPositionCommand(.22));
 		testClimbUp.whileHeld(new TestClimbUp());
+		testClimbUp.whenReleased(new StopClimb());
 		testClimbDown.whileHeld(new TestClimbDown());
+		testClimbDown.whenReleased(new StopClimb());
 		testClimbDrive.whileHeld(new TestClimbDrive());
+		testClimbDrive.whenReleased(new StopClimb());
 	
 	}
   

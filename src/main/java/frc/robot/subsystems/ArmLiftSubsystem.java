@@ -34,10 +34,10 @@ public class ArmLiftSubsystem extends Subsystem {
     //Config outputs, nominal and peak
     armMotor.configNominalOutputForward(0, RobotMap.kTimeoutMs);
 		armMotor.configNominalOutputReverse(0, RobotMap.kTimeoutMs);
-		armMotor.configPeakOutputForward(.5, RobotMap.kTimeoutMs);
+		armMotor.configPeakOutputForward(.75, RobotMap.kTimeoutMs);
     armMotor.configPeakOutputReverse(-.5, RobotMap.kTimeoutMs);
 
-    armMotor.configAllowableClosedloopError(0, RobotMap.kPIDLoopIdx, RobotMap.kTimeoutMs);
+    armMotor.configAllowableClosedloopError(RobotMap.kPIDLoopIdx, 1, RobotMap.kTimeoutMs);
   
     //Config Position Closed Loop gains in slot0, typically kF stays zero.
 		armMotor.config_kF(RobotMap.kPIDLoopIdx, RobotMap.kFf_Arm, RobotMap.kTimeoutMs);
@@ -81,63 +81,4 @@ public class ArmLiftSubsystem extends Subsystem {
 		armMotor.set(ControlMode.Position, targetPositionRotations);
   }
 
-  /*
-   * Below are individual functions to run the arm to specific
-   * heights.  Hatch pickup and release each have an individual height
-   * due to mechanism design.  The pairs of hatch functions should be 
-   * called in sequence with the input from a limit switch.
-   * 
-   * These should probably be removed in favor of individual commands that use the RobotMap values
-   * in the above runToPosition method, after testing has been completed.
-   */
-
-  public void goToFloor() {
-
-    runToPosition(RobotMap.floorRevs);
-  }
-
-  public void pickUpHatch() {
-
-    runToPosition(RobotMap.pickUpHatchAndUnlockHatchLvl1Revs);
-  }
-
-  public void lockHatch() {
-    
-    runToPosition(RobotMap.lockHatchAndPlaceHatchLvl1Revs);
-  }
-
-  public void placeHatchLvl1() {
-    
-    runToPosition(RobotMap.lockHatchAndPlaceHatchLvl1Revs);
-  }
-
-  public void unlockHatchLvl1() {
-
-    runToPosition(RobotMap.pickUpHatchAndUnlockHatchLvl1Revs);
-  }
-
-  public void placeHatchLvl2() {
-
-    runToPosition(RobotMap.placeHatchLvl2Revs);
-  }
-
-  public void unlockHatchLvl2() {
-
-    runToPosition(RobotMap.unlockHatchLvl2Revs);
-  }
-
-  public void placeBallCargoShip() {
-
-    runToPosition(RobotMap.placeBallCargoShipRevs);
-  }
-
-  public void placeBallRocketLvl1() {
-
-    runToPosition(RobotMap.placeBallRocketLvl1Revs);
-  }
-
-  public void placeBallRocketLvl2() {
-
-    runToPosition(RobotMap.placeBallRocketLvl2Revs);
-  }
 }

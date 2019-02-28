@@ -55,11 +55,11 @@ public class RobotMap {
 	public static final double DRIVE_SPEED_FAST = 1.0;
 	public static final double DRIVE_SPEED_SLOW = 0.25;
 	public static final double INTAKE_SPEED = 0.2;
-	public static final double OUTTAKE_SPEED = 0.5;
+	public static final double OUTTAKE_SPEED = -1;
 	public static final double ARM_SPEED_UP = 0.5;
 	public static final double ARM_SPEED_DOWN = -0.1;
 	public static final double CLIMB_LIFT_SPEED = 0.75;
-	public static final double CLIMB_DRIVE_SPEED = 0.5;
+	public static final double CLIMB_DRIVE_SPEED = 0.75;
 	public static final double STOP_SPEED = 0;
 
 	//Encoder config values
@@ -79,20 +79,14 @@ public class RobotMap {
 	public static final double kD_Turn = 0.004;
 
 	//PID values for arm lift motor control
-	public static final double kP_Arm = .75;
+	public static final double kP_Arm = 10;
 	public static final double kI_Arm = 0;
 	public static final double kD_Arm = 1;
 	public static final double kFf_Arm = 0;
 
 	//Revolution variables for arm lift commands
 	public static final double floorRevs = 0;
-	public static final double pickUpHatchAndUnlockHatchLvl1Revs = 12.98;
-	public static final double lockHatchAndPlaceHatchLvl1Revs = 3.34;
-	public static final double placeHatchLvl2Revs = 64.65;
-	public static final double unlockHatchLvl2Revs = 58.63;
-	public static final double placeBallRocketLvl1Revs = 45.37;
-	public static final double placeBallCargoShipRevs = 65.85;
-	public static final double placeBallRocketLvl2Revs = 102.64;
+	public static final double hatchLevel1Revs = .25;
 
 	//Testing variables
 	public static final double ARM_REVOLUTIONS = 20;

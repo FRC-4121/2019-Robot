@@ -7,58 +7,86 @@
 
 package frc.robot.commands;
 
-import edu.wpi.first.wpilibj.Timer;
 import edu.wpi.first.wpilibj.command.Command;
 import frc.robot.Robot;
-import frc.robot.RobotMap;
 
-public class ShootOutBall extends Command {
+public class AutoAssistAlignRobotToTarget extends Command {
   
-  Timer timer = new Timer();
-
-  double startTime;
-  double stopTime;
-
-  public ShootOutBall(double time) {
+  double offsetTolerance = 10;
+  boolean commandComplete = false;
+  
+  public AutoAssistAlignRobotToTarget() {
     
-    requires(Robot.end);
-
-    stopTime = time;
+    requires(Robot.drivetrain);
   }
 
   // Called just before this Command runs the first time
   @Override
   protected void initialize() {
 
-    timer.start();
-    startTime = timer.get();
   }
 
   // Called repeatedly when this Command is scheduled to run
   @Override
   protected void execute() {
-    Robot.end.run(RobotMap.OUTTAKE_SPEED);
+
+    boolean visionFound = Robot.visionTable.getEntry("FoundVisionTarget").getBoolean(false);
+    double visionOffset = Robot.visionTable.getEntry("VisionTargetOffset").getDouble(0);
+
+    Command slewLeft = new AutoDrive(180, 90, 0,0);
+
+    //Only proceed if target has been found
+    if(visionFound)
+    {
+      //Only proceed if offset is greater than tolerance
+      if(Math.abs(visionOffset) > offsetTolerance)
+      {
+        //
+        if(visionOffset > 0)
+        {
+          //slew left
+        }
+        else
+        {
+          //slew right
+        }
+        
+      }
+      else
+      {
+        commandComplete = true;
+      }
+
+    }
+    
+
+    
+
   }
 
   // Make this return true when this Command no longer needs to run execute()
   @Override
   protected boolean isFinished() {
-    
-    double currentTime = timer.get();
-
-    return currentTime > stopTime;
+    return false;
   }
 
   // Called once after isFinished returns true
   @Override
   protected void end() {
-
-    Robot.end.stop();
   }
 
   // Called when another command which requires one or more of the same
   // subsystems is scheduled to run
   @Override
   protected void interrupted() {
+  }
+
+  public double chooseAngle(){
+
+    double angleToUse = 0;
+
+    //Logic tree to determine what angle to orient to based on field orientation
+
+    return angleToUse;
   }
 }
