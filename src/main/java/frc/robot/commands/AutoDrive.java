@@ -21,9 +21,6 @@ public class AutoDrive extends Command {
 
 	public Timer timer = new Timer();
 	
-	public int leftEncoderStart;
-	public int rightEncoderStart;
-	
 	//Class constructor
     public AutoDrive(double ang, double orientAng, double time, double speed) {
     	
@@ -43,9 +40,13 @@ public class AutoDrive extends Command {
     
     // Called just before this Command runs the first time
     protected void initialize() {
-    	
-        timer.start();
-        startTime= timer.get();
+        
+        if(stopTime != 0)
+        {
+            timer.start();
+            startTime= timer.get();
+        }
+
         angleCorrection = 0;
         
     }
@@ -89,34 +90,28 @@ public class AutoDrive extends Command {
     	
     	boolean thereYet = false;
  
-    	//Check elapsed time
-    	if(stopTime<=timer.get()-startTime)
-    	{
-    		
-    		//Too much time has elapsed.  Stop this command.
-    		thereYet = true;
-    		
-    	}
-    	
+        //Check elapsed time
+        if(stopTime != 0)
+        {
+            if(stopTime <= timer.get() - startTime)
+            {
+                //Too much time has elapsed.  Stop this command.
+                thereYet = true; 		
+            }
+        }
+        else 
+        {
+            thereYet = true;
+        }
+
     	return thereYet;
-
-    	
-
     }
-
     
     // Called once after isFinished returns true
-    protected void end() {
-    
-    }
+    protected void end() {}
 
     // Called when another command which requires one or more of the same
     // subsystems is scheduled to run
-    
-    protected void interrupted() {
-    	
-    	//Robot.driveTrain.pid.disable();
-    	
-    }
+    protected void interrupted() {}
     
 }

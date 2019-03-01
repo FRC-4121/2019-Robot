@@ -78,27 +78,34 @@ public class OI {
 
 		//Initialize Joystick buttons
 		changeDriveSpeed = new JoystickButton(rightJoy, 2);
+		
 		testArmUp = new JoystickButton(rightJoy, 3);
 		testArmDown = new JoystickButton(rightJoy, 4);
 		testArmMotorPositionMode = new JoystickButton(rightJoy, 11);
+		testArm2 = new JoystickButton(rightJoy, 12);
+		
 		testIntake = new JoystickButton(rightJoy, 5);
 		testOuttake = new JoystickButton(rightJoy, 6);
+		
 		testClimbUp = new JoystickButton(rightJoy, 7);
 		testClimbDown = new JoystickButton(rightJoy, 8);
 		testClimbDrive = new JoystickButton(rightJoy, 9);
-		testArm2 = new JoystickButton(rightJoy, 12);
+		
 
 		//Configure Joystick button commands
 		changeDriveSpeed.whenPressed(new ChangeTeleopSpeed());
+
 		testIntake.whileHeld(new TakeInBall());//speed limit slowed for testing w/o limit switch
 		testIntake.whenReleased(new StopIntake());
 		testOuttake.whenPressed(new ShootOutBall(2.0));
+
 		testArmUp.whileHeld(new TestArmSpeedCommand(true));
 		testArmDown.whileHeld(new TestArmSpeedCommand(false));
 		testArmUp.whenReleased(new StopArm());
 		testArmDown.whenReleased(new StopArm());
-		testArmMotorPositionMode.whenPressed(new ArmToPositionCommand(1.7));
+		testArmMotorPositionMode.whenPressed(new ArmToPositionCommand(RobotMap.hatchLevel1Revs));
 		testArm2.whenPressed(new ArmToPositionCommand(.22));
+		
 		testClimbUp.whileHeld(new TestClimbUp());
 		testClimbUp.whenReleased(new StopClimb());
 		testClimbDown.whileHeld(new TestClimbDown());

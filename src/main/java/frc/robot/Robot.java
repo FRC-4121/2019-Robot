@@ -208,7 +208,7 @@ public class Robot extends TimedRobot {
     //SmartDashboard.putBoolean("Climb Bottom Limit", Robot.oi.climbBottomLimitSwitch.get());
 
     SmartDashboard.putNumber("Arm Current:", Robot.arm.armMotor.getOutputCurrent());
-
+    SmartDashboard.putNumber("Climb Current:", Robot.climber.climbLift.getOutputCurrent());
     double encoderValue = (double) Robot.arm.armMotor.getSelectedSensorPosition();
 
     SmartDashboard.putNumber("Arm Encoder Value: ", encoderValue);
@@ -325,7 +325,7 @@ public class Robot extends TimedRobot {
       autonomousCommand.cancel();
     }
 
-    
+    //For testing only.  If used like this in comp it will screw up everything
     Robot.arm.armMotor.setSelectedSensorPosition(0);
     Robot.arm.armMotor.set(ControlMode.Position, 0);
 

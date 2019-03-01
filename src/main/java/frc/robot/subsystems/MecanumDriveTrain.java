@@ -80,4 +80,11 @@ public class MecanumDriveTrain extends GenericDriveTrain {
 
   }
 
+  //Method to halt the robot if necessary
+  @Override
+  public void robotStop(){
+
+    mecanumDrive.drivePolar(0, 0, 0);
+  }
+
 }

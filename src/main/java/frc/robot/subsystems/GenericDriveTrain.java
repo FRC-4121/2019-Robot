@@ -37,4 +37,7 @@ public class GenericDriveTrain extends Subsystem {
     //Method for driving during Autonomous - used for Mecanum
     public void autoDrive(double speed, double angle, double rotation) {}
 
+    //Method to halt the robot if necessary
+    public void robotStop(){}
+
 }

@@ -9,20 +9,35 @@ package frc.robot.commands;
 
 import edu.wpi.first.wpilibj.command.Command;
 import frc.robot.Robot;
+import frc.robot.extraClasses.VisionUtilities;
+
 
 public class AutoAssistAlignRobotToTarget extends Command {
   
+  //Declare class level variables
   double offsetTolerance = 10;
+  double targetAngle = 0.0;
   boolean commandComplete = false;
+  boolean visionFound;
+  double visionOffset;
+  VisionUtilities visionUtilities;
   
   public AutoAssistAlignRobotToTarget() {
     
+    //Required subsystems
     requires(Robot.drivetrain);
+
+    //Create vision utilities object
+    visionUtilities = new VisionUtilities();
+
   }
 
   // Called just before this Command runs the first time
   @Override
   protected void initialize() {
+
+    //Find proper target alignment angle
+    targetAngle = visionUtilities.FindTargetAngle(Robot.gyroYaw.getDouble(0));
 
   }
 
@@ -30,49 +45,61 @@ public class AutoAssistAlignRobotToTarget extends Command {
   @Override
   protected void execute() {
 
-    boolean visionFound = Robot.visionTable.getEntry("FoundVisionTarget").getBoolean(false);
-    double visionOffset = Robot.visionTable.getEntry("VisionTargetOffset").getDouble(0);
+    //Declare local variables
+    double slewDirection = 0.0;
 
-    Command slewLeft = new AutoDrive(180, 90, 0,0);
+    //Get vision processing results
+    visionFound = Robot.visionTable.getEntry("FoundVisionTarget").getBoolean(false);
+    visionOffset = Robot.visionTable.getEntry("VisionTargetOffset").getDouble(0);
 
     //Only proceed if target has been found
     if(visionFound)
     {
-      //Only proceed if offset is greater than tolerance
-      if(Math.abs(visionOffset) > offsetTolerance)
+      //Check vision offset
+      if(visionOffset > 0)
       {
-        //
-        if(visionOffset > 0)
-        {
-          //slew left
-        }
-        else
-        {
-          //slew right
-        }
-        
+        //slew left
+        slewDirection = 180;
       }
       else
       {
-        commandComplete = true;
+        //slew right
+        slewDirection = 0;
       }
-
+      
+      Command slewRobot = new AutoDrive(slewDirection, targetAngle, 0, 0.25);
+      
     }
     
-
-    
-
   }
 
   // Make this return true when this Command no longer needs to run execute()
   @Override
   protected boolean isFinished() {
-    return false;
+    
+    boolean thereYet = false;
+
+    if(visionFound)
+    {
+      if(Math.abs(visionOffset) < offsetTolerance)
+      {
+        thereYet = true; //We are sufficiently aligned to continue.
+      }
+      
+    }
+    else
+    {
+      thereYet = true; //Vision has been lost.  Stop trying.
+    }
+
+    return thereYet;
   }
 
   // Called once after isFinished returns true
   @Override
   protected void end() {
+
+    Robot.drivetrain.robotStop();
   }
 
   // Called when another command which requires one or more of the same

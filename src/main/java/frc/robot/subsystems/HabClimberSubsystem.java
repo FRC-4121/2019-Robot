@@ -14,8 +14,8 @@ import frc.robot.RobotMap;
 
 public class HabClimberSubsystem extends Subsystem {
   
-  WPI_TalonSRX climbLift = new WPI_TalonSRX(RobotMap.CLIMB_LIFT_ID);
-  WPI_TalonSRX climbDrive = new WPI_TalonSRX(RobotMap.CLIMB_DRIVE_ID);
+  public WPI_TalonSRX climbLift = new WPI_TalonSRX(RobotMap.CLIMB_LIFT_ID);
+  public WPI_TalonSRX climbDrive = new WPI_TalonSRX(RobotMap.CLIMB_DRIVE_ID);
 
   @Override
   public void initDefaultCommand() {}

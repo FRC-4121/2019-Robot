@@ -66,4 +66,11 @@ public class WestCoastDriveTrain extends GenericDriveTrain {
 
   }
 
+  //Method to halt robot if necessary
+  @Override
+  public void robotStop(){
+
+    westCoastDrive.tankDrive(0, 0);
+  }
+
 }
