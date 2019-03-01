@@ -10,8 +10,9 @@ package frc.robot.commands;
 import edu.wpi.first.wpilibj.command.CommandGroup;
 
 public class AutoDriveOffHab extends CommandGroup {
+
   /**
-   * Add your docs here.
+   * This command group drives the robot off the hab.
    */
   public AutoDriveOffHab() {
     
