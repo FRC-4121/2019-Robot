@@ -21,6 +21,7 @@ public class AutoAssistAlignRobotToTarget extends Command {
   boolean visionFound;
   double visionOffset;
   VisionUtilities visionUtilities;
+  Command slewRobot;
   
   public AutoAssistAlignRobotToTarget() {
     
@@ -67,7 +68,8 @@ public class AutoAssistAlignRobotToTarget extends Command {
         slewDirection = 0;
       }
       
-      Command slewRobot = new AutoDrive(slewDirection, targetAngle, 0, 0.25);
+      slewRobot = new AutoDrive(slewDirection, targetAngle, 0, 0.25);
+      slewRobot.start();
       
     }
     
@@ -99,7 +101,9 @@ public class AutoAssistAlignRobotToTarget extends Command {
   @Override
   protected void end() {
 
-    Robot.drivetrain.robotStop();
+    //Close the slew command
+    slewRobot.close();
+    
   }
 
   // Called when another command which requires one or more of the same

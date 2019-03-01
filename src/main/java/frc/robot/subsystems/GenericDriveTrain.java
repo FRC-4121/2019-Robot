@@ -23,7 +23,7 @@ public class GenericDriveTrain extends Subsystem {
     public void initDefaultCommand() {
         
     	//All drive trains have default command to drive with the joysticks
-        setDefaultCommand(new DriveWithJoysticksCommand());
+        setDefaultCommand(new DriveWithJoysticksCommand(true));
     }
     
     //Method for driving during Teleop - used for WCD
