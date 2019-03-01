@@ -9,6 +9,7 @@ package frc.robot.commands;
 
 import edu.wpi.first.wpilibj.command.Command;
 import frc.robot.Robot;
+import frc.robot.RobotMap;
 import frc.robot.extraClasses.VisionUtilities;
 
 
@@ -16,7 +17,6 @@ public class AutoAssistAlignRobotToTarget extends Command {
   
   //Declare class level variables
   double offsetTolerance = 10;
-  double targetAngle = 0.0;
   boolean commandComplete = false;
   boolean visionFound;
   double visionOffset;
@@ -38,7 +38,7 @@ public class AutoAssistAlignRobotToTarget extends Command {
   protected void initialize() {
 
     //Find proper target alignment angle
-    targetAngle = visionUtilities.FindTargetAngle(Robot.gyroYaw.getDouble(0));
+    RobotMap.VISION_TARGET_ANGLE = visionUtilities.FindTargetAngle(Robot.gyroYaw.getDouble(0));
 
   }
 
@@ -68,7 +68,7 @@ public class AutoAssistAlignRobotToTarget extends Command {
         slewDirection = 0;
       }
       
-      slewRobot = new AutoDrive(slewDirection, targetAngle, 0, 0.25);
+      slewRobot = new AutoDrive(slewDirection, RobotMap.VISION_TARGET_ANGLE, 0, 0.25);
       slewRobot.start();
       
     }
@@ -79,22 +79,38 @@ public class AutoAssistAlignRobotToTarget extends Command {
   @Override
   protected boolean isFinished() {
     
+    //Initialize return flag
     boolean thereYet = false;
 
-    if(visionFound)
+    //Check master kill switch
+    if (RobotMap.KILL_AUTO_COMMAND == true)
     {
-      if(Math.abs(visionOffset) < offsetTolerance)
-      {
-        thereYet = true; //We are sufficiently aligned to continue.
-      }
-      
+
+      thereYet = true;
+      RobotMap.KILL_AUTO_COMMAND = false;
+
     }
     else
     {
-      thereYet = true; //Vision has been lost.  Stop trying.
+
+      if(visionFound)
+      {
+        if(Math.abs(visionOffset) < offsetTolerance)
+        {
+          thereYet = true; //We are sufficiently aligned to continue.
+        }
+      
+      }
+      else
+      {
+        thereYet = true; //Vision has been lost.  Stop trying.
+      }
+
     }
 
+    //Return flag
     return thereYet;
+    
   }
 
   // Called once after isFinished returns true
@@ -103,7 +119,7 @@ public class AutoAssistAlignRobotToTarget extends Command {
 
     //Close the slew command
     slewRobot.close();
-    
+
   }
 
   // Called when another command which requires one or more of the same
@@ -112,12 +128,4 @@ public class AutoAssistAlignRobotToTarget extends Command {
   protected void interrupted() {
   }
 
-  public double chooseAngle(){
-
-    double angleToUse = 0;
-
-    //Logic tree to determine what angle to orient to based on field orientation
-
-    return angleToUse;
-  }
 }

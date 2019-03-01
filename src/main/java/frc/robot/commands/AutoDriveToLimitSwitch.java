@@ -102,9 +102,20 @@ public class AutoDriveToLimitSwitch extends Command {
     //Initialize return value
     boolean thereYet = false;
  
-    //Check elapsed time and limit switch
-    if(stopTime != 0)
+    //Check for master kill switch
+    if (RobotMap.KILL_AUTO_COMMAND == true)
     {
+
+      thereYet = true;
+      RobotMap.KILL_AUTO_COMMAND = false;
+
+    }
+    else
+    {
+
+      //Check elapsed time and limit switch
+      if(stopTime != 0)
+      {
 
         if(limitSwitch.get() == true)
         {
@@ -114,14 +125,16 @@ public class AutoDriveToLimitSwitch extends Command {
         {
           if(stopTime <= timer.get() - startTime)
           {
-              //Too much time has elapsed.  Stop this command.
-              thereYet = true; 		
+            //Too much time has elapsed.  Stop this command.
+            thereYet = true; 		
           }
         }
-    }
-    else 
-    {
+      }
+      else 
+      {
         thereYet = true;
+      }
+
     }
 
     //Return flag

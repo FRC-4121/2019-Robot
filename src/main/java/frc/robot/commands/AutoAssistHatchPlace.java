@@ -9,19 +9,20 @@ package frc.robot.commands;
 
 import edu.wpi.first.wpilibj.command.CommandGroup;
 import frc.robot.Robot;
+import frc.robot.RobotMap;
 
-public class AutoAssistHatchPickup extends CommandGroup {
+public class AutoAssistHatchPlace extends CommandGroup {
 
   /**
-   * This command group assists with hatch pickup.
+   * This command group assists with hatch placement.
    */
-  public AutoAssistHatchPickup() {
-    
+  public AutoAssistHatchPlace() {
+
     addSequential(new AutoAssistAlignRobotToTarget());
-    addParallel(new ArmToPositionCommand(0.22));
-    addSequential(new AutoDriveToLimitSwitch(90, 180, 0, 0.4, Robot.oi.hatchLimitSwitch));
     addParallel(new ArmToPositionCommand(0.25));
-    addSequential(new AutoDrive(-90, 180, 2.0, 0.25));
-    
+    addSequential(new AutoDriveToLimitSwitch(90, RobotMap.VISION_TARGET_ANGLE, 0, 0.4, Robot.oi.hatchLimitSwitch));
+    addParallel(new ArmToPositionCommand(0.22));
+    addSequential(new AutoDrive(-90, 180, 1.25, 0.25));
+
   }
 }

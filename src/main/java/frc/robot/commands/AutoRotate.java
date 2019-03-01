@@ -47,8 +47,14 @@ public class AutoRotate extends Command {
   @Override
   protected void initialize() {
 
-    timer.start();
-    startTime= timer.get();
+    if (stopTime != 0.0)
+    {
+
+      timer.start();
+      startTime= timer.get();
+
+    }
+
     angleCorrection = 0.0;
   }
 
@@ -88,17 +94,43 @@ public class AutoRotate extends Command {
   @Override
   protected boolean isFinished() {
 
+    //Initialize return flag
     boolean thereYet = false;
  
-    //Check elapsed time
-    if(stopTime<=timer.get()-startTime)
+    //Check master kill switch
+    if (RobotMap.KILL_AUTO_COMMAND == true)
     {
-      
-      //Too much time has elapsed.  Stop this command.
+
       thereYet = true;
-      
+      RobotMap.KILL_AUTO_COMMAND = false;
+
     }
+    else
+    {
+
+      //Check elapsed time
+      if (stopTime != 0.0)
+      {
+
+        if(stopTime<=timer.get()-startTime)
+        {
+      
+          //Too much time has elapsed.  Stop this command.
+          thereYet = true;
+      
+        }
+      
+      }
+      else
+      {
+        
+        thereYet = true;
+
+      }
     
+    }
+
+    //Return flag
     return thereYet;
 
 }

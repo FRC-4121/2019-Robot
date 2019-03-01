@@ -87,24 +87,40 @@ public class AutoDrive extends Command {
     
     // Make this return true when this Command no longer needs to run execute()
     protected boolean isFinished() {
-    	
+        
+        //Initialize return flag
     	boolean thereYet = false;
  
-        //Check elapsed time
-        if(stopTime != 0)
+        //Check master kill switch
+        if (RobotMap.KILL_AUTO_COMMAND == true)
         {
-            if(stopTime <= timer.get() - startTime)
-            {
-                //Too much time has elapsed.  Stop this command.
-                thereYet = true; 		
-            }
-        }
-        else 
-        {
+
             thereYet = true;
+            RobotMap.KILL_AUTO_COMMAND = false;
+
+        }
+        else
+        {
+
+            //Check elapsed time
+            if(stopTime != 0)
+            {
+                if(stopTime <= timer.get() - startTime)
+                {
+                    //Too much time has elapsed.  Stop this command.
+                    thereYet = true; 		
+                }
+            }
+            else 
+            {
+                thereYet = true;
+            }
+
         }
 
-    	return thereYet;
+        //Return flag
+        return thereYet;
+        
     }
     
     // Called once after isFinished returns true

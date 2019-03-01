@@ -99,7 +99,8 @@ public class RobotMap {
 	public static final double ARM_REVOLUTIONS = 20;
 
 	//Extraneous variables
-	//Invert direction (for WCD only)
-	public static int DIRECTION_MULTIPLIER = -1;
+	public static int DIRECTION_MULTIPLIER = -1;		//Invert drive direction (for WCD only)
+	public static boolean KILL_AUTO_COMMAND = false;	//Kill any autonomous or auto-assist commands
+	public static double VISION_TARGET_ANGLE = 0.0;		//Angle to current vision target
 	
 }
