@@ -22,6 +22,7 @@ public class DriveWithJoysticksCommand extends Command {
   double joystickDeadband = 0.05;
   double lastJoystickX = 0.0;
   double lastJoystickY = 0.0;
+  double lastJoystickZ = 0.0;
 
   PIDControl pidControl;
 
@@ -46,6 +47,7 @@ public class DriveWithJoysticksCommand extends Command {
     angleCorrection = 0.0;
     lastJoystickX = Robot.oi.rightJoy.getX();
     lastJoystickY = Robot.oi.rightJoy.getY();
+    lastJoystickZ = Robot.oi.rightJoy.getZ();
 
   }
 
@@ -76,7 +78,7 @@ public class DriveWithJoysticksCommand extends Command {
       {
 
         //Find new target angle if new joystick positions
-        if (Math.abs(Robot.oi.rightJoy.getX() - lastJoystickX) > joystickDeadband || Math.abs(Robot.oi.rightJoy.getX() - lastJoystickX) > joystickDeadband)
+        if (Math.abs(Robot.oi.rightJoy.getX() - lastJoystickX) > joystickDeadband || Math.abs(Robot.oi.rightJoy.getX() - lastJoystickX) > joystickDeadband || Math.abs(Robot.oi.rightJoy.getZ() - lastJoystickZ) > joystickDeadband)
         {
           robotAngle = Robot.gyroYaw.getDouble(0);
         }
@@ -109,6 +111,11 @@ public class DriveWithJoysticksCommand extends Command {
       }
     
     }
+
+    lastJoystickX = Robot.oi.rightJoy.getX();
+    lastJoystickY = Robot.oi.rightJoy.getY();
+    lastJoystickZ = Robot.oi.rightJoy.getZ();
+
   }
 
   // Make this return true when this Command no longer needs to run execute()

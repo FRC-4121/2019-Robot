@@ -12,6 +12,8 @@ import edu.wpi.first.wpilibj.Joystick;
 import edu.wpi.first.wpilibj.buttons.Button;
 import edu.wpi.first.wpilibj.buttons.JoystickButton;
 import frc.robot.commands.ArmToPositionCommand;
+import frc.robot.commands.AutoAssistHatchPickup;
+import frc.robot.commands.AutoAssistHatchPlace;
 import frc.robot.commands.ChangeTeleopSpeed;
 import frc.robot.commands.KillAutoCommand;
 import frc.robot.commands.ShootOutBall;
@@ -107,12 +109,12 @@ public class OI {
 		testArmUp.whenReleased(new StopArm());
 		testArmDown.whenReleased(new StopArm());
 		testArmMotorPositionMode.whenPressed(new ArmToPositionCommand(RobotMap.hatchLevel1Revs));
-		testArm2.whenPressed(new ArmToPositionCommand(.22));
+		testArm2.whenPressed(new ArmToPositionCommand(RobotMap.hatchReleaseLevel1Revs));
 		
-		testClimbUp.whileHeld(new TestClimbUp());
-		testClimbUp.whenReleased(new StopClimb());
-		testClimbDown.whileHeld(new TestClimbDown());
-		testClimbDown.whenReleased(new StopClimb());
+		testClimbUp.whenPressed(new AutoAssistHatchPickup());
+		//testClimbUp.whenReleased(new StopClimb());
+		testClimbDown.whenPressed(new AutoAssistHatchPlace());
+		//testClimbDown.whenReleased(new StopClimb());
 		testClimbDrive.whileHeld(new TestClimbDrive());
 		testClimbDrive.whenReleased(new StopClimb());
 	

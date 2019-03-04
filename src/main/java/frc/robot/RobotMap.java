@@ -38,8 +38,8 @@ public class RobotMap {
 
 
 	//Limit switch ids
-	public static final int HATCH_DRIVE_LIMIT_SWITCH_ID = 0;
-	public static final int BALL_LIMIT_SWITCH_ID = 2;
+	public static final int HATCH_DRIVE_LIMIT_SWITCH_ID = 1;
+	public static final int BALL_LIMIT_SWITCH_ID = 0;
 	public static final int CLIMB_TOP_LIMIT_SWITCH_ID = 2;
 	public static final int CLIMB_BOTTOM_LIMIT_SWITCH_ID = 3;
 	public static final int HATCH_LOADED_LIMIT_SWITCH_ID = 4;
@@ -92,7 +92,9 @@ public class RobotMap {
 
 	//Revolution variables for arm lift commands
 	public static final double floorRevs = 0;
-	public static final double hatchLevel1Revs = .25;
+	public static final double hatchLevel1Revs = .27;
+	public static final double hatchReleaseLevel1Revs = .18;
+	public static final double armMaxRevs = 1.8;//hard stop
 
 
 	//Testing variables

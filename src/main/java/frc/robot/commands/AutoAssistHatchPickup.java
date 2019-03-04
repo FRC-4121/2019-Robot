@@ -8,7 +8,7 @@
 package frc.robot.commands;
 
 import edu.wpi.first.wpilibj.command.CommandGroup;
-import frc.robot.Robot;
+import frc.robot.RobotMap;
 
 public class AutoAssistHatchPickup extends CommandGroup {
 
@@ -17,10 +17,10 @@ public class AutoAssistHatchPickup extends CommandGroup {
    */
   public AutoAssistHatchPickup() {
     
-    addSequential(new AutoAssistAlignRobotToTarget());
-    addParallel(new ArmToPositionCommand(0.22));
-    addSequential(new AutoDriveToLimitSwitch(90, 180, 0, 0.4, Robot.oi.hatchLimitSwitch));
-    addParallel(new ArmToPositionCommand(0.25));
+    //addSequential(new AutoAssistAlignRobotToTarget());
+    addSequential(new ArmToPositionCommand(RobotMap.hatchReleaseLevel1Revs));
+    addSequential(new AutoDriveToLimitSwitch(90, 180, 5, 0.4, false));
+    addSequential(new ArmToPositionCommand(RobotMap.hatchLevel1Revs));
     addSequential(new AutoDrive(-90, 180, 2.0, 0.25));
     
   }

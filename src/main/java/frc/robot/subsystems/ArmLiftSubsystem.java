@@ -77,7 +77,7 @@ public class ArmLiftSubsystem extends Subsystem {
   public void runToPosition(double revolutions) {
 
     targetPositionRotations = revolutions * RobotMap.kEncoderPPR;
-
+    
 		armMotor.set(ControlMode.Position, targetPositionRotations);
   }
 

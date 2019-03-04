@@ -25,14 +25,14 @@ public class AutoDriveToLimitSwitch extends Command {
   double robotAngle;      //angle of the robot with respect to robot front
   double startTime;
   double speedMultiplier;
-  DigitalInput limitSwitch;
+  boolean useGyroAngle; //2019: use for driving straight forward after an assist align
 
   PIDControl pidControl;
 
 	public Timer timer = new Timer();
 
   //Default constructor
-  public AutoDriveToLimitSwitch(double ang, double orientAng, double time, double speed, DigitalInput limit) {
+  public AutoDriveToLimitSwitch(double ang, double orientAng, double time, double speed, boolean useGyro){
 
     requires(Robot.drivetrain);
     	
@@ -41,7 +41,7 @@ public class AutoDriveToLimitSwitch extends Command {
       robotAngle = orientAng;
       stopTime = time;
       speedMultiplier = speed;
-      limitSwitch = limit;
+      useGyroAngle = useGyro;
           
     //Set up PID control
     pidControl = new PIDControl(RobotMap.kP_Straight, RobotMap.kI_Straight, RobotMap.kD_Straight);
@@ -70,20 +70,24 @@ public class AutoDriveToLimitSwitch extends Command {
 
     angleCorrection = 0.0;
     
-    if (robotAngle == 180 || robotAngle == -180)
+    if(useGyroAngle)
     {
-        if (gyroAngle >= 0 && gyroAngle < 179.5)
-        {
-            angleCorrection = pidControl.Run(gyroAngle, 180.0);
-        }
-        else if(gyroAngle <= 0 && gyroAngle > -179.5)
-        {
-            angleCorrection = pidControl.Run(gyroAngle, -180.0);
-        }
-    }
-    else
-    {
-        angleCorrection = pidControl.Run(gyroAngle, robotAngle);
+
+      if (robotAngle == 180 || robotAngle == -180)
+      {
+          if (gyroAngle >= 0 && gyroAngle < 179.5)
+          {
+              angleCorrection = pidControl.Run(gyroAngle, 180.0);
+          }
+          else if(gyroAngle <= 0 && gyroAngle > -179.5)
+          {
+              angleCorrection = pidControl.Run(gyroAngle, -180.0);
+          }
+      }
+      else
+      {
+          angleCorrection = pidControl.Run(gyroAngle, robotAngle);
+      }
     }
     
     //possibly substitute driveAngle with driveAngle - gyroAngle to allow for proper slewing
@@ -117,7 +121,7 @@ public class AutoDriveToLimitSwitch extends Command {
       if(stopTime != 0)
       {
 
-        if(limitSwitch.get() == true)
+        if(!Robot.oi.hatchLimitSwitch.get() == true)
         {
           thereYet= true;
         }

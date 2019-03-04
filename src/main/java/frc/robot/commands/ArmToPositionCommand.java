@@ -9,6 +9,7 @@ package frc.robot.commands;
 
 import edu.wpi.first.wpilibj.command.Command;
 import frc.robot.Robot;
+import frc.robot.RobotMap;
 
 public class ArmToPositionCommand extends Command {
   
@@ -37,7 +38,18 @@ public class ArmToPositionCommand extends Command {
   @Override
   protected boolean isFinished() {
     
-    return false;
+    boolean thereYet = false;
+    
+    if(Robot.arm.armMotor.getSelectedSensorPosition() / (double) RobotMap.kEncoderPPR > RobotMap.armMaxRevs) //avoid running past hard stop
+    {
+      thereYet = true;
+    }
+    else if(Math.abs(revolutionsToGo * RobotMap.kEncoderPPR - Robot.arm.armMotor.getSelectedSensorPosition()) < 50) //check encoder location
+    {  
+      thereYet = true;
+    }
+
+    return thereYet;
   }
 
   // Called once after isFinished returns true
