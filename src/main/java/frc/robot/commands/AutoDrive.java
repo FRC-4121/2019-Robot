@@ -96,8 +96,6 @@ public class AutoDrive extends Command {
         {
 
             thereYet = true;
-            RobotMap.KILL_AUTO_COMMAND = false;
-
         }
         else
         {

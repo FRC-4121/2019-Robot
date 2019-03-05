@@ -38,11 +38,11 @@ public class RobotMap {
 
 
 	//Limit switch ids
-	public static final int HATCH_DRIVE_LIMIT_SWITCH_ID = 1;
-	public static final int BALL_LIMIT_SWITCH_ID = 0;
+	public static final int HATCH_DRIVE_LIMIT_SWITCH_ID = 0;
+	public static final int BALL_LIMIT_SWITCH_ID = 4;
 	public static final int CLIMB_TOP_LIMIT_SWITCH_ID = 2;
 	public static final int CLIMB_BOTTOM_LIMIT_SWITCH_ID = 3;
-	public static final int HATCH_LOADED_LIMIT_SWITCH_ID = 4;
+	public static final int HATCH_LOADED_LIMIT_SWITCH_ID = 1;
 
 
 	//Speed multiplier for more accurate driving in mecanum

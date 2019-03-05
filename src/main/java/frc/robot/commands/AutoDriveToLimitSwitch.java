@@ -9,7 +9,6 @@ package frc.robot.commands;
 
 import edu.wpi.first.wpilibj.Timer;
 import edu.wpi.first.wpilibj.command.Command;
-import edu.wpi.first.wpilibj.DigitalInput;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import frc.robot.Robot;
 import frc.robot.RobotMap;
@@ -37,11 +36,11 @@ public class AutoDriveToLimitSwitch extends Command {
     requires(Robot.drivetrain);
     	
     //Set local variables
-      driveAngle = ang;
-      robotAngle = orientAng;
-      stopTime = time;
-      speedMultiplier = speed;
-      useGyroAngle = useGyro;
+    driveAngle = ang;
+    robotAngle = orientAng;
+    stopTime = time;
+    speedMultiplier = speed;
+    useGyroAngle = useGyro;
           
     //Set up PID control
     pidControl = new PIDControl(RobotMap.kP_Straight, RobotMap.kI_Straight, RobotMap.kD_Straight);
@@ -72,26 +71,25 @@ public class AutoDriveToLimitSwitch extends Command {
     
     if(useGyroAngle)
     {
-
       if (robotAngle == 180 || robotAngle == -180)
       {
-          if (gyroAngle >= 0 && gyroAngle < 179.5)
-          {
-              angleCorrection = pidControl.Run(gyroAngle, 180.0);
-          }
-          else if(gyroAngle <= 0 && gyroAngle > -179.5)
-          {
-              angleCorrection = pidControl.Run(gyroAngle, -180.0);
-          }
+        if (gyroAngle >= 0 && gyroAngle < 179.5)
+        {
+          angleCorrection = pidControl.Run(gyroAngle, 180.0);
+        }
+        else if(gyroAngle <= 0 && gyroAngle > -179.5)
+        {
+          angleCorrection = pidControl.Run(gyroAngle, -180.0);
+        }
       }
       else
       {
-          angleCorrection = pidControl.Run(gyroAngle, robotAngle);
+        angleCorrection = pidControl.Run(gyroAngle, robotAngle);
       }
     }
     
     //possibly substitute driveAngle with driveAngle - gyroAngle to allow for proper slewing
-    Robot.drivetrain.autoDrive(RobotMap.AUTO_DRIVE_SPEED * speedMultiplier, driveAngle, -angleCorrection*0.3);    	    	
+    Robot.drivetrain.autoDrive(RobotMap.AUTO_DRIVE_SPEED * speedMultiplier, driveAngle, -angleCorrection*0.5);    	    	
     
     SmartDashboard.putString("Angle Correction", Double.toString(angleCorrection));
     SmartDashboard.putString("Gyro Yaw", Double.toString(gyroAngle));
@@ -111,16 +109,12 @@ public class AutoDriveToLimitSwitch extends Command {
     {
 
       thereYet = true;
-      RobotMap.KILL_AUTO_COMMAND = false;
-
     }
     else
     {
-
       //Check elapsed time and limit switch
       if(stopTime != 0)
       {
-
         if(!Robot.oi.hatchLimitSwitch.get() == true)
         {
           thereYet= true;
@@ -138,12 +132,10 @@ public class AutoDriveToLimitSwitch extends Command {
       {
         thereYet = true;
       }
-
     }
 
     //Return flag
     return thereYet;
-
   }
 
   // Called once after isFinished returns true
@@ -152,12 +144,11 @@ public class AutoDriveToLimitSwitch extends Command {
 
     //Stop the robot
     Robot.drivetrain.robotStop();
-
   }
 
   // Called when another command which requires one or more of the same
   // subsystems is scheduled to run
   @Override
-  protected void interrupted() {
-  }
+  protected void interrupted() {}
+
 }

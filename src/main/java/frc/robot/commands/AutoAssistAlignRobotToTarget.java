@@ -20,13 +20,13 @@ public class AutoAssistAlignRobotToTarget extends Command {
   
   //Declare class level variables
   double offsetTolerance = 10;
-  double cameraOffset = 0;
-  boolean commandComplete = false;
+  double cameraOffset = -5;
   boolean visionFound;
   double visionOffset;
+
   double angleCorrection;
   double gyroAngle;
-  double robotAngle;      //angle of the robot with respect to robot front
+  double robotAngle; //angle of the robot with respect to robot front
   double startTime;
   double stopTime;
   double speedMultiplier;
@@ -34,7 +34,6 @@ public class AutoAssistAlignRobotToTarget extends Command {
   public Timer timer = new Timer();
   VisionUtilities visionUtilities;
   PIDControl pidControl;
-  Command slewRobot;
   
   public AutoAssistAlignRobotToTarget() {
     
@@ -107,27 +106,23 @@ public class AutoAssistAlignRobotToTarget extends Command {
         
         if (robotAngle == 180 || robotAngle == -180)
         {
-            if (gyroAngle >= 0 && gyroAngle < 179.5)
-            {
-                angleCorrection = pidControl.Run(gyroAngle, 180.0);
-            }
-            else if(gyroAngle <= 0 && gyroAngle > -179.5)
-            {
-                angleCorrection = pidControl.Run(gyroAngle, -180.0);
-            }
+          if (gyroAngle >= 0 && gyroAngle < 179.5)
+          {
+            angleCorrection = pidControl.Run(gyroAngle, 180.0);
+          }
+          else if(gyroAngle <= 0 && gyroAngle > -179.5)
+          {
+            angleCorrection = pidControl.Run(gyroAngle, -180.0);
+          }
         }
         else
         {
-            angleCorrection = pidControl.Run(gyroAngle, robotAngle);
+          angleCorrection = pidControl.Run(gyroAngle, robotAngle);
         }
         
         //possibly substitute driveAngle with driveAngle - gyroAngle to allow for proper slewing
         Robot.drivetrain.autoDrive(RobotMap.AUTO_DRIVE_SPEED * speedMultiplier, slewDirection, -angleCorrection*0.3);    	    	
-
-
-
     }
-    
   }
 
   // Make this return true when this Command no longer needs to run execute()
@@ -140,10 +135,7 @@ public class AutoAssistAlignRobotToTarget extends Command {
     //Check master kill switch
     if (RobotMap.KILL_AUTO_COMMAND == true)
     {
-
       thereYet = true;
-      RobotMap.KILL_AUTO_COMMAND = false;
-
     }
     else
     {
@@ -152,8 +144,8 @@ public class AutoAssistAlignRobotToTarget extends Command {
       {
         if(stopTime <= timer.get() - startTime)
         {
-            //Too much time has elapsed.  Stop this command.
-            thereYet = true; 		
+          //Too much time has elapsed.  Stop this command.
+          thereYet = true; 		
         }
         else
         {
@@ -179,7 +171,6 @@ public class AutoAssistAlignRobotToTarget extends Command {
           {
             thereYet = true; //We are sufficiently aligned to continue.
           }
-        
         }
         else
         {
@@ -190,22 +181,19 @@ public class AutoAssistAlignRobotToTarget extends Command {
 
     //Return flag
     return thereYet;
-    
   }
 
   // Called once after isFinished returns true
   @Override
   protected void end() {
 
-    //Close the slew command
-    //slewRobot.close();
-
+    //Stop the robot
+    Robot.drivetrain.robotStop();
   }
 
   // Called when another command which requires one or more of the same
   // subsystems is scheduled to run
   @Override
-  protected void interrupted() {
-  }
+  protected void interrupted() {}
 
 }

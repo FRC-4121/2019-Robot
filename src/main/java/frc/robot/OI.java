@@ -14,6 +14,7 @@ import edu.wpi.first.wpilibj.buttons.JoystickButton;
 import frc.robot.commands.ArmToPositionCommand;
 import frc.robot.commands.AutoAssistHatchPickup;
 import frc.robot.commands.AutoAssistHatchPlace;
+import frc.robot.commands.AutoAssistToggleKill;
 import frc.robot.commands.ChangeTeleopSpeed;
 import frc.robot.commands.KillAutoCommand;
 import frc.robot.commands.ShootOutBall;
@@ -47,7 +48,7 @@ public class OI {
 		//Initialize limit switches
 		hatchLimitSwitch = new DigitalInput(RobotMap.HATCH_DRIVE_LIMIT_SWITCH_ID);
 		hatchLoadedLimitSwitch = new DigitalInput(RobotMap.HATCH_LOADED_LIMIT_SWITCH_ID);
-		ballLimitSwitch = new DigitalInput(RobotMap.BALL_LIMIT_SWITCH_ID);
+		//ballLimitSwitch = new DigitalInput(RobotMap.BALL_LIMIT_SWITCH_ID);
 		//climbTopLimitSwitch = new DigitalInput(RobotMap.CLIMB_TOP_LIMIT_SWITCH_ID);
 		//climbBottomLimitSwitch = new DigitalInput(RobotMap.CLIMB_BOTTOM_LIMIT_SWITCH_ID);
 
@@ -97,7 +98,7 @@ public class OI {
 		
 
 		//Configure Joystick button commands
-		killAutoCommand.whenPressed(new KillAutoCommand());
+		killAutoCommand.whenPressed(new AutoAssistToggleKill());
 		changeDriveSpeed.whenPressed(new ChangeTeleopSpeed());
 
 		testIntake.whileHeld(new TakeInBall());//speed limit slowed for testing w/o limit switch
