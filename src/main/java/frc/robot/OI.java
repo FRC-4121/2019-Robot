@@ -15,6 +15,7 @@ import frc.robot.commands.ArmToPositionCommand;
 import frc.robot.commands.AutoAssistHatchPickup;
 import frc.robot.commands.AutoAssistHatchPlace;
 import frc.robot.commands.AutoAssistToggleKill;
+import frc.robot.commands.AutoDriveOffHab;
 import frc.robot.commands.ChangeTeleopSpeed;
 import frc.robot.commands.KillAutoCommand;
 import frc.robot.commands.ShootOutBall;
@@ -37,6 +38,7 @@ public class OI {
 	//Define joystick objects and joystick button functions
 	public Joystick leftJoy, rightJoy;
 	public Button changeDriveSpeed, killAutoCommand, testArmUp, testArmMotorPositionMode, testArm2;
+	public Button hatchPickup, hatchPlace, autonomousHab;
 	public Button testClimbUp, testClimbDown, testIntake, testOuttake, testArmDown;
 	public Button testClimbDrive;
 
@@ -92,10 +94,13 @@ public class OI {
 		testIntake = new JoystickButton(rightJoy, 5);
 		testOuttake = new JoystickButton(rightJoy, 6);
 		
-		testClimbUp = new JoystickButton(rightJoy, 7);
+		//testClimbUp = new JoystickButton(rightJoy, 7);
 		testClimbDown = new JoystickButton(rightJoy, 8);
-		testClimbDrive = new JoystickButton(rightJoy, 9);
+
+		hatchPickup = new JoystickButton(rightJoy, 9);
+		hatchPlace = new JoystickButton(rightJoy, 10);
 		
+		autonomousHab = new JoystickButton(rightJoy, 7);
 
 		//Configure Joystick button commands
 		killAutoCommand.whenPressed(new AutoAssistToggleKill());
@@ -112,12 +117,19 @@ public class OI {
 		testArmMotorPositionMode.whenPressed(new ArmToPositionCommand(RobotMap.hatchLevel1Revs));
 		testArm2.whenPressed(new ArmToPositionCommand(RobotMap.hatchReleaseLevel1Revs));
 		
-		testClimbUp.whenPressed(new AutoAssistHatchPickup());
+		//testClimbUp.whenPressed(new AutoAssistHatchPickup());
+		//testClimbUp.whileHeld(new TestClimbUp());
 		//testClimbUp.whenReleased(new StopClimb());
-		testClimbDown.whenPressed(new AutoAssistHatchPlace());
+
+		hatchPickup.whenPressed(new AutoAssistHatchPickup());
+		hatchPlace.whenPressed(new AutoAssistHatchPlace());
+
+		autonomousHab.whenPressed(new AutoDriveOffHab());
+
+		//testClimbDown.whileHeld(new TestClimbDown());
 		//testClimbDown.whenReleased(new StopClimb());
-		testClimbDrive.whileHeld(new TestClimbDrive());
-		testClimbDrive.whenReleased(new StopClimb());
+		//testClimbDrive.whileHeld(new TestClimbDrive());
+		//testClimbDrive.whenReleased(new StopClimb());
 	
 	}
   

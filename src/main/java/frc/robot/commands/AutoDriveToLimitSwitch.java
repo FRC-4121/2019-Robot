@@ -89,7 +89,7 @@ public class AutoDriveToLimitSwitch extends Command {
     }
     
     //possibly substitute driveAngle with driveAngle - gyroAngle to allow for proper slewing
-    Robot.drivetrain.autoDrive(RobotMap.AUTO_DRIVE_SPEED * speedMultiplier, driveAngle, -angleCorrection*0.5);    	    	
+    Robot.drivetrain.autoDrive(RobotMap.AUTO_DRIVE_SPEED * speedMultiplier, driveAngle, -angleCorrection*0.3);    	    	
     
     SmartDashboard.putString("Angle Correction", Double.toString(angleCorrection));
     SmartDashboard.putString("Gyro Yaw", Double.toString(gyroAngle));

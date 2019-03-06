@@ -8,6 +8,7 @@
 package frc.robot.commands;
 
 import edu.wpi.first.wpilibj.command.CommandGroup;
+import frc.robot.RobotMap;
 
 public class AutoDriveOffHab extends CommandGroup {
 
@@ -17,6 +18,10 @@ public class AutoDriveOffHab extends CommandGroup {
   public AutoDriveOffHab() {
     
     //Drive off Hab at full speed
-    addSequential(new AutoDrive(90, 0, 1, 1));
+    addSequential(new ArmToPositionCommand(RobotMap.hatchLevel1Revs));
+    addSequential(new AutoDrive(90, 0, 2, 0.5));
+    addSequential(new AutoDrive(90, 0, .5, 1.0));
+    addSequential(new AutoDrive(-180, 0, 1.5, 1.0));
+
   }
 }

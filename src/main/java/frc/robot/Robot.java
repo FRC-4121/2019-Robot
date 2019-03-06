@@ -214,6 +214,8 @@ public class Robot extends TimedRobot {
     SmartDashboard.putNumber("Arm Encoder Value: ", encoderValue);
     SmartDashboard.putNumber("Arm Rotations: ", encoderValue / 4096);
 
+    SmartDashboard.putNumber("Target Angle: ", RobotMap.VISION_TARGET_ANGLE);
+    SmartDashboard.putBoolean("Kill Auto?", RobotMap.KILL_AUTO_COMMAND);
   }
 
   /**

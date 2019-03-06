@@ -19,7 +19,7 @@ import frc.robot.extraClasses.VisionUtilities;
 public class AutoAssistAlignRobotToTarget extends Command {
   
   //Declare class level variables
-  double offsetTolerance = 10;
+  double offsetTolerance = 5;
   double cameraOffset = -5;
   boolean visionFound;
   double visionOffset;
@@ -52,7 +52,7 @@ public class AutoAssistAlignRobotToTarget extends Command {
   @Override
   protected void initialize() {
 
-    stopTime = 0;
+    stopTime = 5;
 
     if(stopTime != 0)
     {
@@ -66,7 +66,7 @@ public class AutoAssistAlignRobotToTarget extends Command {
     SmartDashboard.putNumber("Vision Target Angle: ", RobotMap.VISION_TARGET_ANGLE);
 
     angleCorrection = 0;
-    speedMultiplier = 0.25;
+    speedMultiplier = 0.4;
     
   }
 

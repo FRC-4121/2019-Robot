@@ -25,9 +25,16 @@ public class KillAutoCommand extends Command {
   @Override
   protected void execute() {
 
-    RobotMap.KILL_AUTO_COMMAND = true;
-    
+    if(RobotMap.KILL_AUTO_COMMAND)
+    {
+      RobotMap.KILL_AUTO_COMMAND = false;
+    }
+    else
+    {
+      RobotMap.KILL_AUTO_COMMAND = true;
+    }
   }
+  
 
   // Make this return true when this Command no longer needs to run execute()
   @Override
