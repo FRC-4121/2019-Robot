@@ -25,6 +25,7 @@ public class AutoAssistAlignRobotToTarget extends Command {
   double visionOffset;
 
   double angleCorrection;
+  double speedCorrection;
   double gyroAngle;
   double robotAngle; //angle of the robot with respect to robot front
   double startTime;
@@ -36,10 +37,13 @@ public class AutoAssistAlignRobotToTarget extends Command {
   PIDControl pidControl;
   PIDControl pidControlAlign;
   
-  public AutoAssistAlignRobotToTarget() {
+  public AutoAssistAlignRobotToTarget(double speed) {
     
     //Required subsystems
     requires(Robot.drivetrain);
+
+    //Set variables
+    speedMultiplier = speed;
 
     //Create vision utilities object
     visionUtilities = new VisionUtilities();
@@ -68,7 +72,7 @@ public class AutoAssistAlignRobotToTarget extends Command {
     SmartDashboard.putNumber("Vision Target Angle: ", RobotMap.VISION_TARGET_ANGLE);
 
     angleCorrection = 0;
-    speedMultiplier = 0.35;
+    speedCorrection = 0;
     
   }
 
@@ -98,9 +102,6 @@ public class AutoAssistAlignRobotToTarget extends Command {
         slewDirection = 0;
       }
       
-      //slewRobot = new AutoDrive(slewDirection, RobotMap.VISION_TARGET_ANGLE, 1, 0.25);
-      //slewRobot.start();
-      
       gyroAngle = Robot.gyroYaw.getDouble(0);
       robotAngle = RobotMap.VISION_TARGET_ANGLE;
 
@@ -123,10 +124,10 @@ public class AutoAssistAlignRobotToTarget extends Command {
         }
         
         //Use PID to control slew speed
-        //speedMultiplier = pidControlAlign.Run(visionOffset, 0);
+        speedCorrection = pidControlAlign.Run(visionOffset, 0);
 
         //possibly substitute driveAngle with driveAngle - gyroAngle to allow for proper slewing
-        Robot.drivetrain.autoDrive(RobotMap.AUTO_DRIVE_SPEED * speedMultiplier, slewDirection, -angleCorrection*0.3);    	    	
+        Robot.drivetrain.autoDrive(RobotMap.AUTO_DRIVE_SPEED * speedMultiplier * speedCorrection, slewDirection, -angleCorrection*0.3);    	    	
     }
   }
 

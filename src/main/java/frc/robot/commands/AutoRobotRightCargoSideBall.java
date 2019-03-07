@@ -10,18 +10,18 @@ package frc.robot.commands;
 import edu.wpi.first.wpilibj.command.CommandGroup;
 import frc.robot.RobotMap;
 
-public class AutoDriveOffHab extends CommandGroup {
-
+public class AutoRobotRightCargoSideBall extends CommandGroup {
   /**
-   * This command group drives the robot off the hab.
+   * Add your docs here.
    */
-  public AutoDriveOffHab() {
-    
-    //Drive off Hab at full speed
+  public AutoRobotRightCargoSideBall() {
+
     addSequential(new ArmToPositionCommand(RobotMap.hatchReleaseLevel1Revs));
-    addSequential(new AutoDrive(90, 0, 2, 0.5));
-    addSequential(new AutoDrive(90, 0, .5, 1.0));
-    addSequential(new AutoDrive(-180, 0, 1.5, 1.0));
+    addSequential(new AutoDrive(90, 0, 1.25, 0.4));
+    addSequential(new AutoDrive(90, 0, 2.0, 1.0));
+    addSequential(new AutoRotate(-90, 1.25, 0.5));
+    addSequential(new AutoSlewToTarget(0, 0.5, 2.0));
+    addSequential(new AutoAssistCargoBallPlace());
 
   }
 }

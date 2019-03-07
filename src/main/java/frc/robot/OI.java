@@ -37,9 +37,9 @@ public class OI {
 
 	//Define joystick objects and joystick button functions
 	public Joystick leftJoy, rightJoy;
-	public Button changeDriveSpeed, killAutoCommand, testArmUp, testArmMotorPositionMode, testArm2;
+	public Button changeDriveSpeed, killAutoCommand, liftArmUp, liftArmDown, testArmMotorPositionMode, testArm2;
 	public Button hatchPickup, hatchPlace, autonomousHab;
-	public Button testClimbUp, testClimbDown, testIntake, testOuttake, testArmDown;
+	public Button testClimbUp, testClimbDown, testIntake, testOuttake;
 	public Button testClimbDrive;
 
 	//Define limit switches
@@ -86,8 +86,9 @@ public class OI {
 		killAutoCommand = new JoystickButton(rightJoy, 1);
 		changeDriveSpeed = new JoystickButton(rightJoy, 2);
 		
-		testArmUp = new JoystickButton(rightJoy, 3);
-		testArmDown = new JoystickButton(rightJoy, 4);
+		//Lift arm related buttons
+		liftArmDown = new JoystickButton(rightJoy, 3);
+		liftArmUp = new JoystickButton(rightJoy, 4);
 		testArmMotorPositionMode = new JoystickButton(rightJoy, 11);
 		testArm2 = new JoystickButton(rightJoy, 12);
 		
@@ -110,11 +111,12 @@ public class OI {
 		//testIntake.whenReleased(new StopIntake());
 		testOuttake.whenPressed(new ShootOutBall(2.0));
 
-		testArmUp.whileHeld(new TestArmSpeedCommand(true));
-		testArmDown.whileHeld(new TestArmSpeedCommand(false));
-		testArmUp.whenReleased(new StopArm());
-		testArmDown.whenReleased(new StopArm());
-		testArmMotorPositionMode.whenPressed(new ArmToPositionCommand(RobotMap.hatchLevel1Revs));
+		//Lift arm related actions
+		liftArmUp.whileHeld(new TestArmSpeedCommand(true));
+		liftArmDown.whileHeld(new TestArmSpeedCommand(false));
+		liftArmUp.whenReleased(new StopArm());
+		liftArmDown.whenReleased(new StopArm());
+		testArmMotorPositionMode.whenPressed(new ArmToPositionCommand(RobotMap.hatchPickupLevel1Revs));
 		testArm2.whenPressed(new ArmToPositionCommand(RobotMap.hatchReleaseLevel1Revs));
 		
 		//testClimbUp.whenPressed(new AutoAssistHatchPickup());

@@ -10,18 +10,19 @@ package frc.robot.commands;
 import edu.wpi.first.wpilibj.command.CommandGroup;
 import frc.robot.RobotMap;
 
-public class AutoDriveOffHab extends CommandGroup {
+public class AutoRobotRightCargoFrontHatch extends CommandGroup {
 
   /**
-   * This command group drives the robot off the hab.
+   * This command group drives a robot off the right hab level 2
+   * and places a hatch on the front of the cargo ship.
    */
-  public AutoDriveOffHab() {
+  public AutoRobotRightCargoFrontHatch() {
     
-    //Drive off Hab at full speed
     addSequential(new ArmToPositionCommand(RobotMap.hatchReleaseLevel1Revs));
-    addSequential(new AutoDrive(90, 0, 2, 0.5));
-    addSequential(new AutoDrive(90, 0, .5, 1.0));
-    addSequential(new AutoDrive(-180, 0, 1.5, 1.0));
-
+    addSequential(new AutoDrive(90, 0, 1.25, 0.4));
+    addSequential(new AutoDrive(90, 0, 2.0, 1.0));
+    addSequential(new AutoSlewToTarget(180, 0.5, 2.0));
+    addSequential(new AutoAssistHatchPlace());
+  
   }
 }

@@ -18,10 +18,10 @@ import edu.wpi.first.wpilibj.command.Scheduler;
 import edu.wpi.first.wpilibj.smartdashboard.SendableChooser;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import frc.robot.commands.AutoDefaultStraight;
-import frc.robot.commands.AutoRobotLeftCargoFront;
-import frc.robot.commands.AutoRobotLeftCargoSide;
-import frc.robot.commands.AutoRobotRightCargoFront;
-import frc.robot.commands.AutoRobotRightCargoSide;
+import frc.robot.commands.AutoRobotLeftCargoFrontHatch;
+import frc.robot.commands.AutoRobotLeftCargoSideHatch;
+import frc.robot.commands.AutoRobotRightCargoFrontHatch;
+import frc.robot.commands.AutoRobotRightCargoSideHatch;
 import frc.robot.subsystems.ArmLiftSubsystem;
 import frc.robot.subsystems.GenericDriveTrain;
 import frc.robot.subsystems.HabClimberSubsystem;
@@ -59,17 +59,17 @@ public class Robot extends TimedRobot {
   public static NetworkTableEntry sendVision;
   public static NetworkTableEntry writeVideo;
   public static NetworkTableEntry robotStop;
-  public NetworkTableEntry ballDistance;
-  public NetworkTableEntry ballAngle;
-  public NetworkTableEntry ballOffset;
-  public NetworkTableEntry ballScreenPercent;
-  public NetworkTableEntry foundBall;
-  public NetworkTableEntry tapeOffset;
-  public NetworkTableEntry foundTape;
-  public NetworkTableEntry visionTargetAngle;
-  public NetworkTableEntry visionTargetDistance;
-  public NetworkTableEntry visionTargetOffset;
-  public NetworkTableEntry foundVisionTarget;
+  public static NetworkTableEntry ballDistance;
+  public static NetworkTableEntry ballAngle;
+  public static NetworkTableEntry ballOffset;
+  public static NetworkTableEntry ballScreenPercent;
+  public static NetworkTableEntry foundBall;
+  public static NetworkTableEntry tapeOffset;
+  public static NetworkTableEntry foundTape;
+  public static NetworkTableEntry visionTargetAngle;
+  public static NetworkTableEntry visionTargetDistance;
+  public static NetworkTableEntry visionTargetOffset;
+  public static NetworkTableEntry foundVisionTarget;
      
   //Declare subsystems
   public static GenericDriveTrain drivetrain;
@@ -272,11 +272,11 @@ public class Robot extends TimedRobot {
       {
         if(myTarget.equals("Front"))
         {
-          autonomousCommand = new AutoRobotLeftCargoFront();
+          autonomousCommand = new AutoRobotLeftCargoFrontHatch();
         } 
         else if(myTarget.equals("Side"))
         {
-          autonomousCommand = new AutoRobotLeftCargoSide();
+          autonomousCommand = new AutoRobotLeftCargoSideHatch();
         }
         else
         {
@@ -287,11 +287,11 @@ public class Robot extends TimedRobot {
       {
         if(myTarget.equals("Front"))
         {
-          autonomousCommand = new AutoRobotRightCargoFront();
+          autonomousCommand = new AutoRobotRightCargoFrontHatch();
         }
         else if(myTarget.equals("Side"))
         {
-          autonomousCommand = new AutoRobotRightCargoSide();
+          autonomousCommand = new AutoRobotRightCargoSideHatch();
         }
         else
         {
