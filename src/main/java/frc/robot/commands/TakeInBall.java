@@ -31,8 +31,9 @@ public class TakeInBall extends Command {
     
     //Timer is only to make sure the motor stops if a ball rolls away accidentally
     //Use long times as a result
-    timer.start();
-    startTime = timer.get();
+    // timer.start();
+    // startTime = timer.get();
+    // stopTime = 2;
   }
 
   // Called repeatedly when this Command is scheduled to run
@@ -46,18 +47,17 @@ public class TakeInBall extends Command {
   @Override
   protected boolean isFinished() {
     
-    double currentTime = timer.get();
+    //double currentTime = timer.get();
 
     //Check if limit switch is tripped or if timed out.  If true, stop command
-    //return (currentTime > stopTime) || !Robot.oi.ballLimitSwitch.get();
-    return true;
+    return !Robot.oi.ballLimitSwitch.get();
   }
 
   // Called once after isFinished returns true
   @Override
   protected void end() {
     
-    //Robot.end.stop();
+    Robot.end.stop();
   }
 
   // Called when another command which requires one or more of the same

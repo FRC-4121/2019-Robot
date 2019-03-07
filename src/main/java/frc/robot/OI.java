@@ -48,9 +48,9 @@ public class OI {
 	public OI() {
 
 		//Initialize limit switches
-		hatchLimitSwitch = new DigitalInput(RobotMap.HATCH_DRIVE_LIMIT_SWITCH_ID);
-		hatchLoadedLimitSwitch = new DigitalInput(RobotMap.HATCH_LOADED_LIMIT_SWITCH_ID);
-		//ballLimitSwitch = new DigitalInput(RobotMap.BALL_LIMIT_SWITCH_ID);
+		hatchLimitSwitch = new DigitalInput(RobotMap.HATCH_DRIVE_LIMIT_SWITCH_ID);//default is true
+		hatchLoadedLimitSwitch = new DigitalInput(RobotMap.HATCH_LOADED_LIMIT_SWITCH_ID);//default is false
+		ballLimitSwitch = new DigitalInput(RobotMap.BALL_LIMIT_SWITCH_ID);//default is false
 		//climbTopLimitSwitch = new DigitalInput(RobotMap.CLIMB_TOP_LIMIT_SWITCH_ID);
 		//climbBottomLimitSwitch = new DigitalInput(RobotMap.CLIMB_BOTTOM_LIMIT_SWITCH_ID);
 
@@ -106,8 +106,8 @@ public class OI {
 		killAutoCommand.whenPressed(new AutoAssistToggleKill());
 		changeDriveSpeed.whenPressed(new ChangeTeleopSpeed());
 
-		testIntake.whileHeld(new TakeInBall());//speed limit slowed for testing w/o limit switch
-		testIntake.whenReleased(new StopIntake());
+		testIntake.whenPressed(new TakeInBall());//speed limit slowed for testing w/o limit switch
+		//testIntake.whenReleased(new StopIntake());
 		testOuttake.whenPressed(new ShootOutBall(2.0));
 
 		testArmUp.whileHeld(new TestArmSpeedCommand(true));

@@ -13,6 +13,7 @@ import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import frc.robot.Robot;
 import frc.robot.RobotMap;
 import frc.robot.extraClasses.PIDControl;
+import frc.robot.extraClasses.VisionUtilities;
 
 public class AutoDriveToLimitSwitch extends Command {
   
@@ -27,6 +28,7 @@ public class AutoDriveToLimitSwitch extends Command {
   boolean useGyroAngle; //2019: use for driving straight forward after an assist align
 
   PIDControl pidControl;
+  VisionUtilities visionUtilities;
 
 	public Timer timer = new Timer();
 
@@ -59,6 +61,9 @@ public class AutoDriveToLimitSwitch extends Command {
 
     angleCorrection = 0;
 
+    //Find proper target alignment angle
+    //RobotMap.VISION_TARGET_ANGLE = visionUtilities.FindTargetAngle(Robot.gyroYaw.getDouble(0));
+
   }
 
   // Called repeatedly when this Command is scheduled to run
@@ -66,6 +71,8 @@ public class AutoDriveToLimitSwitch extends Command {
   protected void execute() {
 
     gyroAngle = Robot.gyroYaw.getDouble(0);
+
+    robotAngle = RobotMap.VISION_TARGET_ANGLE;
 
     angleCorrection = 0.0;
     

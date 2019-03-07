@@ -56,6 +56,7 @@ public class Robot extends TimedRobot {
   public static NetworkTableEntry zeroGyro;
   //public static NetworkTableEntry zeroDisplace;
   
+  public static NetworkTableEntry sendVision;
   public static NetworkTableEntry writeVideo;
   public static NetworkTableEntry robotStop;
   public NetworkTableEntry ballDistance;
@@ -105,7 +106,8 @@ public class Robot extends TimedRobot {
 		visionTable = dataTableInstance.getTable("vision");
 		navxTable = dataTableInstance.getTable("navx");
 
-		//Initialize NetworkTable entries
+    //Initialize NetworkTable entries
+    sendVision = visionTable.getEntry("SendVision");
 		robotStop = visionTable.getEntry("RobotStop");
     writeVideo = visionTable.getEntry("WriteVideo");
     ballOffset = visionTable.getEntry("BallOffset");
@@ -130,7 +132,8 @@ public class Robot extends TimedRobot {
     zeroGyro = navxTable.getEntry("ZeroGyro");
     //zeroDisplace = navxTable.getEntry("ZeroDisplace");
 
-		//Initialize NetworkTable values
+    //Initialize NetworkTable values
+    sendVision.setBoolean(false);
     robotStop.setDouble(0.0);
     zeroGyro.setDouble(0.0);
     //zeroDisplace.setDouble(0.0);
@@ -203,7 +206,7 @@ public class Robot extends TimedRobot {
 
     SmartDashboard.putBoolean("Hatch Drive Limit", Robot.oi.hatchLimitSwitch.get());
     SmartDashboard.putBoolean("Hatch Loaded Limit", Robot.oi.hatchLoadedLimitSwitch.get());
-    //SmartDashboard.putBoolean("Ball Limit", Robot.oi.ballLimitSwitch.get());
+    SmartDashboard.putBoolean("Ball Limit", Robot.oi.ballLimitSwitch.get());
     //SmartDashboard.putBoolean("Climb Top Limit", Robot.oi.climbTopLimitSwitch.get());
     //SmartDashboard.putBoolean("Climb Bottom Limit", Robot.oi.climbBottomLimitSwitch.get());
 
