@@ -46,7 +46,7 @@ public class ShootOutBall extends Command {
     
     double currentTime = timer.get();
 
-    return currentTime > stopTime;
+    return currentTime - startTime > stopTime;
   }
 
   // Called once after isFinished returns true

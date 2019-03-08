@@ -19,6 +19,7 @@ import edu.wpi.first.wpilibj.smartdashboard.SendableChooser;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import frc.robot.commands.AutoDefaultStraight;
 import frc.robot.commands.AutoRobotLeftCargoFrontHatch;
+import frc.robot.commands.AutoRobotLeftCargoSideBall;
 import frc.robot.commands.AutoRobotLeftCargoSideHatch;
 import frc.robot.commands.AutoRobotRightCargoFrontHatch;
 import frc.robot.commands.AutoRobotRightCargoSideHatch;
@@ -85,14 +86,15 @@ public class Robot extends TimedRobot {
   
   //Declare Smart dashboard chooser
   private SendableChooser<String> autoStyleChooser;
-  private SendableChooser<String> autoSideChooser;
+  private SendableChooser<String> autoPositionChooser;
   private SendableChooser<String> autoTargetChooser;
+  private SendableChooser<String> autoGamePieceChooser;
   
   //Variables for auto logic
-  public String mySide;
+  public String myPosition;
   public String myTarget;
   public String myStyle;
-
+  public String myGamePiece;
   
 	/**
    * This function is run when the robot is first started up and should be
@@ -172,14 +174,17 @@ public class Robot extends TimedRobot {
     oi = new OI();
 
     //Initialize dashboard choosers
-    autoSideChooser = new SendableChooser<>();
+    autoPositionChooser = new SendableChooser<>();
     autoStyleChooser = new SendableChooser<>();
     autoTargetChooser = new SendableChooser<>();
+    autoGamePieceChooser = new SendableChooser<>();
 
-    autoSideChooser.addOption("Left", "Left");
-    autoSideChooser.addOption("Center", "Center");
-    autoSideChooser.addOption("Right", "Right");
-    
+    autoPositionChooser.addOption("Left Level 1", "Left Level 1");
+    autoPositionChooser.addOption("Left Level 2", "Left Level 2");
+    autoPositionChooser.addOption("Center Level 1", "Center");
+    autoPositionChooser.addOption("Right Level 1", "Right Level 1");
+    autoPositionChooser.addOption("Right Level 2", "Right Level 2");
+
     autoStyleChooser.setDefaultOption("Full Auto", "Auto");
     autoStyleChooser.addOption("Driver Assist", "Sandstorm");
 
@@ -187,7 +192,11 @@ public class Robot extends TimedRobot {
     autoTargetChooser.addOption("Cargo Side", "Side");
     autoTargetChooser.addOption("Straight", "Straight");
 
-    SmartDashboard.putData("Auto Side", autoSideChooser);
+    autoGamePieceChooser.addOption("Hatch", "Hatch");
+    autoGamePieceChooser.addOption("Ball", "Ball");
+
+    SmartDashboard.putData("Auto Side", autoPositionChooser);
+    SmartDashboard.putData("Auto Game Piece", autoGamePieceChooser);
     SmartDashboard.putData("Auto Style", autoStyleChooser);
     SmartDashboard.putData("Auto Target", autoTargetChooser);    
 	}
@@ -256,7 +265,8 @@ public class Robot extends TimedRobot {
     //zeroDisplace.setDouble(1.0);
 
     myStyle = autoStyleChooser.getSelected();
-    mySide = autoSideChooser.getSelected();
+    myPosition = autoPositionChooser.getSelected();
+    myGamePiece = autoGamePieceChooser.getSelected();
     myTarget = autoTargetChooser.getSelected();
    
     autonomousCommand = null;
@@ -268,22 +278,41 @@ public class Robot extends TimedRobot {
     } 
     else 
     {
-      if(mySide.equals("Left"))
+      if(myPosition.equals("Left Level 1"))
       {
         if(myTarget.equals("Front"))
         {
-          autonomousCommand = new AutoRobotLeftCargoFrontHatch();
+          if(myGamePiece.equals("Hatch"))
+          {
+            //autonomousCommand = new AutoRobotLeftLevel1CargoFrontHatch();
+          }
+          else
+          {
+            //Cannot do ball in cargo front position
+            autonomousCommand = new AutoDefaultStraight();
+          }
         } 
         else if(myTarget.equals("Side"))
         {
-          autonomousCommand = new AutoRobotLeftCargoSideHatch();
+          if(myGamePiece.equals("Hatch"))
+          {
+            //autonomousCommand = new AutoRobotLeftLevel1CargoSideHatch();
+          }
+          else
+          {
+            //autonomousCommand = new AutoRobotLeftLevel1CargoSideBall();
+          }
         }
         else
         {
           autonomousCommand = new AutoDefaultStraight();
         }
       }
-      else if(mySide.equals("Right"))
+      else if (myPosition.equals("Left Level 2"))
+      {
+
+      }
+      else if(myPosition.equals("Right"))
       {
         if(myTarget.equals("Front"))
         {
@@ -304,6 +333,7 @@ public class Robot extends TimedRobot {
       }
     }
 
+    
     // schedule the autonomous command
     if (autonomousCommand != null) {
       autonomousCommand.start();

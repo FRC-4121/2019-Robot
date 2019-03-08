@@ -8,11 +8,13 @@
 package frc.robot.commands;
 
 import edu.wpi.first.wpilibj.command.Command;
+import frc.robot.Robot;
 import frc.robot.RobotMap;
 
 public class AutoAssistToggleKill extends Command {
   public AutoAssistToggleKill() {
 
+    requires(Robot.arm);
   }
 
   // Called just before this Command runs the first time
@@ -25,6 +27,8 @@ public class AutoAssistToggleKill extends Command {
   protected void execute() {
 
     RobotMap.KILL_AUTO_COMMAND = !RobotMap.KILL_AUTO_COMMAND;
+
+    //Robot.arm.armMotor.setSelectedSensorPosition(0);
   }
 
   // Make this return true when this Command no longer needs to run execute()

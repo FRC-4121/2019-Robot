@@ -17,16 +17,10 @@ import frc.robot.commands.AutoAssistHatchPlace;
 import frc.robot.commands.AutoAssistToggleKill;
 import frc.robot.commands.AutoDriveOffHab;
 import frc.robot.commands.ChangeTeleopSpeed;
-import frc.robot.commands.KillAutoCommand;
 import frc.robot.commands.ShootOutBall;
 import frc.robot.commands.StopArm;
-import frc.robot.commands.StopClimb;
-import frc.robot.commands.StopIntake;
 import frc.robot.commands.TakeInBall;
 import frc.robot.commands.TestArmSpeedCommand;
-import frc.robot.commands.TestClimbDown;
-import frc.robot.commands.TestClimbDrive;
-import frc.robot.commands.TestClimbUp;
 
 
 /**
@@ -107,7 +101,7 @@ public class OI {
 		killAutoCommand.whenPressed(new AutoAssistToggleKill());
 		changeDriveSpeed.whenPressed(new ChangeTeleopSpeed());
 
-		testIntake.whenPressed(new TakeInBall());//speed limit slowed for testing w/o limit switch
+		testIntake.whenPressed(new TakeInBall());
 		//testIntake.whenReleased(new StopIntake());
 		testOuttake.whenPressed(new ShootOutBall(2.0));
 

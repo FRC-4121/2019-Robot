@@ -19,8 +19,8 @@ import frc.robot.extraClasses.VisionUtilities;
 public class AutoAssistAlignRobotToTarget extends Command {
   
   //Declare class level variables
-  double offsetTolerance = 5;
-  double cameraOffset = -5;
+  double offsetTolerance = 3;
+  double cameraOffset = -8;
   boolean visionFound;
   double visionOffset;
 
@@ -124,7 +124,9 @@ public class AutoAssistAlignRobotToTarget extends Command {
         }
         
         //Use PID to control slew speed
-        speedCorrection = pidControlAlign.Run(visionOffset, 0);
+        //speedCorrection = pidControlAlign.Run(visionOffset, 0);
+        double targetError = Math.abs(visionOffset - offsetTolerance);
+        speedCorrection = targetError * .05;
 
         //possibly substitute driveAngle with driveAngle - gyroAngle to allow for proper slewing
         Robot.drivetrain.autoDrive(RobotMap.AUTO_DRIVE_SPEED * speedMultiplier * speedCorrection, slewDirection, -angleCorrection*0.3);    	    	

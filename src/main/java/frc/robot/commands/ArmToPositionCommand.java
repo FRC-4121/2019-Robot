@@ -39,8 +39,12 @@ public class ArmToPositionCommand extends Command {
   protected boolean isFinished() {
     
     boolean thereYet = false;
-    
-    if(Robot.arm.armMotor.getSelectedSensorPosition() / (double) RobotMap.kEncoderPPR > RobotMap.armMaxRevs) //avoid running past hard stop
+
+    if(RobotMap.KILL_AUTO_COMMAND)
+    {
+      thereYet = true;
+    }
+    else if(Robot.arm.armMotor.getSelectedSensorPosition() / (double) RobotMap.kEncoderPPR > RobotMap.armMaxRevs) //avoid running past hard stop
     {
       thereYet = true;
     }

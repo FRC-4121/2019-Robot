@@ -7,6 +7,8 @@
 
 package frc.robot.commands;
 
+import com.ctre.phoenix.motorcontrol.ControlMode;
+
 import edu.wpi.first.wpilibj.command.Command;
 import frc.robot.Robot;
 
@@ -25,7 +27,13 @@ public class StopArm extends Command {
   // Called repeatedly when this Command is scheduled to run
   @Override
   protected void execute() {
-    Robot.arm.stopArm();
+    
+    //Lock the arm to the stopped height.
+    int encoderPosition = Robot.arm.armMotor.getSelectedSensorPosition();
+
+    Robot.arm.armMotor.set(ControlMode.Position, encoderPosition);
+    
+    //Robot.arm.stopArm();
   }
 
   // Make this return true when this Command no longer needs to run execute()
