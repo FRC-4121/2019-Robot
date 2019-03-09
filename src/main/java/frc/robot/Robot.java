@@ -9,6 +9,8 @@ package frc.robot;
 
 import com.ctre.phoenix.motorcontrol.ControlMode;
 
+import edu.wpi.cscore.UsbCamera;
+import edu.wpi.first.cameraserver.CameraServer;
 import edu.wpi.first.networktables.NetworkTable;
 import edu.wpi.first.networktables.NetworkTableEntry;
 import edu.wpi.first.networktables.NetworkTableInstance;
@@ -95,6 +97,10 @@ public class Robot extends TimedRobot {
   public String myTarget;
   public String myStyle;
   public String myGamePiece;
+
+  //Declare driver camera variables
+  public static CameraServer camServer;
+  public static UsbCamera driverCamera;
   
 	/**
    * This function is run when the robot is first started up and should be
@@ -198,7 +204,14 @@ public class Robot extends TimedRobot {
     SmartDashboard.putData("Auto Side", autoPositionChooser);
     SmartDashboard.putData("Auto Game Piece", autoGamePieceChooser);
     SmartDashboard.putData("Auto Style", autoStyleChooser);
-    SmartDashboard.putData("Auto Target", autoTargetChooser);    
+    SmartDashboard.putData("Auto Target", autoTargetChooser);
+    
+    //Initialize and start driver camera
+    camServer = CameraServer.getInstance();
+    driverCamera = camServer.startAutomaticCapture("Driver", 0);
+    driverCamera.setResolution(160, 120);
+    driverCamera.setBrightness(100);
+    
 	}
 
 
