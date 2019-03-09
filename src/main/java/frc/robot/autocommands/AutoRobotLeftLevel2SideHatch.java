@@ -5,23 +5,28 @@
 /* the project.                                                               */
 /*----------------------------------------------------------------------------*/
 
-package frc.robot.commands;
+package frc.robot.autocommands;
 
 import edu.wpi.first.wpilibj.command.CommandGroup;
 import frc.robot.RobotMap;
+import frc.robot.commands.ArmToPositionCommand;
+import frc.robot.commands.AutoAssistHatchPlace;
+import frc.robot.commands.AutoDrive;
+import frc.robot.commands.AutoRotate;
+import frc.robot.commands.AutoSlewToTarget;
 
-public class AutoRobotRightCargoSideBall extends CommandGroup {
+public class AutoRobotLeftLevel2SideHatch extends CommandGroup {
   /**
    * Add your docs here.
    */
-  public AutoRobotRightCargoSideBall() {
-
+  public AutoRobotLeftLevel2SideHatch() {
+    
     addSequential(new ArmToPositionCommand(RobotMap.hatchReleaseLevel1Revs));
     addSequential(new AutoDrive(90, 0, 1.25, 0.4));
     addSequential(new AutoDrive(90, 0, 2.0, 1.0));
-    addSequential(new AutoRotate(-90, 1.25, 0.5));
-    addSequential(new AutoSlewToTarget(0, 0.5, 2.0));
-    addSequential(new AutoAssistCargoBallPlace());
+    addSequential(new AutoRotate(90, 1.25, 0.5, false));
+    addSequential(new AutoSlewToTarget(180, 0.5, 2.0));
+    addSequential(new AutoAssistHatchPlace());
 
   }
 }

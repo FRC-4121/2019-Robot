@@ -5,9 +5,11 @@
 /* the project.                                                               */
 /*----------------------------------------------------------------------------*/
 
-package frc.robot.commands;
+package frc.robot.autocommands;
 
 import edu.wpi.first.wpilibj.command.CommandGroup;
+import frc.robot.commands.AutoDrive;
+import frc.robot.commands.AutoDriveOffHab;
 
 public class AutoDefaultStraight extends CommandGroup {
   /**

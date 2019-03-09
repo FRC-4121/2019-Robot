@@ -7,7 +7,11 @@
 
 package frc.robot;
 
+import javax.lang.model.util.ElementScanner6;
+
 import com.ctre.phoenix.motorcontrol.ControlMode;
+
+import frc.robot.autocommands.*;
 
 import edu.wpi.cscore.UsbCamera;
 import edu.wpi.first.cameraserver.CameraServer;
@@ -19,12 +23,8 @@ import edu.wpi.first.wpilibj.command.Command;
 import edu.wpi.first.wpilibj.command.Scheduler;
 import edu.wpi.first.wpilibj.smartdashboard.SendableChooser;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
-import frc.robot.commands.AutoDefaultStraight;
-import frc.robot.commands.AutoRobotLeftCargoFrontHatch;
-import frc.robot.commands.AutoRobotLeftCargoSideBall;
-import frc.robot.commands.AutoRobotLeftCargoSideHatch;
-import frc.robot.commands.AutoRobotRightCargoFrontHatch;
-import frc.robot.commands.AutoRobotRightCargoSideHatch;
+import frc.robot.autocommands.AutoDefaultStraight;
+
 import frc.robot.subsystems.ArmLiftSubsystem;
 import frc.robot.subsystems.GenericDriveTrain;
 import frc.robot.subsystems.HabClimberSubsystem;
@@ -207,10 +207,10 @@ public class Robot extends TimedRobot {
     SmartDashboard.putData("Auto Target", autoTargetChooser);
     
     //Initialize and start driver camera
-    camServer = CameraServer.getInstance();
-    driverCamera = camServer.startAutomaticCapture("Driver", 0);
-    driverCamera.setResolution(160, 120);
-    driverCamera.setBrightness(100);
+    //camServer = CameraServer.getInstance();
+    //driverCamera = camServer.startAutomaticCapture("Driver", 0);
+    //driverCamera.setResolution(160, 120);
+    //driverCamera.setBrightness(50);
     
 	}
 
@@ -297,7 +297,7 @@ public class Robot extends TimedRobot {
         {
           if(myGamePiece.equals("Hatch"))
           {
-            //autonomousCommand = new AutoRobotLeftLevel1CargoFrontHatch();
+            autonomousCommand = new AutoRobotLeftLevel1FrontHatch();
           }
           else
           {
@@ -309,11 +309,11 @@ public class Robot extends TimedRobot {
         {
           if(myGamePiece.equals("Hatch"))
           {
-            //autonomousCommand = new AutoRobotLeftLevel1CargoSideHatch();
+            autonomousCommand = new AutoRobotLeftLevel1SideHatch();
           }
           else
           {
-            //autonomousCommand = new AutoRobotLeftLevel1CargoSideBall();
+            autonomousCommand = new AutoRobotLeftLevel1SideBall();
           }
         }
         else
@@ -323,17 +323,86 @@ public class Robot extends TimedRobot {
       }
       else if (myPosition.equals("Left Level 2"))
       {
-
+        if(myTarget.equals("Front"))
+        {
+          if(myGamePiece.equals("Hatch"))
+          {
+            autonomousCommand = new AutoRobotLeftLevel2FrontHatch();
+          }
+          else
+          {
+            //Cannot do ball in cargo front position
+            autonomousCommand = new AutoDefaultStraight();
+          }
+        } 
+        else if(myTarget.equals("Side"))
+        {
+          if(myGamePiece.equals("Hatch"))
+          {
+            autonomousCommand = new AutoRobotLeftLevel2SideHatch();
+          }
+          else
+          {
+            autonomousCommand = new AutoRobotLeftLevel2SideBall();
+          }
+        }
+        else
+        {
+          autonomousCommand = new AutoDefaultStraight();
+        }
       }
-      else if(myPosition.equals("Right"))
+      else if(myPosition.equals("Right Level 1"))
       {
         if(myTarget.equals("Front"))
         {
-          autonomousCommand = new AutoRobotRightCargoFrontHatch();
+          if(myGamePiece.equals("Hatch"))
+          {
+            //autonomousCommand = new AutoRobotRightLevel1FrontHatch();
+          }
+          else
+          {
+            autonomousCommand = new AutoDefaultStraight();
+          }
         }
         else if(myTarget.equals("Side"))
         {
-          autonomousCommand = new AutoRobotRightCargoSideHatch();
+          if(myGamePiece.equals("Hatch"))
+          {
+            //autonomousCommand = new AutoRobotRightLevel1SideHatch();
+          }
+          else
+          {
+            //autonomousCommand = new AutoRobotRightLevel1SideBall();
+          }
+        }
+        else
+        {
+          autonomousCommand = new AutoDefaultStraight();
+        }
+      }
+      else if(myPosition.equals("Right Level 2"))
+      {
+        if(myTarget.equals("Front"))
+        {
+          if(myGamePiece.equals("Hatch"))
+          {
+            //autonomousCommand = new AutoRobotRightLevel2FrontHatch();
+          }
+          else
+          {
+            autonomousCommand = new AutoDefaultStraight();
+          }
+        }
+        else if(myTarget.equals("Side"))
+        {
+          if(myGamePiece.equals("Hatch"))
+          {
+            //autonomousCommand = new AutoRobotRightLevel2SideHatch();
+          }
+          else
+          {
+            //autonomousCommand = new AutoRobotRightLevel2SideBall();
+          }
         }
         else
         {
@@ -342,7 +411,33 @@ public class Robot extends TimedRobot {
       }
       else //Center starting position; may add some more options here in the future
       {
-        autonomousCommand = new AutoDefaultStraight();
+        if(myTarget.equals("Front"))
+        {
+          if(myGamePiece.equals("Hatch"))
+          {
+            //autonomousCommand = new AutoRobotCenterFrontHatch();
+          }
+          else
+          {
+            autonomousCommand = new frc.robot.autocommands.AutoDefaultStraight();
+          }
+        }
+        else if(myTarget.equals("Side"))
+        {
+          if(myGamePiece.equals("Hatch"))
+          {
+            //autonomousCommand = new AutoRobotCenterSideHatch();
+          }
+          else
+          {
+            //autonomousCommand = new AutoRobotCenterSideBall();
+          }
+        }
+        else
+        {
+          autonomousCommand = new AutoDefaultStraight();
+        }
+        
       }
     }
 

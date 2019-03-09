@@ -23,20 +23,22 @@ public class AutoRotate extends Command {
 	double startTime;         //time at start of movement
   double stopTime;          //timeout time
   double speedMultiplier;
+  boolean useVision;
 	
 	PIDControl pidControl;
 
 	public Timer timer = new Timer();
 
   //Class constructor
-  public AutoRotate(double ang, double time, double speed) {
+  public AutoRotate(double ang, double time, double speed, boolean useVisionAngle) {
 
     requires(Robot.drivetrain);
-
+ 
     //Initialize internal variables
     robotAngle = ang;
     stopTime = time;
     speedMultiplier = speed;
+    useVision = useVisionAngle;
 
     //Set up PID control
     pidControl = new PIDControl(RobotMap.kP_Turn, RobotMap.kI_Turn, RobotMap.kD_Turn);
@@ -64,23 +66,28 @@ public class AutoRotate extends Command {
 
     gyroAngle = Robot.gyroYaw.getDouble(0);
 
+    if(useVision)
+    {
+      robotAngle = RobotMap.VISION_TARGET_ANGLE;
+    }
+
     angleCorrection = 0.0;
     
     if (robotAngle == 180 || robotAngle == -180)
+    {
+        if (gyroAngle >= 0 && gyroAngle < 179.5)
         {
-            if (gyroAngle >= 0 && gyroAngle < 179.5)
-            {
-                angleCorrection = pidControl.Run(gyroAngle, 180.0);
-            }
-            else if(gyroAngle <= 0 && gyroAngle > -179.5)
-            {
-                angleCorrection = pidControl.Run(gyroAngle, -180.0);
-            }
+            angleCorrection = pidControl.Run(gyroAngle, 180.0);
         }
-        else
+        else if(gyroAngle <= 0 && gyroAngle > -179.5)
         {
-            angleCorrection = pidControl.Run(gyroAngle, robotAngle);
+            angleCorrection = pidControl.Run(gyroAngle, -180.0);
         }
+    }
+    else
+    {
+        angleCorrection = pidControl.Run(gyroAngle, robotAngle);
+    }
 
     Robot.drivetrain.autoDrive(0.0, 0.0, -angleCorrection*RobotMap.AUTO_DRIVE_SPEED * speedMultiplier);    	    	
         
@@ -102,8 +109,6 @@ public class AutoRotate extends Command {
     {
 
       thereYet = true;
-      RobotMap.KILL_AUTO_COMMAND = false;
-
     }
     else
     {
@@ -123,11 +128,9 @@ public class AutoRotate extends Command {
       }
       else
       {
-        
         thereYet = true;
-
       }
-    
+          
     }
 
     //Return flag

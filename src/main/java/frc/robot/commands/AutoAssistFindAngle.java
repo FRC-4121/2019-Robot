@@ -7,60 +7,45 @@
 
 package frc.robot.commands;
 
-import edu.wpi.first.wpilibj.Timer;
 import edu.wpi.first.wpilibj.command.Command;
 import frc.robot.Robot;
 import frc.robot.RobotMap;
+import frc.robot.extraClasses.VisionUtilities;
 
-public class TakeInBall extends Command {
- 
-  Timer timer = new Timer();
+public class AutoAssistFindAngle extends Command {
 
-  double startTime;
-  double stopTime;
+  VisionUtilities visionUtilities;
 
-  public TakeInBall() {
-    
-    requires(Robot.end);
+  public AutoAssistFindAngle() {
+    // Use requires() here to declare subsystem dependencies
+    // eg. requires(chassis);
 
+    visionUtilities = new VisionUtilities();
   }
 
   // Called just before this Command runs the first time
   @Override
   protected void initialize() {
-    
-    //Timer is only to make sure the motor stops if a ball rolls away accidentally
-    //Use long times as a result
-    timer.start();
-    startTime = timer.get();
-    stopTime = 2;
   }
 
   // Called repeatedly when this Command is scheduled to run
   @Override
   protected void execute() {
 
-    Robot.end.run(RobotMap.INTAKE_SPEED);
+    //Find proper target alignment angle
+    RobotMap.VISION_TARGET_ANGLE = visionUtilities.FindTargetAngle(Robot.gyroYaw.getDouble(0));
+
   }
 
   // Make this return true when this Command no longer needs to run execute()
   @Override
   protected boolean isFinished() {
-  
-    if(stopTime <= timer.get() - startTime){
-    
-      return true;
-    }
-
-    //Check if limit switch is tripped or if timed out.  If true, stop command
-    return Robot.oi.ballLimitSwitch.get();
+    return true;
   }
 
   // Called once after isFinished returns true
   @Override
   protected void end() {
-    
-    Robot.end.stop();
   }
 
   // Called when another command which requires one or more of the same

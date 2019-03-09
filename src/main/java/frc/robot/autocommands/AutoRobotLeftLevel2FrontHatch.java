@@ -5,18 +5,22 @@
 /* the project.                                                               */
 /*----------------------------------------------------------------------------*/
 
-package frc.robot.commands;
+package frc.robot.autocommands;
 
 import edu.wpi.first.wpilibj.command.CommandGroup;
 import frc.robot.RobotMap;
+import frc.robot.commands.ArmToPositionCommand;
+import frc.robot.commands.AutoAssistHatchPlace;
+import frc.robot.commands.AutoDrive;
+import frc.robot.commands.AutoSlewToTarget;
 
-public class AutoRobotLeftCargoFrontHatch extends CommandGroup {
+public class AutoRobotLeftLevel2FrontHatch extends CommandGroup {
 
   /**
    * This command group drives a robot off the left hab level 2
    * and places a hatch on the front of the cargo ship.
    */
-  public AutoRobotLeftCargoFrontHatch() {
+  public AutoRobotLeftLevel2FrontHatch() {
     
     addSequential(new ArmToPositionCommand(RobotMap.hatchReleaseLevel1Revs));
     addSequential(new AutoDrive(90, 0, 1.25, 0.4));

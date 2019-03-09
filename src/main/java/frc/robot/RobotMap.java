@@ -54,8 +54,8 @@ public class RobotMap {
 	public static final double DRIVE_SPEED_FAST = 1.0;
 	public static final double DRIVE_SPEED_SLOW = 0.25;
 
-	public static final double INTAKE_SPEED = 0.2;
-	public static final double OUTTAKE_SPEED = -1;
+	public static final double INTAKE_SPEED = 1;
+	public static final double OUTTAKE_SPEED = -.85;
 
 	public static final double ARM_SPEED_UP = 0.5;
 	public static final double ARM_SPEED_DOWN = -0.1;
