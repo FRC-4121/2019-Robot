@@ -45,7 +45,7 @@ public class AutoSlewToTarget extends Command {
 
     //Set up PID control
     pidControl = new PIDControl(RobotMap.kP_Straight, RobotMap.kI_Straight, RobotMap.kD_Straight);
-    
+    visionUtilities = new VisionUtilities();
   }
 
   // Called just before this Command runs the first time

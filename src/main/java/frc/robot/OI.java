@@ -12,6 +12,7 @@ import edu.wpi.first.wpilibj.Joystick;
 import edu.wpi.first.wpilibj.buttons.Button;
 import edu.wpi.first.wpilibj.buttons.JoystickButton;
 import frc.robot.commands.ArmToPositionCommand;
+import frc.robot.commands.AutoAssistHatch;
 import frc.robot.commands.AutoAssistHatchPickup;
 import frc.robot.commands.AutoAssistHatchPlace;
 import frc.robot.commands.AutoAssistToggleKill;
@@ -43,6 +44,7 @@ public class OI {
 
 	//Define limit switches
 	public DigitalInput hatchLimitSwitch, hatchLoadedLimitSwitch, ballLimitSwitch, climbTopLimitSwitch, climbBottomLimitSwitch;
+	private JoystickButton uberHatch;
 	
 	public OI() {
 
@@ -96,11 +98,12 @@ public class OI {
 		
 		testClimbUp = new JoystickButton(rightJoy, 7);
 		testClimbDown = new JoystickButton(rightJoy, 8);
-		testClimbDrive = new JoystickButton(rightJoy, 9);
+		//testClimbDrive = new JoystickButton(rightJoy, 9);
 
 
 		//hatchPickup = new JoystickButton(rightJoy, 9);
-		//hatchPlace = new JoystickButton(rightJoy, 10);
+		hatchPlace = new JoystickButton(rightJoy, 10);
+		//uberHatch = new JoystickButton(rightJoy, 10);
 		
 		//autonomousHab = new JoystickButton(rightJoy, 7);
 
@@ -125,14 +128,15 @@ public class OI {
 		testClimbUp.whenReleased(new StopClimb());
 
 		//hatchPickup.whenPressed(new AutoAssistHatchPickup());
-		//hatchPlace.whenPressed(new AutoAssistHatchPlace());
+		hatchPlace.whenPressed(new AutoAssistHatchPlace());
+		//uberHatch.whenPressed(new AutoAssistHatch(10));
 
 		//autonomousHab.whenPressed(new AutoDriveOffHab());
 
 		testClimbDown.whileHeld(new TestClimbDown());
 		testClimbDown.whenReleased(new StopClimb());
-		testClimbDrive.whileHeld(new TestClimbDrive());
-		testClimbDrive.whenReleased(new StopClimb());
+		//testClimbDrive.whileHeld(new TestClimbDrive());
+		//testClimbDrive.whenReleased(new StopClimb());
 	
 	}
   

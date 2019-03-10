@@ -19,7 +19,7 @@ import frc.robot.extraClasses.VisionUtilities;
 public class AutoAssistAlignRobotToTarget extends Command {
   
   //Declare class level variables
-  double offsetTolerance = 1;
+  double offsetTolerance = .5;
   double cameraOffset = -2;
   boolean visionFound;
   double visionOffset;
@@ -58,7 +58,7 @@ public class AutoAssistAlignRobotToTarget extends Command {
   @Override
   protected void initialize() {
 
-    stopTime = 5;
+    stopTime = 10;
 
     if(stopTime != 0)
     {
