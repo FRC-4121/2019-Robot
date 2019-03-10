@@ -357,7 +357,7 @@ public class Robot extends TimedRobot {
         {
           if(myGamePiece.equals("Hatch"))
           {
-            //autonomousCommand = new AutoRobotRightLevel1FrontHatch();
+            autonomousCommand = new AutoRobotRightLevel1FrontHatch();
           }
           else
           {
@@ -368,11 +368,11 @@ public class Robot extends TimedRobot {
         {
           if(myGamePiece.equals("Hatch"))
           {
-            //autonomousCommand = new AutoRobotRightLevel1SideHatch();
+            autonomousCommand = new AutoRobotRightLevel1SideHatch();
           }
           else
           {
-            //autonomousCommand = new AutoRobotRightLevel1SideBall();
+            autonomousCommand = new AutoRobotRightLevel1SideBall();
           }
         }
         else
@@ -386,7 +386,7 @@ public class Robot extends TimedRobot {
         {
           if(myGamePiece.equals("Hatch"))
           {
-            //autonomousCommand = new AutoRobotRightLevel2FrontHatch();
+            autonomousCommand = new AutoRobotRightLevel2FrontHatch();
           }
           else
           {
@@ -397,11 +397,11 @@ public class Robot extends TimedRobot {
         {
           if(myGamePiece.equals("Hatch"))
           {
-            //autonomousCommand = new AutoRobotRightLevel2SideHatch();
+            autonomousCommand = new AutoRobotRightLevel2SideHatch();
           }
           else
           {
-            //autonomousCommand = new AutoRobotRightLevel2SideBall();
+            autonomousCommand = new AutoRobotRightLevel2SideBall();
           }
         }
         else
@@ -415,7 +415,7 @@ public class Robot extends TimedRobot {
         {
           if(myGamePiece.equals("Hatch"))
           {
-            //autonomousCommand = new AutoRobotCenterFrontHatch();
+            autonomousCommand = new AutoRobotCenterFrontHatch();
           }
           else
           {

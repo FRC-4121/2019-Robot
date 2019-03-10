@@ -14,7 +14,7 @@ import frc.robot.RobotMap;
 
 public class IntakeSubsystem extends Subsystem {
 
-  WPI_TalonSRX intakeMotor = new WPI_TalonSRX(RobotMap.INTAKE_MOTOR_ID);
+  public WPI_TalonSRX intakeMotor = new WPI_TalonSRX(RobotMap.INTAKE_MOTOR_ID);
 
   @Override
   public void initDefaultCommand() {}
