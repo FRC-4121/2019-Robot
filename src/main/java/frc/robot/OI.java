@@ -37,8 +37,8 @@ public class OI {
 
 	//Define joystick objects and joystick button functions
 	public Joystick leftJoy, rightJoy;
-	public Button changeDriveSpeed, killAutoCommand, liftArmUp, liftArmDown, testArmMotorPositionMode, testArm2;
-	public Button hatchPickup, hatchPlace, autonomousHab;
+	public Button changeDriveSpeed, killAutoCommand, liftArmUp, liftArmDown, liftArmToHatchPickup, liftArmToHatchRelease;
+	public Button hatchPickup, hatchPlace, autonomousHab, liftArmToBallPickupRelease;
 	public Button testClimbUp, testClimbDown, testIntake, testOuttake;
 	public Button testClimbDrive;
 
@@ -90,20 +90,21 @@ public class OI {
 		//Lift arm related buttons
 		liftArmDown = new JoystickButton(rightJoy, 3);
 		liftArmUp = new JoystickButton(rightJoy, 4);
-		testArmMotorPositionMode = new JoystickButton(rightJoy, 11);
-		testArm2 = new JoystickButton(rightJoy, 12);
+		liftArmToHatchPickup = new JoystickButton(rightJoy, 10);
+		liftArmToHatchRelease = new JoystickButton(rightJoy, 12);
+		liftArmToBallPickupRelease = new JoystickButton(rightJoy, 8);
 		
 		testIntake = new JoystickButton(rightJoy, 5);
 		testOuttake = new JoystickButton(rightJoy, 6);
 		
-		testClimbUp = new JoystickButton(rightJoy, 7);
-		testClimbDown = new JoystickButton(rightJoy, 8);
+		//testClimbUp = new JoystickButton(rightJoy, 7);
+		//testClimbDown = new JoystickButton(rightJoy, 8);
 		//testClimbDrive = new JoystickButton(rightJoy, 9);
 
 
-		//hatchPickup = new JoystickButton(rightJoy, 9);
-		hatchPlace = new JoystickButton(rightJoy, 10);
-		//uberHatch = new JoystickButton(rightJoy, 10);
+		hatchPickup = new JoystickButton(rightJoy, 11);
+		hatchPlace = new JoystickButton(rightJoy, 9);
+		uberHatch = new JoystickButton(rightJoy, 7);
 		
 		//autonomousHab = new JoystickButton(rightJoy, 7);
 
@@ -121,20 +122,21 @@ public class OI {
 		liftArmDown.whileHeld(new TestArmSpeedCommand(false));
 		liftArmUp.whenReleased(new StopArm());
 		liftArmDown.whenReleased(new StopArm());
-		testArmMotorPositionMode.whenPressed(new ArmToPositionCommand(RobotMap.hatchPickupLevel1Revs));
-		testArm2.whenPressed(new ArmToPositionCommand(RobotMap.hatchReleaseLevel1Revs));
+		liftArmToHatchPickup.whenPressed(new ArmToPositionCommand(RobotMap.hatchPickupLevel1Revs));
+		liftArmToHatchRelease.whenPressed(new ArmToPositionCommand(RobotMap.hatchReleaseLevel1Revs));
+		liftArmToBallPickupRelease.whenPressed(new ArmToPositionCommand(RobotMap.cargoBallReleaseRevs));
 		
-		testClimbUp.whileHeld(new TestClimbUp());
-		testClimbUp.whenReleased(new StopClimb());
+		//testClimbUp.whileHeld(new TestClimbUp());
+		//testClimbUp.whenReleased(new StopClimb());
 
-		//hatchPickup.whenPressed(new AutoAssistHatchPickup());
+		hatchPickup.whenPressed(new AutoAssistHatchPickup());
 		hatchPlace.whenPressed(new AutoAssistHatchPlace());
-		//uberHatch.whenPressed(new AutoAssistHatch(10));
+		uberHatch.whenPressed(new AutoAssistHatch(10));
 
 		//autonomousHab.whenPressed(new AutoDriveOffHab());
 
-		testClimbDown.whileHeld(new TestClimbDown());
-		testClimbDown.whenReleased(new StopClimb());
+		//testClimbDown.whileHeld(new TestClimbDown());
+		//testClimbDown.whenReleased(new StopClimb());
 		//testClimbDrive.whileHeld(new TestClimbDrive());
 		//testClimbDrive.whenReleased(new StopClimb());
 	

@@ -54,8 +54,8 @@ public class RobotMap {
 	public static final double DRIVE_SPEED_FAST = 1.0;
 	public static final double DRIVE_SPEED_SLOW = 0.25;
 
-	public static final double INTAKE_SPEED = 1;
-	public static final double OUTTAKE_SPEED = -.85;
+	public static final double INTAKE_SPEED = -0.5;
+	public static final double OUTTAKE_SPEED = 1.0;
 
 	public static final double ARM_SPEED_UP = 0.5;
 	public static final double ARM_SPEED_DOWN = -0.1;
@@ -94,7 +94,7 @@ public class RobotMap {
 	public static final double floorRevs = 0.05;
 	public static final double hatchPickupLevel1Revs = .2;
 	public static final double hatchReleaseLevel1Revs = .08;
-	public static final double cargoBallReleaseRevs = 0.85;
+	public static final double cargoBallReleaseRevs = 0.9;
 	public static final double armMaxRevs = 1.8;//hard stop
 
 

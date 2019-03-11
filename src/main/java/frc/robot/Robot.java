@@ -207,10 +207,11 @@ public class Robot extends TimedRobot {
     SmartDashboard.putData("Auto Target", autoTargetChooser);
     
     //Initialize and start driver camera
-    //camServer = CameraServer.getInstance();
-    //driverCamera = camServer.startAutomaticCapture("Driver", 0);
-    //driverCamera.setResolution(160, 120);
-    //driverCamera.setBrightness(50);
+    camServer = CameraServer.getInstance();
+    driverCamera = camServer.startAutomaticCapture("Driver", 0);
+    driverCamera.setResolution(160, 120);
+    driverCamera.setFPS(15);
+    driverCamera.setBrightness(50);
     
 	}
 

@@ -22,7 +22,8 @@ public class AutoAssistHatchPickup extends CommandGroup {
     addSequential(new AutoAssistAlignRobotToTarget(0.35));
     addSequential(new ArmToPositionCommand(RobotMap.hatchReleaseLevel1Revs));
     addSequential(new AutoDriveToLimitSwitch(90, 180, 4, 0.25, true));
-    addSequential(new ArmToPositionCommand(RobotMap.hatchPickupLevel1Revs));
+    //addSequential(new ArmToPositionCommand(RobotMap.hatchPickupLevel1Revs));
+    addSequential(new ArmToHatchLimitSwitch());
     addSequential(new AutoDrive(-90, 180, 2.0, 0.25));
     
   }
