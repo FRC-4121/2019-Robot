@@ -14,10 +14,10 @@ import frc.robot.RobotMap;
 
 public class TakeInBall extends Command {
  
-  Timer timer = new Timer();
+  // Timer timer = new Timer();
 
-  double startTime;
-  double stopTime;
+  // double startTime;
+  // double stopTime;
 
   public TakeInBall() {
     
@@ -31,9 +31,9 @@ public class TakeInBall extends Command {
     
     //Timer is only to make sure the motor stops if a ball rolls away accidentally
     //Use long times as a result
-    timer.start();
-    startTime = timer.get();
-    stopTime = 2;
+    // timer.start();
+    // startTime = timer.get();
+    // stopTime = 2;
   }
 
   // Called repeatedly when this Command is scheduled to run
@@ -47,10 +47,10 @@ public class TakeInBall extends Command {
   @Override
   protected boolean isFinished() {
   
-    if(stopTime <= timer.get() - startTime){
+    // if(stopTime <= timer.get() - startTime){
     
-      return true;
-    }
+    //   return true;
+    // }
 
     //Check if limit switch is tripped or if timed out.  If true, stop command
     return Robot.oi.ballLimitSwitch.get();

@@ -43,7 +43,7 @@ public class OI {
 	public Button testClimbDrive;
 
 	//Define limit switches
-	public DigitalInput hatchLimitSwitch, hatchLoadedLimitSwitch, ballLimitSwitch, climbTopLimitSwitch, climbBottomLimitSwitch;
+	public DigitalInput hatchLimitSwitch, hatchLoadedLimitSwitch, ballLimitSwitch, armLimitSwitch, climbTopLimitSwitch, climbBottomLimitSwitch;
 	private JoystickButton uberHatch;
 	
 	public OI() {
@@ -52,6 +52,7 @@ public class OI {
 		hatchLimitSwitch = new DigitalInput(RobotMap.HATCH_DRIVE_LIMIT_SWITCH_ID);//default is true
 		hatchLoadedLimitSwitch = new DigitalInput(RobotMap.HATCH_LOADED_LIMIT_SWITCH_ID);//default is false
 		ballLimitSwitch = new DigitalInput(RobotMap.BALL_LIMIT_SWITCH_ID);//default is false
+		armLimitSwitch = new DigitalInput(RobotMap.ARM_LIMIT_SWITCH_ID);
 		//climbTopLimitSwitch = new DigitalInput(RobotMap.CLIMB_TOP_LIMIT_SWITCH_ID);
 		//climbBottomLimitSwitch = new DigitalInput(RobotMap.CLIMB_BOTTOM_LIMIT_SWITCH_ID);
 
@@ -113,7 +114,7 @@ public class OI {
 		changeDriveSpeed.whenPressed(new ChangeTeleopSpeed());
 
 		testIntake.whenPressed(new TakeInBall());
-		//testIntake.whenReleased(new StopIntake());
+		testIntake.whenReleased(new StopIntake());
 		testOuttake.whenPressed(new ShootOutBall(2.0));
 		testOuttake.whenReleased(new StopIntake());
 

@@ -40,8 +40,9 @@ public class RobotMap {
 	//Limit switch ids
 	public static final int HATCH_DRIVE_LIMIT_SWITCH_ID = 1;
 	public static final int BALL_LIMIT_SWITCH_ID = 2;
-	public static final int CLIMB_TOP_LIMIT_SWITCH_ID = 4;
-	public static final int CLIMB_BOTTOM_LIMIT_SWITCH_ID = 3;
+	//public static final int CLIMB_TOP_LIMIT_SWITCH_ID = 4;
+	public static final int ARM_LIMIT_SWITCH_ID = 3;
+	//public static final int CLIMB_BOTTOM_LIMIT_SWITCH_ID = 3;
 	public static final int HATCH_LOADED_LIMIT_SWITCH_ID = 0;
 
 
@@ -54,7 +55,7 @@ public class RobotMap {
 	public static final double DRIVE_SPEED_FAST = 1.0;
 	public static final double DRIVE_SPEED_SLOW = 0.25;
 
-	public static final double INTAKE_SPEED = -0.5;
+	public static final double INTAKE_SPEED = -0.4;
 	public static final double OUTTAKE_SPEED = 1.0;
 
 	public static final double ARM_SPEED_UP = 0.5;
@@ -92,11 +93,10 @@ public class RobotMap {
 
 	//Revolution variables for arm lift commands
 	public static final double floorRevs = 0.05;
-	public static final double hatchPickupLevel1Revs = .2;
+	public static final double hatchPickupLevel1Revs = .15;
 	public static final double hatchReleaseLevel1Revs = .08;
-	public static final double cargoBallReleaseRevs = 0.9;
+	public static final double cargoBallReleaseRevs = 0.76;
 	public static final double armMaxRevs = 1.8;//hard stop
-
 
 	//Testing variables
 	public static final double ARM_REVOLUTIONS = 20;
@@ -105,5 +105,5 @@ public class RobotMap {
 	public static int DIRECTION_MULTIPLIER = -1;		//Invert drive direction (for WCD only)
 	public static boolean KILL_AUTO_COMMAND = false;	//Kill any autonomous or auto-assist commands
 	public static double VISION_TARGET_ANGLE = 0.0;		//Angle to current vision target
-	
+	public static boolean RESET_ARM_ENCODER = false;
 }

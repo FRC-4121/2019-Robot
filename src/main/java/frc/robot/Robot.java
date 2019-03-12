@@ -19,6 +19,7 @@ import edu.wpi.first.networktables.NetworkTable;
 import edu.wpi.first.networktables.NetworkTableEntry;
 import edu.wpi.first.networktables.NetworkTableInstance;
 import edu.wpi.first.wpilibj.TimedRobot;
+import edu.wpi.first.wpilibj.Timer;
 import edu.wpi.first.wpilibj.command.Command;
 import edu.wpi.first.wpilibj.command.Scheduler;
 import edu.wpi.first.wpilibj.smartdashboard.SendableChooser;
@@ -230,6 +231,7 @@ public class Robot extends TimedRobot {
     SmartDashboard.putBoolean("Hatch Drive Limit", Robot.oi.hatchLimitSwitch.get());
     SmartDashboard.putBoolean("Hatch Loaded Limit", Robot.oi.hatchLoadedLimitSwitch.get());
     SmartDashboard.putBoolean("Ball Limit", Robot.oi.ballLimitSwitch.get());
+    SmartDashboard.putBoolean("Arm Limit", Robot.oi.armLimitSwitch.get());
     //SmartDashboard.putBoolean("Climb Top Limit", Robot.oi.climbTopLimitSwitch.get());
     //SmartDashboard.putBoolean("Climb Bottom Limit", Robot.oi.climbBottomLimitSwitch.get());
 
@@ -242,6 +244,27 @@ public class Robot extends TimedRobot {
 
     SmartDashboard.putNumber("Target Angle: ", RobotMap.VISION_TARGET_ANGLE);
     SmartDashboard.putBoolean("Kill Auto?", RobotMap.KILL_AUTO_COMMAND);
+
+    SmartDashboard.putBoolean("Reset Encoders?", RobotMap.RESET_ARM_ENCODER);
+
+    if(Robot.oi.armLimitSwitch.get() == true)
+    {
+      if(!RobotMap.RESET_ARM_ENCODER)
+      {
+        //Reset the encoder and lock
+        Robot.arm.armMotor.setSelectedSensorPosition(0);
+        Robot.arm.armMotor.set(ControlMode.Position, 0);
+
+        RobotMap.RESET_ARM_ENCODER = true;
+      }
+    }
+    else
+    {
+      RobotMap.RESET_ARM_ENCODER = false;
+    }
+    
+    
+
   }
 
   /**
@@ -469,7 +492,7 @@ public class Robot extends TimedRobot {
       autonomousCommand.cancel();
     }
 
-    //For testing only.  If used like this in comp it will screw up everything
+    //For testing only.  If used like this in comp it may screw up everything
     Robot.arm.armMotor.setSelectedSensorPosition(0);
     Robot.arm.armMotor.set(ControlMode.Position, 0);
 

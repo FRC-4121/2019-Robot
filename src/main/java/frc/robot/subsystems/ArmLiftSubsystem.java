@@ -65,9 +65,11 @@ public class ArmLiftSubsystem extends Subsystem {
     {
       armMotor.set(RobotMap.ARM_SPEED_DOWN);
     }
+
+    
   }
 
-  //Halt the arm
+  //Halt the arm (obsolete)
   public void stopArm() {
     
     armMotor.set(RobotMap.STOP_SPEED);
@@ -78,7 +80,8 @@ public class ArmLiftSubsystem extends Subsystem {
 
     targetPositionRotations = revolutions * RobotMap.kEncoderPPR;
     
-		armMotor.set(ControlMode.Position, targetPositionRotations);
+    armMotor.set(ControlMode.Position, targetPositionRotations);
+    
   }
 
 }

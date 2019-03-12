@@ -14,6 +14,7 @@ import frc.robot.RobotMap;
 public class TestArmSpeedCommand extends Command {
 
   public boolean armUp;
+  boolean resetEncoders = false;
 
   public TestArmSpeedCommand(boolean runUp) {
     
@@ -38,12 +39,14 @@ public class TestArmSpeedCommand extends Command {
   @Override
   protected boolean isFinished() {
 
+    boolean thereYet = false;
+
     if(Robot.arm.armMotor.getSelectedSensorPosition() / (double) RobotMap.kEncoderPPR > RobotMap.armMaxRevs)
     {
-      return false;
+      thereYet = true;
     }
-    
-    return true;
+        
+    return thereYet;
   }
 
   // Called once after isFinished returns true
