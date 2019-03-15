@@ -47,6 +47,10 @@ public class ArmToPositionCommand extends Command {
     {
       thereYet = true;
     }
+    else if(Robot.oi.armLimitSwitch.get() == true)
+    {
+      thereYet = true;
+    }
     else if(Robot.arm.armMotor.getSelectedSensorPosition() / (double) RobotMap.kEncoderPPR > RobotMap.armMaxRevs) //avoid running past hard stop
     {
       thereYet = true;

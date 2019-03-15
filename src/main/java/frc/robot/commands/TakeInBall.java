@@ -52,8 +52,8 @@ public class TakeInBall extends Command {
     //   return true;
     // }
 
-    //Check if limit switch is tripped or if timed out.  If true, stop command
-    return Robot.oi.ballLimitSwitch.get();
+    //Check if limit switch is tripped.  If true, stop command
+    return false;//!Robot.oi.ballLimitSwitch.get();
   }
 
   // Called once after isFinished returns true

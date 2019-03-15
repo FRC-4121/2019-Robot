@@ -13,9 +13,11 @@ import edu.wpi.first.wpilibj.command.CommandGroup;
 
 public class AutoRobotLeftLevel1FrontHatch extends CommandGroup {
   /**
-   * Add your docs here.
+   * This command group drives off of the left level 1 Hab and places a hatch on the front of the 
+   * cargo ship using the vision system.
    */
   public AutoRobotLeftLevel1FrontHatch() {
+    
     addSequential(new ArmToPositionCommand(RobotMap.hatchReleaseLevel1Revs));
     addSequential(new AutoDrive(90, 0, .5, 0.3));
     addSequential(new AutoDrive(90, 0, 2.2, .6));

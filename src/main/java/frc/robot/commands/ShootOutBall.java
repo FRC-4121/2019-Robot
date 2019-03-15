@@ -44,9 +44,19 @@ public class ShootOutBall extends Command {
   @Override
   protected boolean isFinished() {
     
-    double currentTime = timer.get();
+    boolean thereYet = false;
+    
+    if(stopTime != 0)
+    {
+      double currentTime = timer.get();
 
-    return currentTime - startTime > stopTime;
+      if(stopTime <= currentTime - startTime)
+      {
+        thereYet = true;
+      }
+    }
+    
+    return thereYet;
   }
 
   // Called once after isFinished returns true

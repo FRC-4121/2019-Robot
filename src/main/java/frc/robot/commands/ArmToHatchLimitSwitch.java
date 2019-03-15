@@ -42,7 +42,7 @@ public class ArmToHatchLimitSwitch extends Command {
 
     boolean thereYet = false;
 
-    if (Robot.oi.hatchLoadedLimitSwitch.get() == true)
+    if (!Robot.oi.hatchLoadedLimitSwitch.get() == true)
     {
       thereYet = true;
 

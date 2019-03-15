@@ -92,9 +92,9 @@ public class RobotMap {
 
 
 	//Revolution variables for arm lift commands
-	public static final double floorRevs = 0.05;
-	public static final double hatchPickupLevel1Revs = .15;
-	public static final double hatchReleaseLevel1Revs = .08;
+	public static final double floorRevs = 0.0;
+	public static final double hatchPickupLevel1Revs = .10;
+	public static final double hatchReleaseLevel1Revs = .07;
 	public static final double cargoBallReleaseRevs = 0.76;
 	public static final double armMaxRevs = 1.8;//hard stop
 

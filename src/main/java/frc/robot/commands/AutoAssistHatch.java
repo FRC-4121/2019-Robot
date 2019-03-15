@@ -45,7 +45,7 @@ public class AutoAssistHatch extends Command {
   protected void execute() {
 
     //Determine which hatch command group to execute
-    if (Robot.oi.hatchLoadedLimitSwitch.get() == false)
+    if (!Robot.oi.hatchLoadedLimitSwitch.get() == false)
     {
 
       hatchCommands = new AutoAssistHatchPickup();

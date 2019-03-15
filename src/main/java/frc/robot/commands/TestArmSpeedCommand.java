@@ -41,7 +41,14 @@ public class TestArmSpeedCommand extends Command {
 
     boolean thereYet = false;
 
+    //max height cap
     if(Robot.arm.armMotor.getSelectedSensorPosition() / (double) RobotMap.kEncoderPPR > RobotMap.armMaxRevs)
+    {
+      thereYet = true;
+    }
+
+    //Stop at minimum height
+    if(Robot.oi.armLimitSwitch.get() == true)
     {
       thereYet = true;
     }

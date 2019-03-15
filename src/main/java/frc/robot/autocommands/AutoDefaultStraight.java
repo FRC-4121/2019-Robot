@@ -8,8 +8,9 @@
 package frc.robot.autocommands;
 
 import edu.wpi.first.wpilibj.command.CommandGroup;
+import frc.robot.RobotMap;
+import frc.robot.commands.ArmToPositionCommand;
 import frc.robot.commands.AutoDrive;
-import frc.robot.commands.AutoDriveOffHab;
 
 public class AutoDefaultStraight extends CommandGroup {
   /**
@@ -17,7 +18,9 @@ public class AutoDefaultStraight extends CommandGroup {
    */
   public AutoDefaultStraight() {
     
-    addSequential(new AutoDriveOffHab());
-    addSequential(new AutoDrive(90, 0, 3, 0.625));
+    //Raise arm slightly and drive off hab. then drive straight for a little bit
+    addSequential(new ArmToPositionCommand(RobotMap.hatchReleaseLevel1Revs));
+    addSequential(new AutoDrive(90, 0, 1.5, 0.3));
+    addSequential(new AutoDrive(90, 0, 1, 0.625));
   }
 }

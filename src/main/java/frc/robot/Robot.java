@@ -196,11 +196,12 @@ public class Robot extends TimedRobot {
     autoStyleChooser.addOption("Driver Assist", "Sandstorm");
 
     autoTargetChooser.setDefaultOption("Cargo Front", "Front");
-    autoTargetChooser.addOption("Cargo Side", "Side");
+    //autoTargetChooser.addOption("Cargo Side", "Side");
     autoTargetChooser.addOption("Straight", "Straight");
 
-    autoGamePieceChooser.addOption("Hatch", "Hatch");
-    autoGamePieceChooser.addOption("Ball", "Ball");
+    autoGamePieceChooser.setDefaultOption("Hatch", "Hatch");
+    //autoGamePieceChooser.addOption("Hatch", "Hatch");
+    //autoGamePieceChooser.addOption("Ball", "Ball");
 
     SmartDashboard.putData("Auto Side", autoPositionChooser);
     SmartDashboard.putData("Auto Game Piece", autoGamePieceChooser);
@@ -247,18 +248,21 @@ public class Robot extends TimedRobot {
 
     SmartDashboard.putBoolean("Reset Encoders?", RobotMap.RESET_ARM_ENCODER);
 
-    if(Robot.oi.armLimitSwitch.get() == true)
+    //Using arm limit switch to reset encoders in case of skipping chains.
+    //If the limit switch returns true...
+    if(Robot.oi.armLimitSwitch.get() == false)
     {
+      //...and the reset flag is false...
       if(!RobotMap.RESET_ARM_ENCODER)
       {
-        //Reset the encoder and lock
+        //...reset the encoder and lock
         Robot.arm.armMotor.setSelectedSensorPosition(0);
         Robot.arm.armMotor.set(ControlMode.Position, 0);
 
         RobotMap.RESET_ARM_ENCODER = true;
       }
     }
-    else
+    else //if the limit switch moves away, make it reset the next time it comes down.
     {
       RobotMap.RESET_ARM_ENCODER = false;
     }
@@ -291,7 +295,7 @@ public class Robot extends TimedRobot {
    * LabVIEW Dashboard, remove all of the chooser code and uncomment the
    * getString code to get the auto name from the text box below the Gyro
    *
-   * <p>You can add additional auto modes by adding additional commands to the
+   * You can add additional auto modes by adding additional commands to the
    * chooser code above (like the commented example) or additional comparisons
    * to the switch structure below with additional strings & commands.
    */
@@ -433,7 +437,7 @@ public class Robot extends TimedRobot {
           autonomousCommand = new AutoDefaultStraight();
         }
       }
-      else //Center starting position; may add some more options here in the future
+      else //Center starting position
       {
         if(myTarget.equals("Front"))
         {
@@ -465,7 +469,6 @@ public class Robot extends TimedRobot {
       }
     }
 
-    
     // schedule the autonomous command
     if (autonomousCommand != null) {
       autonomousCommand.start();

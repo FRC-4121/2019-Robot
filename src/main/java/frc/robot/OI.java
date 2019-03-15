@@ -45,12 +45,13 @@ public class OI {
 	//Define limit switches
 	public DigitalInput hatchLimitSwitch, hatchLoadedLimitSwitch, ballLimitSwitch, armLimitSwitch, climbTopLimitSwitch, climbBottomLimitSwitch;
 	private JoystickButton uberHatch;
+	private Button liftArmToFloor;
 	
 	public OI() {
 
 		//Initialize limit switches
 		hatchLimitSwitch = new DigitalInput(RobotMap.HATCH_DRIVE_LIMIT_SWITCH_ID);//default is true
-		hatchLoadedLimitSwitch = new DigitalInput(RobotMap.HATCH_LOADED_LIMIT_SWITCH_ID);//default is false
+		hatchLoadedLimitSwitch = new DigitalInput(RobotMap.HATCH_LOADED_LIMIT_SWITCH_ID);//default is true
 		ballLimitSwitch = new DigitalInput(RobotMap.BALL_LIMIT_SWITCH_ID);//default is false
 		armLimitSwitch = new DigitalInput(RobotMap.ARM_LIMIT_SWITCH_ID);
 		//climbTopLimitSwitch = new DigitalInput(RobotMap.CLIMB_TOP_LIMIT_SWITCH_ID);
@@ -91,10 +92,11 @@ public class OI {
 		//Lift arm related buttons
 		liftArmDown = new JoystickButton(rightJoy, 3);
 		liftArmUp = new JoystickButton(rightJoy, 4);
-		liftArmToHatchPickup = new JoystickButton(rightJoy, 10);
-		liftArmToHatchRelease = new JoystickButton(rightJoy, 12);
-		liftArmToBallPickupRelease = new JoystickButton(rightJoy, 8);
-		
+		liftArmToHatchPickup = new JoystickButton(rightJoy, 10); //'up' height
+		liftArmToHatchRelease = new JoystickButton(rightJoy, 12); //'down' height
+		liftArmToBallPickupRelease = new JoystickButton(rightJoy, 8); //height for loading station pickup and cargoship placement
+		liftArmToFloor = new JoystickButton(rightJoy, 11);
+
 		testIntake = new JoystickButton(rightJoy, 5);
 		testOuttake = new JoystickButton(rightJoy, 6);
 		
@@ -103,19 +105,18 @@ public class OI {
 		//testClimbDrive = new JoystickButton(rightJoy, 9);
 
 
-		hatchPickup = new JoystickButton(rightJoy, 11);
-		hatchPlace = new JoystickButton(rightJoy, 9);
-		uberHatch = new JoystickButton(rightJoy, 7);
+		hatchPickup = new JoystickButton(rightJoy, 9);
+		hatchPlace = new JoystickButton(rightJoy, 7);
+		//uberHatch = new JoystickButton(rightJoy, 0);
 		
-		//autonomousHab = new JoystickButton(rightJoy, 7);
-
 		//Configure Joystick button commands
 		killAutoCommand.whenPressed(new AutoAssistToggleKill());
 		changeDriveSpeed.whenPressed(new ChangeTeleopSpeed());
 
-		testIntake.whenPressed(new TakeInBall());
+		//Intake actions
+		testIntake.whileHeld(new TakeInBall());
 		testIntake.whenReleased(new StopIntake());
-		testOuttake.whenPressed(new ShootOutBall(2.0));
+		testOuttake.whileHeld(new ShootOutBall(0));
 		testOuttake.whenReleased(new StopIntake());
 
 		//Lift arm related actions
@@ -126,15 +127,14 @@ public class OI {
 		liftArmToHatchPickup.whenPressed(new ArmToPositionCommand(RobotMap.hatchPickupLevel1Revs));
 		liftArmToHatchRelease.whenPressed(new ArmToPositionCommand(RobotMap.hatchReleaseLevel1Revs));
 		liftArmToBallPickupRelease.whenPressed(new ArmToPositionCommand(RobotMap.cargoBallReleaseRevs));
+		liftArmToFloor.whenPressed(new ArmToPositionCommand(RobotMap.floorRevs));
 		
 		//testClimbUp.whileHeld(new TestClimbUp());
 		//testClimbUp.whenReleased(new StopClimb());
 
 		hatchPickup.whenPressed(new AutoAssistHatchPickup());
 		hatchPlace.whenPressed(new AutoAssistHatchPlace());
-		uberHatch.whenPressed(new AutoAssistHatch(10));
-
-		//autonomousHab.whenPressed(new AutoDriveOffHab());
+		//uberHatch.whenPressed(new AutoAssistHatch(10));
 
 		//testClimbDown.whileHeld(new TestClimbDown());
 		//testClimbDown.whenReleased(new StopClimb());

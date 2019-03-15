@@ -35,7 +35,7 @@ public class ArmLiftSubsystem extends Subsystem {
     armMotor.configNominalOutputForward(0, RobotMap.kTimeoutMs);
 		armMotor.configNominalOutputReverse(0, RobotMap.kTimeoutMs);
 		armMotor.configPeakOutputForward(.65, RobotMap.kTimeoutMs);
-    armMotor.configPeakOutputReverse(-.65, RobotMap.kTimeoutMs);
+    armMotor.configPeakOutputReverse(-.35, RobotMap.kTimeoutMs);
 
     armMotor.configAllowableClosedloopError(RobotMap.kPIDLoopIdx, 1, RobotMap.kTimeoutMs);
   

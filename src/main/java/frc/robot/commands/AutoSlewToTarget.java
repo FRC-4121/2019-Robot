@@ -120,7 +120,8 @@ public class AutoSlewToTarget extends Command {
         if(stopTime <= timer.get() - startTime)
         {
           //Too much time has elapsed.  Stop this command.
-          thereYet = true; 		
+          thereYet = true;
+           		
         }
         else
         {
