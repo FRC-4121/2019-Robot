@@ -11,6 +11,7 @@ import com.ctre.phoenix.motorcontrol.ControlMode;
 
 import edu.wpi.first.wpilibj.command.Command;
 import frc.robot.Robot;
+import frc.robot.RobotMap;
 
 public class ArmToHatchLimitSwitch extends Command {
 
@@ -42,7 +43,16 @@ public class ArmToHatchLimitSwitch extends Command {
 
     boolean thereYet = false;
 
-    if (!Robot.oi.hatchLoadedLimitSwitch.get() == true)
+    if(RobotMap.KILL_AUTO_COMMAND)
+    {
+      thereYet = true;
+
+      //Lock the arm to the stopped height.
+      int encoderPosition = Robot.arm.armMotor.getSelectedSensorPosition();
+      Robot.arm.armMotor.set(ControlMode.Position, encoderPosition);
+    }
+
+    else if (!Robot.oi.hatchLoadedLimitSwitch.get() == true)
     {
       thereYet = true;
 

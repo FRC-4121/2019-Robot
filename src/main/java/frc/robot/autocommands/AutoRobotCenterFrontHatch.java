@@ -18,9 +18,9 @@ public class AutoRobotCenterFrontHatch extends CommandGroup {
   public AutoRobotCenterFrontHatch() {
     
     addSequential(new ArmToPositionCommand(RobotMap.hatchReleaseLevel1Revs));
-    addSequential(new AutoDrive(90, 0, .5, 0.3));
-    addSequential(new AutoDrive(90, 0, 2.2, .6));
-    addSequential(new AutoSlewToTarget(0, 0.7, 1));
+    addSequential(new AutoDrive(90, 0, .5, .7));
+    addSequential(new AutoDrive(90, 0, 1.9, .8));
+    addSequential(new AutoSlewToTarget(0, 0.7, 1));//maybe comment this out and place robot more specifically
     addSequential(new AutoAssistHatchPlace());
   }
 }

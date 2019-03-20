@@ -23,8 +23,8 @@ public class AutoRobotLeftLevel2FrontHatch extends CommandGroup {
   public AutoRobotLeftLevel2FrontHatch() {
     
     addSequential(new ArmToPositionCommand(RobotMap.hatchReleaseLevel1Revs));
-    addSequential(new AutoDrive(90, 0, 1.5, 0.3));
-    addSequential(new AutoDrive(90, 0, 2.0, .6));
+    addSequential(new AutoDrive(90, 0, 2.25, .9));
+    //addSequential(new AutoDrive(90, 0, 1.5, .6));
     addSequential(new AutoSlewToTarget(20, 0.7, 5.0));
     addSequential(new AutoAssistHatchPlace());
     

@@ -52,7 +52,6 @@ public class OI {
 		//Initialize limit switches
 		hatchLimitSwitch = new DigitalInput(RobotMap.HATCH_DRIVE_LIMIT_SWITCH_ID);//default is true
 		hatchLoadedLimitSwitch = new DigitalInput(RobotMap.HATCH_LOADED_LIMIT_SWITCH_ID);//default is true
-		ballLimitSwitch = new DigitalInput(RobotMap.BALL_LIMIT_SWITCH_ID);//default is false
 		armLimitSwitch = new DigitalInput(RobotMap.ARM_LIMIT_SWITCH_ID);
 		//climbTopLimitSwitch = new DigitalInput(RobotMap.CLIMB_TOP_LIMIT_SWITCH_ID);
 		//climbBottomLimitSwitch = new DigitalInput(RobotMap.CLIMB_BOTTOM_LIMIT_SWITCH_ID);

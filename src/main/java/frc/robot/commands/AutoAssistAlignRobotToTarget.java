@@ -20,7 +20,7 @@ public class AutoAssistAlignRobotToTarget extends Command {
   
   //Declare class level variables
   double offsetTolerance = .25;
-  double cameraOffset = -1.25;
+  double cameraOffset = 1.25;
   boolean visionFound;
   double visionOffset;
 

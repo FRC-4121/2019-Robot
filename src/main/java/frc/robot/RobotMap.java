@@ -39,21 +39,21 @@ public class RobotMap {
 
 	//Limit switch ids
 	public static final int HATCH_DRIVE_LIMIT_SWITCH_ID = 1;
-	public static final int BALL_LIMIT_SWITCH_ID = 2;
+	//public static final int BALL_LIMIT_SWITCH_ID = 2;
 	//public static final int CLIMB_TOP_LIMIT_SWITCH_ID = 4;
-	public static final int ARM_LIMIT_SWITCH_ID = 3;
+	public static final int ARM_LIMIT_SWITCH_ID = 2;
 	//public static final int CLIMB_BOTTOM_LIMIT_SWITCH_ID = 3;
 	public static final int HATCH_LOADED_LIMIT_SWITCH_ID = 0;
 
 
 	//Speed multiplier for more accurate driving in mecanum
-	public static final double MECANUM_MULTIPLIER = 0.5;
+	//public static final double MECANUM_MULTIPLIER = 0.5;
 
 	//Motor speeds
-	public static final double AUTO_DRIVE_SPEED = 0.8;
-	public static double DRIVE_SPEED = 0.65;
+	public static final double AUTO_DRIVE_SPEED = 0.85;
+	public static double DRIVE_SPEED = 1.0;
 	public static final double DRIVE_SPEED_FAST = 1.0;
-	public static final double DRIVE_SPEED_SLOW = 0.25;
+	public static final double DRIVE_SPEED_SLOW = 0.35;
 
 	public static final double INTAKE_SPEED = -0.4;
 	public static final double OUTTAKE_SPEED = 1.0;
@@ -92,11 +92,11 @@ public class RobotMap {
 
 
 	//Revolution variables for arm lift commands
-	public static final double floorRevs = 0.0;
-	public static final double hatchPickupLevel1Revs = .10;
-	public static final double hatchReleaseLevel1Revs = .07;
-	public static final double cargoBallReleaseRevs = 0.76;
-	public static final double armMaxRevs = 1.8;//hard stop
+	public static final double floorRevs = 0.04;
+	public static final double hatchPickupLevel1Revs = .14;
+	public static final double hatchReleaseLevel1Revs = .08;
+	public static final double cargoBallReleaseRevs = 0.825;
+	public static final double armMaxRevs = 1.0;//hard stop
 
 	//Testing variables
 	public static final double ARM_REVOLUTIONS = 20;

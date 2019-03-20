@@ -96,8 +96,8 @@ public class Robot extends TimedRobot {
   //Variables for auto logic
   public String myPosition;
   public String myTarget;
-  public String myStyle;
-  public String myGamePiece;
+  public String myStyle = "Sandstorm";
+  public String myGamePiece = "Hatch";
 
   //Declare driver camera variables
   public static CameraServer camServer;
@@ -173,6 +173,7 @@ public class Robot extends TimedRobot {
     }
     
     //Init other subsystems
+    drivetrain = new MecanumDriveTrain();
     arm = new ArmLiftSubsystem();
     end = new IntakeSubsystem();
     climber = new HabClimberSubsystem();
@@ -238,6 +239,7 @@ public class Robot extends TimedRobot {
 
     SmartDashboard.putNumber("Arm Current:", Robot.arm.armMotor.getOutputCurrent());
     SmartDashboard.putNumber("Climb Current:", Robot.climber.climbLift.getOutputCurrent());
+    //SmartDashboard.putNumber("Drive Current:", Robot.drivetrain.frontLeftMotor.getOutputCurrent());
     double encoderValue = (double) Robot.arm.armMotor.getSelectedSensorPosition();
 
     SmartDashboard.putNumber("Arm Encoder Value: ", encoderValue);
@@ -313,7 +315,7 @@ public class Robot extends TimedRobot {
     autonomousCommand = null;
 
     //Logic tree for choosing our auto program
-    if(myStyle.equals("Sandstorm"))
+    if(myStyle.equals("Sandstorm") || myStyle.equals(null))
     {
       autonomousCommand = null;
     } 
