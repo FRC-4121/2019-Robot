@@ -11,43 +11,18 @@ import com.ctre.phoenix.motorcontrol.can.WPI_TalonSRX;
 
 import edu.wpi.first.wpilibj.command.Subsystem;
 import frc.robot.RobotMap;
+import frc.robot.commands.DriveClimberWithJoystick;
 
-public class HabClimberSubsystem extends Subsystem {
+/**
+ * Add your docs here.
+ */
+public class ClimbDriveSubsystem extends Subsystem {
   
-  public WPI_TalonSRX climbLift = new WPI_TalonSRX(RobotMap.CLIMB_LIFT_ID);
-  //public WPI_TalonSRX climbDrive = new WPI_TalonSRX(RobotMap.CLIMB_DRIVE_ID);
+  public WPI_TalonSRX climbDrive = new WPI_TalonSRX(RobotMap.CLIMB_DRIVE_ID);
 
   @Override
   public void initDefaultCommand() {
-
-    //setDefaultCommand(new DriveClimberWithJoystick());
-  }
-
-  public void deployLift(boolean runUp){
     
-    if(runUp)
-    {
-      climbLift.set(RobotMap.CLIMB_LIFT_SPEED);
-    }
-    else
-    {
-      climbLift.set(-RobotMap.CLIMB_LIFT_SPEED);
-    }
+    setDefaultCommand(new DriveClimberWithJoystick());
   }
-
-  // public void driveWheels(){
-
-  //   climbDrive.set(RobotMap.CLIMB_DRIVE_SPEED);
-  // }
-
-  public void stopClimb(){
-
-    climbLift.set(RobotMap.STOP_SPEED);
-  }
-
-  // public void stopClimbDrive(){
-
-  //   climbDrive.set(RobotMap.STOP_SPEED);
-  // }
-
 }

@@ -38,7 +38,7 @@ public class MecanumDriveTrain extends GenericDriveTrain {
     
     //Set properties of drive
     mecanumDrive.setSafetyEnabled(false);	
-    mecanumDrive.setMaxOutput(0.8);
+    mecanumDrive.setMaxOutput(1.0);
     
     //Get joystick values and scale
     speedX = rightJoyX * RobotMap.DRIVE_SPEED;
@@ -60,6 +60,11 @@ public class MecanumDriveTrain extends GenericDriveTrain {
 
     SmartDashboard.putString("Gyro Angle", Double.toString(gyroAngle));
     SmartDashboard.putString("Gyro Yaw", Double.toString(Robot.gyroYaw.getDouble(0)));
+
+    SmartDashboard.putNumber("Front Left Drive", frontLeftMotor.getOutputCurrent());
+    SmartDashboard.putNumber("Back Left Drive", backLeftMotor.getOutputCurrent());
+    SmartDashboard.putNumber("Front Right Drive", frontRightMotor.getOutputCurrent());
+    SmartDashboard.putNumber("Back Right Drive", backRightMotor.getOutputCurrent());
   }
 
 
@@ -74,7 +79,7 @@ public class MecanumDriveTrain extends GenericDriveTrain {
 
     mecanumDrive.setSafetyEnabled(false);
 		
-		mecanumDrive.setMaxOutput(0.8);
+		mecanumDrive.setMaxOutput(1.0);
 
     mecanumDrive.drivePolar(speed, angle, rotation);
 

@@ -9,11 +9,12 @@ package frc.robot.commands;
 
 import edu.wpi.first.wpilibj.command.Command;
 import frc.robot.Robot;
+import frc.robot.RobotMap;
 
-public class StopClimb extends Command {
-  public StopClimb() {
+public class DriveClimberWithJoystick extends Command {
+  public DriveClimberWithJoystick() {
     
-    requires(Robot.climber);
+    requires(Robot.climbDrive);
   }
 
   // Called just before this Command runs the first time
@@ -25,13 +26,13 @@ public class StopClimb extends Command {
   @Override
   protected void execute() {
 
-    Robot.climber.stopClimb();
+    Robot.climbDrive.climbDrive.set(-Robot.oi.leftJoy.getY() * RobotMap.CLIMB_DRIVE_SPEED);
   }
 
   // Make this return true when this Command no longer needs to run execute()
   @Override
   protected boolean isFinished() {
-    return true;
+    return false;
   }
 
   // Called once after isFinished returns true

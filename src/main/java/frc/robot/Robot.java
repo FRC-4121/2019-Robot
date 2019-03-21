@@ -27,6 +27,7 @@ import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import frc.robot.autocommands.AutoDefaultStraight;
 
 import frc.robot.subsystems.ArmLiftSubsystem;
+import frc.robot.subsystems.ClimbDriveSubsystem;
 import frc.robot.subsystems.GenericDriveTrain;
 import frc.robot.subsystems.HabClimberSubsystem;
 import frc.robot.subsystems.IntakeSubsystem;
@@ -80,6 +81,7 @@ public class Robot extends TimedRobot {
   public static ArmLiftSubsystem arm;
   public static HabClimberSubsystem climber;
   public static IntakeSubsystem end;
+  public static ClimbDriveSubsystem climbDrive;
 
   //Declare sensors and control inputs
 	public static OI oi;
@@ -173,10 +175,10 @@ public class Robot extends TimedRobot {
     }
     
     //Init other subsystems
-    drivetrain = new MecanumDriveTrain();
     arm = new ArmLiftSubsystem();
     end = new IntakeSubsystem();
     climber = new HabClimberSubsystem();
+    climbDrive = new ClimbDriveSubsystem();
 		
     //Init output-input systems
     oi = new OI();
@@ -232,7 +234,7 @@ public class Robot extends TimedRobot {
 
     SmartDashboard.putBoolean("Hatch Drive Limit", Robot.oi.hatchLimitSwitch.get());
     SmartDashboard.putBoolean("Hatch Loaded Limit", Robot.oi.hatchLoadedLimitSwitch.get());
-    SmartDashboard.putBoolean("Ball Limit", Robot.oi.ballLimitSwitch.get());
+    //SmartDashboard.putBoolean("Ball Limit", Robot.oi.ballLimitSwitch.get());
     SmartDashboard.putBoolean("Arm Limit", Robot.oi.armLimitSwitch.get());
     //SmartDashboard.putBoolean("Climb Top Limit", Robot.oi.climbTopLimitSwitch.get());
     //SmartDashboard.putBoolean("Climb Bottom Limit", Robot.oi.climbBottomLimitSwitch.get());

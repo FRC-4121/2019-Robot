@@ -22,8 +22,8 @@ public class RobotMap {
 	public static final int FRONT_RIGHT_MOTOR_ID = 0;
 
 	//Motor Controller Constants - Mechanism Talons
-	public static final int CLIMB_LIFT_ID = 7;
-	public static final int CLIMB_DRIVE_ID = 6;
+	public static final int CLIMB_LIFT_ID = 6;
+	public static final int CLIMB_DRIVE_ID = 7;
 	public static final int INTAKE_MOTOR_ID = 2;
 	public static final int ARM_MOTOR_ID = 3;
 	
@@ -53,16 +53,16 @@ public class RobotMap {
 	public static final double AUTO_DRIVE_SPEED = 0.85;
 	public static double DRIVE_SPEED = 1.0;
 	public static final double DRIVE_SPEED_FAST = 1.0;
-	public static final double DRIVE_SPEED_SLOW = 0.35;
+	public static final double DRIVE_SPEED_SLOW = 0.5;
 
 	public static final double INTAKE_SPEED = -0.4;
 	public static final double OUTTAKE_SPEED = 1.0;
 
 	public static final double ARM_SPEED_UP = 0.5;
-	public static final double ARM_SPEED_DOWN = -0.1;
+	public static final double ARM_SPEED_DOWN = -1;//-0.1;//slow speed commented out for climb testing.  Do not use normally!!!
 
 	public static final double CLIMB_LIFT_SPEED = 0.75;
-	public static final double CLIMB_DRIVE_SPEED = 0.75;
+	public static final double CLIMB_DRIVE_SPEED = 1;
 
 	public static final double STOP_SPEED = 0;
 

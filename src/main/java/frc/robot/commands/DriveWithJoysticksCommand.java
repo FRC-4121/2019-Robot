@@ -20,6 +20,7 @@ public class DriveWithJoysticksCommand extends Command {
   double gyroAngle;
   double robotAngle;
   double joystickDeadband = 0.05;
+  double rotationDeadband = .15;
   double lastJoystickX = 0.0;
   double lastJoystickY = 0.0;
   double lastJoystickZ = 0.0;
@@ -60,8 +61,14 @@ public class DriveWithJoysticksCommand extends Command {
     {
 
       //Drive normally
-      Robot.drivetrain.drive(-Robot.oi.rightJoy.getY(), Robot.oi.rightJoy.getX(), Robot.oi.rightJoy.getZ(), false);
-
+      if(Math.abs(Robot.oi.rightJoy.getZ()) > rotationDeadband)
+      {
+        Robot.drivetrain.drive(-Robot.oi.rightJoy.getY(), Robot.oi.rightJoy.getX(), Robot.oi.rightJoy.getZ(), false);
+      }
+      else
+      {
+        Robot.drivetrain.drive(-Robot.oi.rightJoy.getY(), Robot.oi.rightJoy.getX(), 0, false);
+      }
     }
     else
     {

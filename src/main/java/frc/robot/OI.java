@@ -59,8 +59,8 @@ public class OI {
 		//Joystick Configuration
 
 		//Create new joystick objects
-		//leftJoy = new Joystick(0); //Only needed for WCD
-		rightJoy = new Joystick(0);
+		leftJoy = new Joystick(0); //Drive: WCD, 2019: climber control
+		rightJoy = new Joystick(1);
 
 		/* Joystick Button Layout
 		 * 1: Trigger
@@ -99,8 +99,8 @@ public class OI {
 		testIntake = new JoystickButton(rightJoy, 5);
 		testOuttake = new JoystickButton(rightJoy, 6);
 		
-		//testClimbUp = new JoystickButton(rightJoy, 7);
-		//testClimbDown = new JoystickButton(rightJoy, 8);
+		testClimbUp = new JoystickButton(leftJoy, 4);
+		testClimbDown = new JoystickButton(leftJoy, 3);
 		//testClimbDrive = new JoystickButton(rightJoy, 9);
 
 
@@ -128,15 +128,15 @@ public class OI {
 		liftArmToBallPickupRelease.whenPressed(new ArmToPositionCommand(RobotMap.cargoBallReleaseRevs));
 		liftArmToFloor.whenPressed(new ArmToPositionCommand(RobotMap.floorRevs));
 		
-		//testClimbUp.whileHeld(new TestClimbUp());
-		//testClimbUp.whenReleased(new StopClimb());
+		testClimbUp.whileHeld(new TestClimbUp());
+		testClimbUp.whenReleased(new StopClimb());
 
 		hatchPickup.whenPressed(new AutoAssistHatchPickup());
 		hatchPlace.whenPressed(new AutoAssistHatchPlace());
 		//uberHatch.whenPressed(new AutoAssistHatch(10));
 
-		//testClimbDown.whileHeld(new TestClimbDown());
-		//testClimbDown.whenReleased(new StopClimb());
+		testClimbDown.whileHeld(new TestClimbDown());
+		testClimbDown.whenReleased(new StopClimb());
 		//testClimbDrive.whileHeld(new TestClimbDrive());
 		//testClimbDrive.whenReleased(new StopClimb());
 	
