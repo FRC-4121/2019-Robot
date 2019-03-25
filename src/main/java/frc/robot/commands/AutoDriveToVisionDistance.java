@@ -82,16 +82,16 @@ public class AutoDriveToVisionDistance extends Command {
       {
         if (gyroAngle >= 0 && gyroAngle < 179.5)
         {
-          angleCorrection = pidControl.Run(gyroAngle, 180.0);
+          angleCorrection = pidControl.Run(gyroAngle, 180.0, 2);
         }
         else if(gyroAngle <= 0 && gyroAngle > -179.5)
         {
-          angleCorrection = pidControl.Run(gyroAngle, -180.0);
+          angleCorrection = pidControl.Run(gyroAngle, -180.0, 2);
         }
       }
       else
       {
-        angleCorrection = pidControl.Run(gyroAngle, robotAngle);
+        angleCorrection = pidControl.Run(gyroAngle, robotAngle, 2);
       }
     }
     

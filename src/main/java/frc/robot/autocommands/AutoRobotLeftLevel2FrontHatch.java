@@ -22,7 +22,7 @@ public class AutoRobotLeftLevel2FrontHatch extends CommandGroup {
    */
   public AutoRobotLeftLevel2FrontHatch() {
     
-    addSequential(new ArmToPositionCommand(RobotMap.hatchReleaseLevel1Revs));
+    addSequential(new ArmToPositionCommand(RobotMap.floorRevs));
     addSequential(new AutoDrive(90, 0, 2.25, .9));
     //addSequential(new AutoDrive(90, 0, 1.5, .6));
     addSequential(new AutoSlewToTarget(20, 0.7, 5.0));

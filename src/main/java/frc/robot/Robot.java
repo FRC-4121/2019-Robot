@@ -7,11 +7,7 @@
 
 package frc.robot;
 
-import javax.lang.model.util.ElementScanner6;
-
 import com.ctre.phoenix.motorcontrol.ControlMode;
-
-import frc.robot.autocommands.*;
 
 import edu.wpi.cscore.UsbCamera;
 import edu.wpi.first.cameraserver.CameraServer;
@@ -19,17 +15,26 @@ import edu.wpi.first.networktables.NetworkTable;
 import edu.wpi.first.networktables.NetworkTableEntry;
 import edu.wpi.first.networktables.NetworkTableInstance;
 import edu.wpi.first.wpilibj.TimedRobot;
-import edu.wpi.first.wpilibj.Timer;
 import edu.wpi.first.wpilibj.command.Command;
 import edu.wpi.first.wpilibj.command.Scheduler;
 import edu.wpi.first.wpilibj.smartdashboard.SendableChooser;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import frc.robot.autocommands.AutoDefaultStraight;
-
+import frc.robot.autocommands.AutoRobotCenterFrontHatch;
+import frc.robot.autocommands.AutoRobotLeftLevel1FrontHatch;
+import frc.robot.autocommands.AutoRobotLeftLevel1SideBall;
+import frc.robot.autocommands.AutoRobotLeftLevel1SideHatch;
+import frc.robot.autocommands.AutoRobotLeftLevel2FrontHatch;
+import frc.robot.autocommands.AutoRobotLeftLevel2SideBall;
+import frc.robot.autocommands.AutoRobotLeftLevel2SideHatch;
+import frc.robot.autocommands.AutoRobotRightLevel1FrontHatch;
+import frc.robot.autocommands.AutoRobotRightLevel1SideBall;
+import frc.robot.autocommands.AutoRobotRightLevel1SideHatch;
+import frc.robot.autocommands.AutoRobotRightLevel2FrontHatch;
+import frc.robot.autocommands.AutoRobotRightLevel2SideBall;
+import frc.robot.autocommands.AutoRobotRightLevel2SideHatch;
 import frc.robot.subsystems.ArmLiftSubsystem;
-import frc.robot.subsystems.ClimbDriveSubsystem;
 import frc.robot.subsystems.GenericDriveTrain;
-import frc.robot.subsystems.HabClimberSubsystem;
 import frc.robot.subsystems.IntakeSubsystem;
 import frc.robot.subsystems.MecanumDriveTrain;
 import frc.robot.subsystems.WestCoastDriveTrain;
@@ -79,9 +84,7 @@ public class Robot extends TimedRobot {
   //Declare subsystems
   public static GenericDriveTrain drivetrain;
   public static ArmLiftSubsystem arm;
-  public static HabClimberSubsystem climber;
   public static IntakeSubsystem end;
-  public static ClimbDriveSubsystem climbDrive;
 
   //Declare sensors and control inputs
 	public static OI oi;
@@ -177,8 +180,6 @@ public class Robot extends TimedRobot {
     //Init other subsystems
     arm = new ArmLiftSubsystem();
     end = new IntakeSubsystem();
-    climber = new HabClimberSubsystem();
-    climbDrive = new ClimbDriveSubsystem();
 		
     //Init output-input systems
     oi = new OI();
@@ -232,16 +233,11 @@ public class Robot extends TimedRobot {
   @Override
   public void robotPeriodic() {
 
-    SmartDashboard.putBoolean("Hatch Drive Limit", Robot.oi.hatchLimitSwitch.get());
-    SmartDashboard.putBoolean("Hatch Loaded Limit", Robot.oi.hatchLoadedLimitSwitch.get());
-    //SmartDashboard.putBoolean("Ball Limit", Robot.oi.ballLimitSwitch.get());
+    SmartDashboard.putBoolean("Hatch Drive Limit", !Robot.oi.hatchLimitSwitch.get());
+    SmartDashboard.putBoolean("Hatch Loaded Limit", !Robot.oi.hatchLoadedLimitSwitch.get());
     SmartDashboard.putBoolean("Arm Limit", Robot.oi.armLimitSwitch.get());
-    //SmartDashboard.putBoolean("Climb Top Limit", Robot.oi.climbTopLimitSwitch.get());
-    //SmartDashboard.putBoolean("Climb Bottom Limit", Robot.oi.climbBottomLimitSwitch.get());
 
     SmartDashboard.putNumber("Arm Current:", Robot.arm.armMotor.getOutputCurrent());
-    SmartDashboard.putNumber("Climb Current:", Robot.climber.climbLift.getOutputCurrent());
-    //SmartDashboard.putNumber("Drive Current:", Robot.drivetrain.frontLeftMotor.getOutputCurrent());
     double encoderValue = (double) Robot.arm.armMotor.getSelectedSensorPosition();
 
     SmartDashboard.putNumber("Arm Encoder Value: ", encoderValue);
@@ -271,8 +267,6 @@ public class Robot extends TimedRobot {
       RobotMap.RESET_ARM_ENCODER = false;
     }
     
-    
-
   }
 
   /**
@@ -281,9 +275,7 @@ public class Robot extends TimedRobot {
    * the robot is disabled.
    */
   @Override
-  public void disabledInit() {
-
-  }
+  public void disabledInit() {}
 
 
   @Override
@@ -307,7 +299,6 @@ public class Robot extends TimedRobot {
   public void autonomousInit() {
     
     zeroGyro.setDouble(1.0);
-    //zeroDisplace.setDouble(1.0);
 
     myStyle = autoStyleChooser.getSelected();
     myPosition = autoPositionChooser.getSelected();

@@ -22,7 +22,7 @@ public class AutoAssistCargoBallPlace extends CommandGroup {
     addSequential(new AutoDriveToVisionDistance(90, RobotMap.VISION_TARGET_ANGLE, 26.0, 1.25, 0.3, true));
     addSequential(new ArmToPositionCommand(RobotMap.cargoBallReleaseRevs));
     addSequential(new ShootOutBall(1.25));
-    addSequential(new ArmToPositionCommand(RobotMap.hatchReleaseLevel1Revs));
+    addSequential(new ArmToPositionCommand(RobotMap.floorRevs));
     
   }
 }

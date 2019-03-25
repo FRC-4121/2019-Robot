@@ -33,22 +33,25 @@ public class PIDControl {
 
  
 	//Runs PID control calculations
-	public double Run(double sensorReading, double targetValue) {
+	public double Run(double sensorReading, double targetValue, double deadband) {
 		
 		//Reset correction factor
 		correctionFactor = 0;
 		
 		//Calculate current error
 		targetError = sensorReading - targetValue;
-		
-		//Calculate new correction
-		errorSum += (targetError * timeStep);
-		errorChange = (targetError - previousError) / timeStep;
-		correctionFactor = kP*targetError + kI*errorSum + kD*errorChange;
-		
+
+		if(Math.abs(targetError) > deadband)
+		{
+			//Calculate new correction
+			errorSum += (targetError * timeStep);
+			errorChange = (targetError - previousError) / timeStep;
+			correctionFactor = kP*targetError + kI*errorSum + kD*errorChange;
+		}
+
 		//Set previous error
 		previousError = targetError;
-		
+				
 		//Return correction factor
 		return correctionFactor;
 		

@@ -16,17 +16,12 @@ import frc.robot.commands.AutoAssistHatch;
 import frc.robot.commands.AutoAssistHatchPickup;
 import frc.robot.commands.AutoAssistHatchPlace;
 import frc.robot.commands.AutoAssistToggleKill;
-import frc.robot.commands.AutoDriveOffHab;
 import frc.robot.commands.ChangeTeleopSpeed;
 import frc.robot.commands.ShootOutBall;
 import frc.robot.commands.StopArm;
-import frc.robot.commands.StopClimb;
 import frc.robot.commands.StopIntake;
 import frc.robot.commands.TakeInBall;
 import frc.robot.commands.TestArmSpeedCommand;
-import frc.robot.commands.TestClimbDown;
-import frc.robot.commands.TestClimbDrive;
-import frc.robot.commands.TestClimbUp;
 
 
 /**
@@ -37,13 +32,12 @@ public class OI {
 
 	//Define joystick objects and joystick button functions
 	public Joystick leftJoy, rightJoy;
-	public Button changeDriveSpeed, killAutoCommand, liftArmUp, liftArmDown, liftArmToHatchPickup, liftArmToHatchRelease;
+	public Button changeDriveSpeed, killAutoCommand, liftArmUp, liftArmDown, liftArmToHatchPickup;
 	public Button hatchPickup, hatchPlace, autonomousHab, liftArmToBallPickupRelease;
-	public Button testClimbUp, testClimbDown, testIntake, testOuttake;
-	public Button testClimbDrive;
+	public Button testIntake, testOuttake;
 
 	//Define limit switches
-	public DigitalInput hatchLimitSwitch, hatchLoadedLimitSwitch, ballLimitSwitch, armLimitSwitch, climbTopLimitSwitch, climbBottomLimitSwitch;
+	public DigitalInput hatchLimitSwitch, hatchLoadedLimitSwitch, ballLimitSwitch, armLimitSwitch;
 	private JoystickButton uberHatch;
 	private Button liftArmToFloor;
 	
@@ -53,13 +47,11 @@ public class OI {
 		hatchLimitSwitch = new DigitalInput(RobotMap.HATCH_DRIVE_LIMIT_SWITCH_ID);//default is true
 		hatchLoadedLimitSwitch = new DigitalInput(RobotMap.HATCH_LOADED_LIMIT_SWITCH_ID);//default is true
 		armLimitSwitch = new DigitalInput(RobotMap.ARM_LIMIT_SWITCH_ID);
-		//climbTopLimitSwitch = new DigitalInput(RobotMap.CLIMB_TOP_LIMIT_SWITCH_ID);
-		//climbBottomLimitSwitch = new DigitalInput(RobotMap.CLIMB_BOTTOM_LIMIT_SWITCH_ID);
 
 		//Joystick Configuration
 
 		//Create new joystick objects
-		leftJoy = new Joystick(0); //Drive: WCD, 2019: climber control
+		//leftJoy = new Joystick(0);
 		rightJoy = new Joystick(1);
 
 		/* Joystick Button Layout
@@ -92,16 +84,12 @@ public class OI {
 		liftArmDown = new JoystickButton(rightJoy, 3);
 		liftArmUp = new JoystickButton(rightJoy, 4);
 		liftArmToHatchPickup = new JoystickButton(rightJoy, 10); //'up' height
-		liftArmToHatchRelease = new JoystickButton(rightJoy, 12); //'down' height
 		liftArmToBallPickupRelease = new JoystickButton(rightJoy, 8); //height for loading station pickup and cargoship placement
-		liftArmToFloor = new JoystickButton(rightJoy, 11);
+		liftArmToFloor = new JoystickButton(rightJoy, 12);
 
 		testIntake = new JoystickButton(rightJoy, 5);
 		testOuttake = new JoystickButton(rightJoy, 6);
 		
-		testClimbUp = new JoystickButton(leftJoy, 4);
-		testClimbDown = new JoystickButton(leftJoy, 3);
-		//testClimbDrive = new JoystickButton(rightJoy, 9);
 
 
 		hatchPickup = new JoystickButton(rightJoy, 9);
@@ -124,21 +112,14 @@ public class OI {
 		liftArmUp.whenReleased(new StopArm());
 		liftArmDown.whenReleased(new StopArm());
 		liftArmToHatchPickup.whenPressed(new ArmToPositionCommand(RobotMap.hatchPickupLevel1Revs));
-		liftArmToHatchRelease.whenPressed(new ArmToPositionCommand(RobotMap.hatchReleaseLevel1Revs));
 		liftArmToBallPickupRelease.whenPressed(new ArmToPositionCommand(RobotMap.cargoBallReleaseRevs));
 		liftArmToFloor.whenPressed(new ArmToPositionCommand(RobotMap.floorRevs));
 		
-		testClimbUp.whileHeld(new TestClimbUp());
-		testClimbUp.whenReleased(new StopClimb());
 
 		hatchPickup.whenPressed(new AutoAssistHatchPickup());
 		hatchPlace.whenPressed(new AutoAssistHatchPlace());
 		//uberHatch.whenPressed(new AutoAssistHatch(10));
 
-		testClimbDown.whileHeld(new TestClimbDown());
-		testClimbDown.whenReleased(new StopClimb());
-		//testClimbDrive.whileHeld(new TestClimbDrive());
-		//testClimbDrive.whenReleased(new StopClimb());
 	
 	}
   

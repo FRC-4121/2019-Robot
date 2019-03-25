@@ -19,7 +19,7 @@ public class AutoDefaultStraight extends CommandGroup {
   public AutoDefaultStraight() {
     
     //Raise arm slightly and drive off hab. then drive straight for a little bit
-    addSequential(new ArmToPositionCommand(RobotMap.hatchReleaseLevel1Revs));
+    addSequential(new ArmToPositionCommand(RobotMap.floorRevs));
     addSequential(new AutoDrive(90, 0, 1.5, 0.3));
     addSequential(new AutoDrive(90, 0, 1, 0.625));
   }

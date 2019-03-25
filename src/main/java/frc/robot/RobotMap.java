@@ -22,8 +22,6 @@ public class RobotMap {
 	public static final int FRONT_RIGHT_MOTOR_ID = 0;
 
 	//Motor Controller Constants - Mechanism Talons
-	public static final int CLIMB_LIFT_ID = 6;
-	public static final int CLIMB_DRIVE_ID = 7;
 	public static final int INTAKE_MOTOR_ID = 2;
 	public static final int ARM_MOTOR_ID = 3;
 	
@@ -39,15 +37,12 @@ public class RobotMap {
 
 	//Limit switch ids
 	public static final int HATCH_DRIVE_LIMIT_SWITCH_ID = 1;
-	//public static final int BALL_LIMIT_SWITCH_ID = 2;
-	//public static final int CLIMB_TOP_LIMIT_SWITCH_ID = 4;
 	public static final int ARM_LIMIT_SWITCH_ID = 2;
-	//public static final int CLIMB_BOTTOM_LIMIT_SWITCH_ID = 3;
 	public static final int HATCH_LOADED_LIMIT_SWITCH_ID = 0;
 
 
 	//Speed multiplier for more accurate driving in mecanum
-	//public static final double MECANUM_MULTIPLIER = 0.5;
+	public static final double MECANUM_TURN_MULTIPLIER = 0.5;
 
 	//Motor speeds
 	public static final double AUTO_DRIVE_SPEED = 0.85;
@@ -59,10 +54,7 @@ public class RobotMap {
 	public static final double OUTTAKE_SPEED = 1.0;
 
 	public static final double ARM_SPEED_UP = 0.5;
-	public static final double ARM_SPEED_DOWN = -1;//-0.1;//slow speed commented out for climb testing.  Do not use normally!!!
-
-	public static final double CLIMB_LIFT_SPEED = 0.75;
-	public static final double CLIMB_DRIVE_SPEED = 1;
+	public static final double ARM_SPEED_DOWN = -0.1;
 
 	public static final double STOP_SPEED = 0;
 
@@ -78,10 +70,13 @@ public class RobotMap {
 
 	//PID values for mecanum
 	public static final double kP_Straight = 0.05;
-	public static final double kP_Turn = 0.05;
+	public static final double kP_Slew = .275;
+	public static final double kP_Turn = 0.1;
 	public static final double kI_Straight = 0.0;
+	public static final double kI_Slew = 0.0;
 	public static final double kI_Turn = 0.0;
 	public static final double kD_Straight = 0.004;
+	public static final double kD_Slew = 0.02;
 	public static final double kD_Turn = 0.004;
 
 	//PID values for arm lift motor control
@@ -92,11 +87,10 @@ public class RobotMap {
 
 
 	//Revolution variables for arm lift commands
-	public static final double floorRevs = 0.04;
+	public static final double floorRevs = 0.00;
 	public static final double hatchPickupLevel1Revs = .14;
-	public static final double hatchReleaseLevel1Revs = .08;
-	public static final double cargoBallReleaseRevs = 0.825;
-	public static final double armMaxRevs = 1.0;//hard stop
+	public static final double cargoBallReleaseRevs = 0.725;
+	public static final double armMaxRevs = .85;//hard stop
 
 	//Testing variables
 	public static final double ARM_REVOLUTIONS = 20;

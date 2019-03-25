@@ -19,8 +19,8 @@ import frc.robot.extraClasses.VisionUtilities;
 public class AutoAssistAlignRobotToTarget extends Command {
   
   //Declare class level variables
-  double offsetTolerance = .25;
-  double cameraOffset = 1.25;
+  double offsetTolerance = .15;
+  double cameraOffset = 0;
   boolean visionFound;
   double visionOffset;
 
@@ -50,7 +50,7 @@ public class AutoAssistAlignRobotToTarget extends Command {
 
     //Set up PID control
     pidControl = new PIDControl(RobotMap.kP_Turn, RobotMap.kI_Turn, RobotMap.kD_Turn);
-    pidControlAlign = new PIDControl(RobotMap.kP_Straight, RobotMap.kI_Straight, RobotMap.kD_Straight);
+    pidControlAlign = new PIDControl(RobotMap.kP_Slew, RobotMap.kI_Slew, RobotMap.kD_Slew);
 
   }
 
@@ -58,7 +58,7 @@ public class AutoAssistAlignRobotToTarget extends Command {
   @Override
   protected void initialize() {
 
-    stopTime = 10;
+    stopTime = 5;
 
     if(stopTime != 0)
     {
@@ -109,20 +109,24 @@ public class AutoAssistAlignRobotToTarget extends Command {
         {
           if (gyroAngle >= 0 && gyroAngle < 179.5)
           {
-            angleCorrection = pidControl.Run(gyroAngle, 180.0);
+            angleCorrection = pidControl.Run(gyroAngle, 180.0, 2);
           }
           else if(gyroAngle <= 0 && gyroAngle > -179.5)
           {
-            angleCorrection = pidControl.Run(gyroAngle, -180.0);
+            angleCorrection = pidControl.Run(gyroAngle, -180.0, 2);
           }
         }
         else
         {
-          angleCorrection = pidControl.Run(gyroAngle, robotAngle);
+          angleCorrection = pidControl.Run(gyroAngle, robotAngle, 2);
         }
 
+        //speedCorrection = pidControlAlign.Run(Math.abs(visionOffset), 0);
+        speedCorrection = 1;
+        SmartDashboard.putNumber("Align Correction: ", speedCorrection);
+
         //possibly substitute driveAngle with driveAngle - gyroAngle to allow for proper slewing
-        Robot.drivetrain.autoDrive(RobotMap.AUTO_DRIVE_SPEED * speedMultiplier, slewDirection, -angleCorrection*0.3);    	    	
+        Robot.drivetrain.autoDrive(speedCorrection * RobotMap.AUTO_DRIVE_SPEED * speedMultiplier, slewDirection, -angleCorrection*0.3);    	    	
     }
   }
 

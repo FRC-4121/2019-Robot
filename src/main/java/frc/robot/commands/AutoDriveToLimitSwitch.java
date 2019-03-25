@@ -30,7 +30,13 @@ public class AutoDriveToLimitSwitch extends Command {
   PIDControl pidControl;
   VisionUtilities visionUtilities;
 
-	public Timer timer = new Timer();
+  public Timer timer = new Timer();
+  public Timer limitTimer = new Timer();
+  private boolean limitStartTimeInit = false;
+  
+  boolean thereYet = false;
+
+  double limitStartTime = 0;
 
   //Default constructor
   public AutoDriveToLimitSwitch(double ang, double orientAng, double time, double speed, boolean useGyro){
@@ -52,6 +58,13 @@ public class AutoDriveToLimitSwitch extends Command {
   // Called just before this Command runs the first time
   @Override
   protected void initialize() {
+
+    boolean visionFound = Robot.foundVisionTarget.getBoolean(false);
+    if(!visionFound){
+
+      thereYet = true;
+
+    }
 
     if(stopTime != 0)
     {
@@ -82,21 +95,21 @@ public class AutoDriveToLimitSwitch extends Command {
       {
         if (gyroAngle >= 0 && gyroAngle < 179.5)
         {
-          angleCorrection = pidControl.Run(gyroAngle, 180.0);
+          angleCorrection = pidControl.Run(gyroAngle, 180.0, 2);
         }
         else if(gyroAngle <= 0 && gyroAngle > -179.5)
         {
-          angleCorrection = pidControl.Run(gyroAngle, -180.0);
+          angleCorrection = pidControl.Run(gyroAngle, -180.0, 2);
         }
       }
       else
       {
-        angleCorrection = pidControl.Run(gyroAngle, robotAngle);
+        angleCorrection = pidControl.Run(gyroAngle, robotAngle, 2);
       }
     }
-    
+
     //possibly substitute driveAngle with driveAngle - gyroAngle to allow for proper slewing
-    Robot.drivetrain.autoDrive(RobotMap.AUTO_DRIVE_SPEED * speedMultiplier, driveAngle, -angleCorrection*0.3);    	    	
+    Robot.drivetrain.autoDrive(RobotMap.AUTO_DRIVE_SPEED *speedMultiplier, driveAngle, -angleCorrection*0.3);    	    	
     
     SmartDashboard.putString("Angle Correction", Double.toString(angleCorrection));
     SmartDashboard.putString("Gyro Yaw", Double.toString(gyroAngle));
@@ -109,7 +122,7 @@ public class AutoDriveToLimitSwitch extends Command {
   protected boolean isFinished() {
 
     //Initialize return value
-    boolean thereYet = false;
+    thereYet = false;
  
     //Check for master kill switch
     if (RobotMap.KILL_AUTO_COMMAND == true)
@@ -124,7 +137,19 @@ public class AutoDriveToLimitSwitch extends Command {
       {
         if(!Robot.oi.hatchLimitSwitch.get() == true)
         {
-          thereYet= true;
+          if(limitStartTimeInit == false)
+          {
+            limitStartTime = limitTimer.get();
+            limitStartTimeInit = true;
+          }
+          
+          double limitTime = limitTimer.get();
+
+          if(limitTime - limitStartTime > 1)
+          {
+            thereYet = true;
+          }
+
         }
         else
         {

@@ -63,7 +63,7 @@ public class DriveWithJoysticksCommand extends Command {
       //Drive normally
       if(Math.abs(Robot.oi.rightJoy.getZ()) > rotationDeadband)
       {
-        Robot.drivetrain.drive(-Robot.oi.rightJoy.getY(), Robot.oi.rightJoy.getX(), Robot.oi.rightJoy.getZ(), false);
+        Robot.drivetrain.drive(-Robot.oi.rightJoy.getY(), Robot.oi.rightJoy.getX(), Robot.oi.rightJoy.getZ() * RobotMap.MECANUM_TURN_MULTIPLIER, false);
       }
       else
       {
@@ -101,16 +101,16 @@ public class DriveWithJoysticksCommand extends Command {
         {
             if (gyroAngle >= 0 && gyroAngle < 179.5)
             {
-               angleCorrection = pidControl.Run(gyroAngle, 180.0);
+               angleCorrection = pidControl.Run(gyroAngle, 180.0, 2);
             }
             else if(gyroAngle <= 0 && gyroAngle > -179.5)
             {
-                angleCorrection = pidControl.Run(gyroAngle, -180.0);
+                angleCorrection = pidControl.Run(gyroAngle, -180.0, 2);
             }
         }
         else
         {
-            angleCorrection = pidControl.Run(gyroAngle, robotAngle);
+            angleCorrection = pidControl.Run(gyroAngle, robotAngle, 2);
         }
 
         Robot.drivetrain.drive(-Robot.oi.rightJoy.getY(), Robot.oi.rightJoy.getX(), -angleCorrection*0.3, false);
