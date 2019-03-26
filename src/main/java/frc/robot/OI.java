@@ -12,6 +12,7 @@ import edu.wpi.first.wpilibj.Joystick;
 import edu.wpi.first.wpilibj.buttons.Button;
 import edu.wpi.first.wpilibj.buttons.JoystickButton;
 import frc.robot.commands.ArmToPositionCommand;
+import frc.robot.commands.AutoAssistCargoBallPlace;
 import frc.robot.commands.AutoAssistHatch;
 import frc.robot.commands.AutoAssistHatchPickup;
 import frc.robot.commands.AutoAssistHatchPlace;
@@ -34,7 +35,7 @@ public class OI {
 	public Joystick leftJoy, rightJoy;
 	public Button changeDriveSpeed, killAutoCommand, liftArmUp, liftArmDown, liftArmToHatchPickup;
 	public Button hatchPickup, hatchPlace, autonomousHab, liftArmToBallPickupRelease;
-	public Button testIntake, testOuttake;
+	public Button testIntake, testOuttake, cargoPlace;
 
 	//Define limit switches
 	public DigitalInput hatchLimitSwitch, hatchLoadedLimitSwitch, ballLimitSwitch, armLimitSwitch;
@@ -90,7 +91,7 @@ public class OI {
 		testIntake = new JoystickButton(rightJoy, 5);
 		testOuttake = new JoystickButton(rightJoy, 6);
 		
-
+		cargoPlace = new JoystickButton(rightJoy, 11);
 
 		hatchPickup = new JoystickButton(rightJoy, 9);
 		hatchPlace = new JoystickButton(rightJoy, 7);
@@ -115,6 +116,7 @@ public class OI {
 		liftArmToBallPickupRelease.whenPressed(new ArmToPositionCommand(RobotMap.cargoBallReleaseRevs));
 		liftArmToFloor.whenPressed(new ArmToPositionCommand(RobotMap.floorRevs));
 		
+		cargoPlace.whenPressed(new AutoAssistCargoBallPlace());
 
 		hatchPickup.whenPressed(new AutoAssistHatchPickup());
 		hatchPlace.whenPressed(new AutoAssistHatchPlace());

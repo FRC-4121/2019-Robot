@@ -47,7 +47,7 @@ public class ArmToPositionCommand extends Command {
     {
       thereYet = true;
     }
-    else if(Robot.oi.armLimitSwitch.get() == true)
+    else if(!Robot.oi.armLimitSwitch.get() == true)
     {
       thereYet = true;
     }

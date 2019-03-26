@@ -19,7 +19,7 @@ import frc.robot.extraClasses.VisionUtilities;
 public class AutoAssistAlignRobotToTarget extends Command {
   
   //Declare class level variables
-  double offsetTolerance = .15;
+  double offsetTolerance = .1;
   double cameraOffset = 0;
   boolean visionFound;
   double visionOffset;
@@ -58,7 +58,7 @@ public class AutoAssistAlignRobotToTarget extends Command {
   @Override
   protected void initialize() {
 
-    stopTime = 5;
+    stopTime = 1.5;
 
     if(stopTime != 0)
     {
@@ -109,24 +109,24 @@ public class AutoAssistAlignRobotToTarget extends Command {
         {
           if (gyroAngle >= 0 && gyroAngle < 179.5)
           {
-            angleCorrection = pidControl.Run(gyroAngle, 180.0, 2);
+            angleCorrection = pidControl.Run(gyroAngle, 180.0, 0.5);
           }
           else if(gyroAngle <= 0 && gyroAngle > -179.5)
           {
-            angleCorrection = pidControl.Run(gyroAngle, -180.0, 2);
+            angleCorrection = pidControl.Run(gyroAngle, -180.0, 0.5);
           }
         }
         else
         {
-          angleCorrection = pidControl.Run(gyroAngle, robotAngle, 2);
+          angleCorrection = pidControl.Run(gyroAngle, robotAngle, 0.5);
         }
 
-        //speedCorrection = pidControlAlign.Run(Math.abs(visionOffset), 0);
-        speedCorrection = 1;
+        speedCorrection = pidControlAlign.Run(Math.abs(visionOffset), 0, offsetTolerance);
+        //speedCorrection = 1;
         SmartDashboard.putNumber("Align Correction: ", speedCorrection);
 
         //possibly substitute driveAngle with driveAngle - gyroAngle to allow for proper slewing
-        Robot.drivetrain.autoDrive(speedCorrection * RobotMap.AUTO_DRIVE_SPEED * speedMultiplier, slewDirection, -angleCorrection*0.3);    	    	
+        Robot.drivetrain.autoDrive(speedCorrection * RobotMap.AUTO_DRIVE_SPEED * speedMultiplier, slewDirection, -angleCorrection*1);    	    	
     }
   }
 

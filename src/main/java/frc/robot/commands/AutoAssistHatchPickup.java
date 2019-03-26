@@ -18,13 +18,13 @@ public class AutoAssistHatchPickup extends CommandGroup {
   public AutoAssistHatchPickup() {
 
     addSequential(new AutoAssistFindAngle());
-    addSequential(new AutoRotate(RobotMap.VISION_TARGET_ANGLE, .5, 0.6, true));
-    addSequential(new AutoAssistAlignRobotToTarget(0.525));
-    // addSequential(new ArmToPositionCommand(RobotMap.floorRevs));
+    //addSequential(new AutoRotate(RobotMap.VISION_TARGET_ANGLE, .5, 0.6, true));
+    addSequential(new AutoAssistAlignRobotToTarget(0.51));
+    addSequential(new ArmToPositionCommand(RobotMap.floorRevs));
     addSequential(new AutoDriveToLimitSwitch(90, 180, 4, 0.25, true));
     //addSequential(new ArmToPositionCommand(RobotMap.hatchPickupLevel1Revs));
-    //addSequential(new ArmToHatchLimitSwitch());
-    //addSequential(new AutoDrive(-90, 180, 2.0, 0.25));
+    addSequential(new ArmToHatchLimitSwitch());
+    addSequential(new AutoDrive(-90, 180, 2.0, 0.25));
     
   }
 }

@@ -46,8 +46,8 @@ public class RobotMap {
 
 	//Motor speeds
 	public static final double AUTO_DRIVE_SPEED = 0.85;
-	public static double DRIVE_SPEED = 1.0;
-	public static final double DRIVE_SPEED_FAST = 1.0;
+	public static double DRIVE_SPEED = 0.85;
+	public static final double DRIVE_SPEED_FAST = 0.85;
 	public static final double DRIVE_SPEED_SLOW = 0.5;
 
 	public static final double INTAKE_SPEED = -0.4;
@@ -70,14 +70,14 @@ public class RobotMap {
 
 	//PID values for mecanum
 	public static final double kP_Straight = 0.05;
-	public static final double kP_Slew = .275;
-	public static final double kP_Turn = 0.1;
+	public static final double kP_Slew = .4;
+	public static final double kP_Turn = 0.06;
 	public static final double kI_Straight = 0.0;
 	public static final double kI_Slew = 0.0;
 	public static final double kI_Turn = 0.0;
 	public static final double kD_Straight = 0.004;
-	public static final double kD_Slew = 0.02;
-	public static final double kD_Turn = 0.004;
+	public static final double kD_Slew = 0.00;
+	public static final double kD_Turn = 0.02;
 
 	//PID values for arm lift motor control
 	public static final double kP_Arm = 10;
@@ -89,7 +89,7 @@ public class RobotMap {
 	//Revolution variables for arm lift commands
 	public static final double floorRevs = 0.00;
 	public static final double hatchPickupLevel1Revs = .14;
-	public static final double cargoBallReleaseRevs = 0.725;
+	public static final double cargoBallReleaseRevs = 0.82;
 	public static final double armMaxRevs = .85;//hard stop
 
 	//Testing variables

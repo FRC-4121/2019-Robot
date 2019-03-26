@@ -57,22 +57,24 @@ public class AutoDrive extends Command {
         
         gyroAngle = Robot.gyroYaw.getDouble(0);
 
+        robotAngle = RobotMap.VISION_TARGET_ANGLE;
+
         angleCorrection = 0.0;
         
         if (robotAngle == 180 || robotAngle == -180)
         {
             if (gyroAngle >= 0 && gyroAngle < 179.5)
             {
-                angleCorrection = pidControl.Run(gyroAngle, 180.0, 2);
+                angleCorrection = pidControl.Run(gyroAngle, 180.0, 0.5);
             }
             else if(gyroAngle <= 0 && gyroAngle > -179.5)
             {
-                angleCorrection = pidControl.Run(gyroAngle, -180.0, 2);
+                angleCorrection = pidControl.Run(gyroAngle, -180.0, 0.5);
             }
         }
         else
         {
-            angleCorrection = pidControl.Run(gyroAngle, robotAngle, 2);
+            angleCorrection = pidControl.Run(gyroAngle, robotAngle, 0.5);
         }
         
         //possibly substitute driveAngle with driveAngle - gyroAngle to allow for proper slewing

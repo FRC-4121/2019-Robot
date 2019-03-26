@@ -9,6 +9,7 @@ package frc.robot.commands;
 
 import com.ctre.phoenix.motorcontrol.ControlMode;
 
+import edu.wpi.first.wpilibj.Timer;
 import edu.wpi.first.wpilibj.command.Command;
 import frc.robot.Robot;
 import frc.robot.RobotMap;
@@ -16,17 +17,23 @@ import frc.robot.RobotMap;
 public class ArmToHatchLimitSwitch extends Command {
 
   //Declare variables
+  public Timer timer = new Timer();
+  double stopTime;
+  double startTime;
 
   //Default constructor
   public ArmToHatchLimitSwitch() {
 
     requires(Robot.arm);
 
+    stopTime = .5;
   }
 
   // Called just before this Command runs the first time
   @Override
   protected void initialize() {
+    
+    startTime = timer.get();
   }
 
   // Called repeatedly when this Command is scheduled to run
@@ -60,6 +67,13 @@ public class ArmToHatchLimitSwitch extends Command {
       int encoderPosition = Robot.arm.armMotor.getSelectedSensorPosition();
       Robot.arm.armMotor.set(ControlMode.Position, encoderPosition);
 
+    } else if(stopTime > timer.get() - startTime){
+      
+      thereYet = true;
+
+      //Lock the arm to the stopped height.
+      int encoderPosition = Robot.arm.armMotor.getSelectedSensorPosition();
+      Robot.arm.armMotor.set(ControlMode.Position, encoderPosition);
     }
 
     return thereYet;

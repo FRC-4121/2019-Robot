@@ -18,11 +18,13 @@ public class AutoAssistCargoBallPlace extends CommandGroup {
 
     addSequential(new AutoAssistFindAngle());
     //addSequential(new AutoRotate(RobotMap.VISION_TARGET_ANGLE, 2, 0.4, true));
-    addSequential(new AutoAssistAlignRobotToTarget(0.3));
-    addSequential(new AutoDriveToVisionDistance(90, RobotMap.VISION_TARGET_ANGLE, 26.0, 1.25, 0.3, true));
+    addSequential(new AutoAssistAlignRobotToTarget(0.51));
     addSequential(new ArmToPositionCommand(RobotMap.cargoBallReleaseRevs));
-    addSequential(new ShootOutBall(1.25));
-    addSequential(new ArmToPositionCommand(RobotMap.floorRevs));
+    addSequential(new AutoDriveToVisionDistance(90, RobotMap.VISION_TARGET_ANGLE, 26.0, 1.25, 0.3, true));
+    addSequential(new ShootOutBall(.25));
+    addSequential(new StopIntake());
+    addSequential(new AutoDrive(-90, RobotMap.VISION_TARGET_ANGLE, 1.0, 0.25));
+    //addSequential(new ArmToPositionCommand(RobotMap.floorRevs));
     
   }
 }

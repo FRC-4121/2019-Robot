@@ -7,6 +7,8 @@
 
 package frc.robot.subsystems;
 
+import com.ctre.phoenix.motorcontrol.NeutralMode;
+import com.ctre.phoenix.motorcontrol.can.TalonSRX;
 import com.ctre.phoenix.motorcontrol.can.WPI_TalonSRX;
 
 import edu.wpi.first.wpilibj.drive.MecanumDrive;
@@ -29,6 +31,7 @@ public class MecanumDriveTrain extends GenericDriveTrain {
   public WPI_TalonSRX backLeftMotor = new WPI_TalonSRX(RobotMap.BACK_LEFT_MOTOR_ID);
   public WPI_TalonSRX backRightMotor = new WPI_TalonSRX(RobotMap.BACK_RIGHT_MOTOR_ID);
 
+
   //Initialize mecanum drive
   MecanumDrive mecanumDrive = new MecanumDrive(frontLeftMotor, frontRightMotor, backLeftMotor, backRightMotor);
 
@@ -36,6 +39,11 @@ public class MecanumDriveTrain extends GenericDriveTrain {
   @Override
   public void drive(double rightJoyX, double rightJoyY, double rightJoyZ, boolean useGyro) {
     
+    frontLeftMotor.setNeutralMode(NeutralMode.Brake);
+    frontRightMotor.setNeutralMode(NeutralMode.Brake);
+    backLeftMotor.setNeutralMode(NeutralMode.Brake);
+    backRightMotor.setNeutralMode(NeutralMode.Brake);
+
     //Set properties of drive
     mecanumDrive.setSafetyEnabled(false);	
     mecanumDrive.setMaxOutput(1.0);
@@ -79,7 +87,7 @@ public class MecanumDriveTrain extends GenericDriveTrain {
 
     mecanumDrive.setSafetyEnabled(false);
 		
-		mecanumDrive.setMaxOutput(1.0);
+		mecanumDrive.setMaxOutput(0.85);
 
     mecanumDrive.drivePolar(speed, angle, rotation);
 

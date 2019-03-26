@@ -137,19 +137,7 @@ public class AutoDriveToLimitSwitch extends Command {
       {
         if(!Robot.oi.hatchLimitSwitch.get() == true)
         {
-          if(limitStartTimeInit == false)
-          {
-            limitStartTime = limitTimer.get();
-            limitStartTimeInit = true;
-          }
-          
-          double limitTime = limitTimer.get();
-
-          if(limitTime - limitStartTime > 1)
-          {
-            thereYet = true;
-          }
-
+          thereYet = true;
         }
         else
         {
