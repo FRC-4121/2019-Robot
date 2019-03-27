@@ -11,12 +11,12 @@ import edu.wpi.first.wpilibj.command.Command;
 import frc.robot.Robot;
 import frc.robot.RobotMap;
 
-public class TestArmSpeedCommand extends Command {
+public class ArmRunAtSpeed extends Command {
 
   public boolean armUp;
   boolean resetEncoders = false;
 
-  public TestArmSpeedCommand(boolean runUp) {
+  public ArmRunAtSpeed(boolean runUp) {
     
     requires(Robot.arm);
     armUp = runUp;

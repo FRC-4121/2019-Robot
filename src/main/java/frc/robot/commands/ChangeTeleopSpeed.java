@@ -32,10 +32,12 @@ public class ChangeTeleopSpeed extends Command {
     if (RobotMap.DRIVE_SPEED == RobotMap.DRIVE_SPEED_FAST)
     {
       RobotMap.DRIVE_SPEED = RobotMap.DRIVE_SPEED_SLOW;
+      RobotMap.TELEOP_SPEED = "Slow";
     }
     else
     {
       RobotMap.DRIVE_SPEED = RobotMap.DRIVE_SPEED_FAST;
+      RobotMap.TELEOP_SPEED = "Fast";
     }
     
   }

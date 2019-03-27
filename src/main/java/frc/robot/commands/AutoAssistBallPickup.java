@@ -13,6 +13,11 @@ import frc.robot.Robot;
 import frc.robot.RobotMap;
 import frc.robot.extraClasses.PIDControl;
 
+/*
+ * This command is designed to allow the robot to pick up a ball automatically.
+ * Defunct and unused - Jonas, 3/27
+ */
+
 public class AutoAssistBallPickup extends Command {
 
 	double stopTime;

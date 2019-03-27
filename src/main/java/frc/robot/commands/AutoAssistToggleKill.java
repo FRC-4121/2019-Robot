@@ -28,7 +28,6 @@ public class AutoAssistToggleKill extends Command {
 
     RobotMap.KILL_AUTO_COMMAND = !RobotMap.KILL_AUTO_COMMAND;
 
-    //Robot.arm.armMotor.setSelectedSensorPosition(0);
   }
 
   // Make this return true when this Command no longer needs to run execute()

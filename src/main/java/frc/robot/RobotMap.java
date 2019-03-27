@@ -40,7 +40,6 @@ public class RobotMap {
 	public static final int ARM_LIMIT_SWITCH_ID = 2;
 	public static final int HATCH_LOADED_LIMIT_SWITCH_ID = 0;
 
-
 	//Speed multiplier for more accurate driving in mecanum
 	public static final double MECANUM_TURN_MULTIPLIER = 0.5;
 
@@ -50,7 +49,7 @@ public class RobotMap {
 	public static final double DRIVE_SPEED_FAST = 0.85;
 	public static final double DRIVE_SPEED_SLOW = 0.5;
 
-	public static final double INTAKE_SPEED = -0.4;
+	public static final double INTAKE_SPEED = -0.8;
 	public static final double OUTTAKE_SPEED = 1.0;
 
 	public static final double ARM_SPEED_UP = 0.5;
@@ -90,14 +89,15 @@ public class RobotMap {
 	public static final double floorRevs = 0.00;
 	public static final double hatchPickupLevel1Revs = .14;
 	public static final double cargoBallReleaseRevs = 0.82;
-	public static final double armMaxRevs = .85;//hard stop
-
-	//Testing variables
-	public static final double ARM_REVOLUTIONS = 20;
+	public static final double rocket1BallRevs = .5;
+	public static final double rocket2BallRevs = 0;
+	public static final double rocket2HatchRevs = 0;
+	public static final double armMaxRevs = .88;//hard stop, probably wrong
 
 	//Extraneous variables
 	public static int DIRECTION_MULTIPLIER = -1;		//Invert drive direction (for WCD only)
 	public static boolean KILL_AUTO_COMMAND = false;	//Kill any autonomous or auto-assist commands
 	public static double VISION_TARGET_ANGLE = 0.0;		//Angle to current vision target
 	public static boolean RESET_ARM_ENCODER = false;
+	public static String TELEOP_SPEED = "Fast";
 }

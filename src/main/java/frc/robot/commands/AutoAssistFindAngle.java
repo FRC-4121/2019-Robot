@@ -12,6 +12,10 @@ import frc.robot.Robot;
 import frc.robot.RobotMap;
 import frc.robot.extraClasses.VisionUtilities;
 
+/**
+ * A wrapper class for the VisionUtilities angle-finder method
+ */
+
 public class AutoAssistFindAngle extends Command {
 
   VisionUtilities visionUtilities;

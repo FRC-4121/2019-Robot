@@ -17,22 +17,7 @@ import edu.wpi.first.networktables.NetworkTableInstance;
 import edu.wpi.first.wpilibj.TimedRobot;
 import edu.wpi.first.wpilibj.command.Command;
 import edu.wpi.first.wpilibj.command.Scheduler;
-import edu.wpi.first.wpilibj.smartdashboard.SendableChooser;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
-import frc.robot.autocommands.AutoDefaultStraight;
-import frc.robot.autocommands.AutoRobotCenterFrontHatch;
-import frc.robot.autocommands.AutoRobotLeftLevel1FrontHatch;
-import frc.robot.autocommands.AutoRobotLeftLevel1SideBall;
-import frc.robot.autocommands.AutoRobotLeftLevel1SideHatch;
-import frc.robot.autocommands.AutoRobotLeftLevel2FrontHatch;
-import frc.robot.autocommands.AutoRobotLeftLevel2SideBall;
-import frc.robot.autocommands.AutoRobotLeftLevel2SideHatch;
-import frc.robot.autocommands.AutoRobotRightLevel1FrontHatch;
-import frc.robot.autocommands.AutoRobotRightLevel1SideBall;
-import frc.robot.autocommands.AutoRobotRightLevel1SideHatch;
-import frc.robot.autocommands.AutoRobotRightLevel2FrontHatch;
-import frc.robot.autocommands.AutoRobotRightLevel2SideBall;
-import frc.robot.autocommands.AutoRobotRightLevel2SideHatch;
 import frc.robot.subsystems.ArmLiftSubsystem;
 import frc.robot.subsystems.GenericDriveTrain;
 import frc.robot.subsystems.IntakeSubsystem;
@@ -92,21 +77,23 @@ public class Robot extends TimedRobot {
 	//Declare commands
   private Command autonomousCommand;
   
-  //Declare Smart dashboard chooser
-  private SendableChooser<String> autoStyleChooser;
-  private SendableChooser<String> autoPositionChooser;
-  private SendableChooser<String> autoTargetChooser;
-  private SendableChooser<String> autoGamePieceChooser;
+  //Auto removed for 2019 season in order to stay out of our most-likely-teleoping teammates in sandstorm
+  // //Declare Smart dashboard chooser
+  // private SendableChooser<String> autoStyleChooser;
+  // private SendableChooser<String> autoPositionChooser;
+  // private SendableChooser<String> autoTargetChooser;
+  // private SendableChooser<String> autoGamePieceChooser;
   
   //Variables for auto logic
-  public String myPosition;
-  public String myTarget;
-  public String myStyle = "Sandstorm";
-  public String myGamePiece = "Hatch";
+  // public String myPosition;
+  // public String myTarget;
+  // public String myStyle = "Sandstorm";
+  // public String myGamePiece = "Hatch";
 
   //Declare driver camera variables
   public static CameraServer camServer;
   public static UsbCamera driverCamera;
+  public static UsbCamera ballCamera;
   
 	/**
    * This function is run when the robot is first started up and should be
@@ -185,39 +172,44 @@ public class Robot extends TimedRobot {
     oi = new OI();
 
     //Initialize dashboard choosers
-    autoPositionChooser = new SendableChooser<>();
-    autoStyleChooser = new SendableChooser<>();
-    autoTargetChooser = new SendableChooser<>();
-    autoGamePieceChooser = new SendableChooser<>();
+    // autoPositionChooser = new SendableChooser<>();
+    // autoStyleChooser = new SendableChooser<>();
+    // autoTargetChooser = new SendableChooser<>();
+    // autoGamePieceChooser = new SendableChooser<>();
 
-    autoPositionChooser.addOption("Left Level 1", "Left Level 1");
-    autoPositionChooser.addOption("Left Level 2", "Left Level 2");
-    autoPositionChooser.addOption("Center Level 1", "Center");
-    autoPositionChooser.addOption("Right Level 1", "Right Level 1");
-    autoPositionChooser.addOption("Right Level 2", "Right Level 2");
+    // autoPositionChooser.addOption("Left Level 1", "Left Level 1");
+    // autoPositionChooser.addOption("Left Level 2", "Left Level 2");
+    // autoPositionChooser.addOption("Center Level 1", "Center");
+    // autoPositionChooser.addOption("Right Level 1", "Right Level 1");
+    // autoPositionChooser.addOption("Right Level 2", "Right Level 2");
 
-    autoStyleChooser.setDefaultOption("Full Auto", "Auto");
-    autoStyleChooser.addOption("Driver Assist", "Sandstorm");
+    // autoStyleChooser.setDefaultOption("Full Auto", "Auto");
+    // autoStyleChooser.addOption("Driver Assist", "Sandstorm");
 
-    autoTargetChooser.setDefaultOption("Cargo Front", "Front");
-    //autoTargetChooser.addOption("Cargo Side", "Side");
-    autoTargetChooser.addOption("Straight", "Straight");
+    // autoTargetChooser.setDefaultOption("Cargo Front", "Front");
+    // //autoTargetChooser.addOption("Cargo Side", "Side");
+    // autoTargetChooser.addOption("Straight", "Straight");
 
-    autoGamePieceChooser.setDefaultOption("Hatch", "Hatch");
-    //autoGamePieceChooser.addOption("Hatch", "Hatch");
-    //autoGamePieceChooser.addOption("Ball", "Ball");
+    // autoGamePieceChooser.setDefaultOption("Hatch", "Hatch");
+    // //autoGamePieceChooser.addOption("Hatch", "Hatch");
+    // //autoGamePieceChooser.addOption("Ball", "Ball");
 
-    SmartDashboard.putData("Auto Side", autoPositionChooser);
-    SmartDashboard.putData("Auto Game Piece", autoGamePieceChooser);
-    SmartDashboard.putData("Auto Style", autoStyleChooser);
-    SmartDashboard.putData("Auto Target", autoTargetChooser);
+    // SmartDashboard.putData("Auto Side", autoPositionChooser);
+    // SmartDashboard.putData("Auto Game Piece", autoGamePieceChooser);
+    // SmartDashboard.putData("Auto Style", autoStyleChooser);
+    // SmartDashboard.putData("Auto Target", autoTargetChooser);
     
-    //Initialize and start driver camera
+    //Initialize and start driver and ball cameras
     camServer = CameraServer.getInstance();
-    driverCamera = camServer.startAutomaticCapture("Driver", 0);
+    driverCamera = camServer.startAutomaticCapture("Driver View", 1);
     driverCamera.setResolution(160, 120);
     driverCamera.setFPS(15);
     driverCamera.setBrightness(50);
+
+    ballCamera = camServer.startAutomaticCapture("Ball View", 0);
+    ballCamera.setResolution(160, 120);
+    ballCamera.setFPS(15);
+    ballCamera.setBrightness(50);
     
 	}
 
@@ -239,14 +231,14 @@ public class Robot extends TimedRobot {
 
     SmartDashboard.putNumber("Arm Current:", Robot.arm.armMotor.getOutputCurrent());
     double encoderValue = (double) Robot.arm.armMotor.getSelectedSensorPosition();
-
     SmartDashboard.putNumber("Arm Encoder Value: ", encoderValue);
     SmartDashboard.putNumber("Arm Rotations: ", encoderValue / 4096);
+    SmartDashboard.putBoolean("Reset Encoders?", RobotMap.RESET_ARM_ENCODER);
 
     SmartDashboard.putNumber("Target Angle: ", RobotMap.VISION_TARGET_ANGLE);
     SmartDashboard.putBoolean("Kill Auto?", RobotMap.KILL_AUTO_COMMAND);
 
-    SmartDashboard.putBoolean("Reset Encoders?", RobotMap.RESET_ARM_ENCODER);
+    SmartDashboard.putString("Gear", RobotMap.TELEOP_SPEED);
 
     //Using arm limit switch to reset encoders in case of skipping chains.
     //If the limit switch returns true...
@@ -300,174 +292,175 @@ public class Robot extends TimedRobot {
     
     zeroGyro.setDouble(1.0);
 
-    myStyle = autoStyleChooser.getSelected();
-    myPosition = autoPositionChooser.getSelected();
-    myGamePiece = autoGamePieceChooser.getSelected();
-    myTarget = autoTargetChooser.getSelected();
+    // myStyle = autoStyleChooser.getSelected();
+    // myPosition = autoPositionChooser.getSelected();
+    // myGamePiece = autoGamePieceChooser.getSelected();
+    // myTarget = autoTargetChooser.getSelected();
    
     autonomousCommand = null;
 
-    //Logic tree for choosing our auto program
-    if(myStyle.equals("Sandstorm") || myStyle.equals(null))
-    {
-      autonomousCommand = null;
-    } 
-    else 
-    {
-      if(myPosition.equals("Left Level 1"))
-      {
-        if(myTarget.equals("Front"))
-        {
-          if(myGamePiece.equals("Hatch"))
-          {
-            autonomousCommand = new AutoRobotLeftLevel1FrontHatch();
-          }
-          else
-          {
-            //Cannot do ball in cargo front position
-            autonomousCommand = new AutoDefaultStraight();
-          }
-        } 
-        else if(myTarget.equals("Side"))
-        {
-          if(myGamePiece.equals("Hatch"))
-          {
-            autonomousCommand = new AutoRobotLeftLevel1SideHatch();
-          }
-          else
-          {
-            autonomousCommand = new AutoRobotLeftLevel1SideBall();
-          }
-        }
-        else
-        {
-          autonomousCommand = new AutoDefaultStraight();
-        }
-      }
-      else if (myPosition.equals("Left Level 2"))
-      {
-        if(myTarget.equals("Front"))
-        {
-          if(myGamePiece.equals("Hatch"))
-          {
-            autonomousCommand = new AutoRobotLeftLevel2FrontHatch();
-          }
-          else
-          {
-            //Cannot do ball in cargo front position
-            autonomousCommand = new AutoDefaultStraight();
-          }
-        } 
-        else if(myTarget.equals("Side"))
-        {
-          if(myGamePiece.equals("Hatch"))
-          {
-            autonomousCommand = new AutoRobotLeftLevel2SideHatch();
-          }
-          else
-          {
-            autonomousCommand = new AutoRobotLeftLevel2SideBall();
-          }
-        }
-        else
-        {
-          autonomousCommand = new AutoDefaultStraight();
-        }
-      }
-      else if(myPosition.equals("Right Level 1"))
-      {
-        if(myTarget.equals("Front"))
-        {
-          if(myGamePiece.equals("Hatch"))
-          {
-            autonomousCommand = new AutoRobotRightLevel1FrontHatch();
-          }
-          else
-          {
-            autonomousCommand = new AutoDefaultStraight();
-          }
-        }
-        else if(myTarget.equals("Side"))
-        {
-          if(myGamePiece.equals("Hatch"))
-          {
-            autonomousCommand = new AutoRobotRightLevel1SideHatch();
-          }
-          else
-          {
-            autonomousCommand = new AutoRobotRightLevel1SideBall();
-          }
-        }
-        else
-        {
-          autonomousCommand = new AutoDefaultStraight();
-        }
-      }
-      else if(myPosition.equals("Right Level 2"))
-      {
-        if(myTarget.equals("Front"))
-        {
-          if(myGamePiece.equals("Hatch"))
-          {
-            autonomousCommand = new AutoRobotRightLevel2FrontHatch();
-          }
-          else
-          {
-            autonomousCommand = new AutoDefaultStraight();
-          }
-        }
-        else if(myTarget.equals("Side"))
-        {
-          if(myGamePiece.equals("Hatch"))
-          {
-            autonomousCommand = new AutoRobotRightLevel2SideHatch();
-          }
-          else
-          {
-            autonomousCommand = new AutoRobotRightLevel2SideBall();
-          }
-        }
-        else
-        {
-          autonomousCommand = new AutoDefaultStraight();
-        }
-      }
-      else //Center starting position
-      {
-        if(myTarget.equals("Front"))
-        {
-          if(myGamePiece.equals("Hatch"))
-          {
-            autonomousCommand = new AutoRobotCenterFrontHatch();
-          }
-          else
-          {
-            autonomousCommand = new frc.robot.autocommands.AutoDefaultStraight();
-          }
-        }
-        else if(myTarget.equals("Side"))
-        {
-          if(myGamePiece.equals("Hatch"))
-          {
-            //autonomousCommand = new AutoRobotCenterSideHatch();
-          }
-          else
-          {
-            //autonomousCommand = new AutoRobotCenterSideBall();
-          }
-        }
-        else
-        {
-          autonomousCommand = new AutoDefaultStraight();
-        }
+    //Logic tree for choosing our auto program, currently removed because true auto is not sufficiently
+    //advantageous this season.  We don't want to autonomously get in the way of our alliance teammates.
+    // if(myStyle.equals("Sandstorm") || myStyle.equals(null))
+    // {
+    //   autonomousCommand = null;
+    // } 
+    // else 
+    // {
+    //   if(myPosition.equals("Left Level 1"))
+    //   {
+    //     if(myTarget.equals("Front"))
+    //     {
+    //       if(myGamePiece.equals("Hatch"))
+    //       {
+    //         autonomousCommand = new AutoRobotLeftLevel1FrontHatch();
+    //       }
+    //       else
+    //       {
+    //         //Cannot do ball in cargo front position
+    //         autonomousCommand = new AutoDefaultStraight();
+    //       }
+    //     } 
+    //     else if(myTarget.equals("Side"))
+    //     {
+    //       if(myGamePiece.equals("Hatch"))
+    //       {
+    //         autonomousCommand = new AutoRobotLeftLevel1SideHatch();
+    //       }
+    //       else
+    //       {
+    //         autonomousCommand = new AutoRobotLeftLevel1SideBall();
+    //       }
+    //     }
+    //     else
+    //     {
+    //       autonomousCommand = new AutoDefaultStraight();
+    //     }
+    //   }
+    //   else if (myPosition.equals("Left Level 2"))
+    //   {
+    //     if(myTarget.equals("Front"))
+    //     {
+    //       if(myGamePiece.equals("Hatch"))
+    //       {
+    //         autonomousCommand = new AutoRobotLeftLevel2FrontHatch();
+    //       }
+    //       else
+    //       {
+    //         //Cannot do ball in cargo front position
+    //         autonomousCommand = new AutoDefaultStraight();
+    //       }
+    //     } 
+    //     else if(myTarget.equals("Side"))
+    //     {
+    //       if(myGamePiece.equals("Hatch"))
+    //       {
+    //         autonomousCommand = new AutoRobotLeftLevel2SideHatch();
+    //       }
+    //       else
+    //       {
+    //         autonomousCommand = new AutoRobotLeftLevel2SideBall();
+    //       }
+    //     }
+    //     else
+    //     {
+    //       autonomousCommand = new AutoDefaultStraight();
+    //     }
+    //   }
+    //   else if(myPosition.equals("Right Level 1"))
+    //   {
+    //     if(myTarget.equals("Front"))
+    //     {
+    //       if(myGamePiece.equals("Hatch"))
+    //       {
+    //         autonomousCommand = new AutoRobotRightLevel1FrontHatch();
+    //       }
+    //       else
+    //       {
+    //         autonomousCommand = new AutoDefaultStraight();
+    //       }
+    //     }
+    //     else if(myTarget.equals("Side"))
+    //     {
+    //       if(myGamePiece.equals("Hatch"))
+    //       {
+    //         autonomousCommand = new AutoRobotRightLevel1SideHatch();
+    //       }
+    //       else
+    //       {
+    //         autonomousCommand = new AutoRobotRightLevel1SideBall();
+    //       }
+    //     }
+    //     else
+    //     {
+    //       autonomousCommand = new AutoDefaultStraight();
+    //     }
+    //   }
+    //   else if(myPosition.equals("Right Level 2"))
+    //   {
+    //     if(myTarget.equals("Front"))
+    //     {
+    //       if(myGamePiece.equals("Hatch"))
+    //       {
+    //         autonomousCommand = new AutoRobotRightLevel2FrontHatch();
+    //       }
+    //       else
+    //       {
+    //         autonomousCommand = new AutoDefaultStraight();
+    //       }
+    //     }
+    //     else if(myTarget.equals("Side"))
+    //     {
+    //       if(myGamePiece.equals("Hatch"))
+    //       {
+    //         autonomousCommand = new AutoRobotRightLevel2SideHatch();
+    //       }
+    //       else
+    //       {
+    //         autonomousCommand = new AutoRobotRightLevel2SideBall();
+    //       }
+    //     }
+    //     else
+    //     {
+    //       autonomousCommand = new AutoDefaultStraight();
+    //     }
+    //   }
+    //   else //Center starting position
+    //   {
+    //     if(myTarget.equals("Front"))
+    //     {
+    //       if(myGamePiece.equals("Hatch"))
+    //       {
+    //         autonomousCommand = new AutoRobotCenterFrontHatch();
+    //       }
+    //       else
+    //       {
+    //         autonomousCommand = new frc.robot.autocommands.AutoDefaultStraight();
+    //       }
+    //     }
+    //     else if(myTarget.equals("Side"))
+    //     {
+    //       if(myGamePiece.equals("Hatch"))
+    //       {
+    //         //autonomousCommand = new AutoRobotCenterSideHatch();
+    //       }
+    //       else
+    //       {
+    //         //autonomousCommand = new AutoRobotCenterSideBall();
+    //       }
+    //     }
+    //     else
+    //     {
+    //       autonomousCommand = new AutoDefaultStraight();
+    //     }
         
-      }
-    }
+    //   }
+    // }
 
-    // schedule the autonomous command
-    if (autonomousCommand != null) {
-      autonomousCommand.start();
-    }
+    // // schedule the autonomous command
+    // if (autonomousCommand != null) {
+    //   autonomousCommand.start();
+    // }
   }
 
 
