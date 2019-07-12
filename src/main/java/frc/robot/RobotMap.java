@@ -16,9 +16,9 @@ package frc.robot;
 public class RobotMap {
 
 	//Motor Controller Constants - Mecanum Drive
-	public static final int BACK_LEFT_MOTOR_ID = 5;
+	public static final int BACK_LEFT_MOTOR_ID = 6;
 	public static final int BACK_RIGHT_MOTOR_ID = 1;
-	public static final int FRONT_LEFT_MOTOR_ID = 4;
+	public static final int FRONT_LEFT_MOTOR_ID = 5;
 	public static final int FRONT_RIGHT_MOTOR_ID = 0;
 
 	//Motor Controller Constants - Mechanism Talons
@@ -41,16 +41,16 @@ public class RobotMap {
 	public static final int HATCH_LOADED_LIMIT_SWITCH_ID = 0;
 
 	//Speed multiplier for more accurate driving in mecanum
-	public static final double MECANUM_TURN_MULTIPLIER = 0.5;
+	public static final double MECANUM_TURN_MULTIPLIER = .8;
 
 	//Motor speeds
-	public static final double AUTO_DRIVE_SPEED = 0.85;
-	public static double DRIVE_SPEED = 0.85;
-	public static final double DRIVE_SPEED_FAST = 0.85;
+	public static final double AUTO_DRIVE_SPEED = 1.0;
+	public static double DRIVE_SPEED = 1.0;
+	public static final double DRIVE_SPEED_FAST = 1.0;
 	public static final double DRIVE_SPEED_SLOW = 0.5;
 
-	public static final double INTAKE_SPEED = -0.8;
-	public static final double OUTTAKE_SPEED = 1.0;
+	public static final double INTAKE_SPEED = -1.0;
+	public static final double OUTTAKE_SPEED = .75;
 
 	public static final double ARM_SPEED_UP = 0.5;
 	public static final double ARM_SPEED_DOWN = -0.1;
@@ -69,8 +69,8 @@ public class RobotMap {
 
 	//PID values for mecanum
 	public static final double kP_Straight = 0.05;
-	public static final double kP_Slew = .4;
-	public static final double kP_Turn = 0.06;
+	public static final double kP_Slew = 1;
+	public static final double kP_Turn = .5;
 	public static final double kI_Straight = 0.0;
 	public static final double kI_Slew = 0.0;
 	public static final double kI_Turn = 0.0;
@@ -88,10 +88,10 @@ public class RobotMap {
 	//Revolution variables for arm lift commands
 	public static final double floorRevs = 0.00;
 	public static final double hatchPickupLevel1Revs = .14;
-	public static final double cargoBallReleaseRevs = 0.82;
+	public static final double cargoBallReleaseRevs = 0.778;
 	public static final double rocket1BallRevs = .5;
 	public static final double rocket2BallRevs = 0;
-	public static final double rocket2HatchRevs = 0;
+	public static final double rocket2HatchRevs = 0.7;
 	public static final double armMaxRevs = .88;//hard stop, probably wrong
 
 	//Extraneous variables

@@ -48,7 +48,7 @@ public class ArmRunAtSpeed extends Command {
     }
 
     //Stop at minimum height
-    if(Robot.oi.armLimitSwitch.get() == true)
+    if(!Robot.oi.armLimitSwitch.get() == true)
     {
       thereYet = true;
     }

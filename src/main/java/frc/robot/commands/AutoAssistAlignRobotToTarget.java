@@ -58,7 +58,7 @@ public class AutoAssistAlignRobotToTarget extends Command {
   @Override
   protected void initialize() {
 
-    stopTime = 1.5;
+    stopTime = 2.0;
 
     if(stopTime != 0)
     {

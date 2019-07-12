@@ -19,9 +19,9 @@ public class AutoAssistHatchPlace extends CommandGroup {
 
     addSequential(new AutoAssistFindAngle());
     //addSequential(new AutoRotate(RobotMap.VISION_TARGET_ANGLE, .5, 0.7, true));
-    addSequential(new AutoAssistAlignRobotToTarget(0.51));
+    addSequential(new AutoAssistAlignRobotToTarget(1));
     addSequential(new ArmToPositionCommand(RobotMap.hatchPickupLevel1Revs));
-    addSequential(new AutoDriveToLimitSwitch(90, RobotMap.VISION_TARGET_ANGLE, 4, 0.25, true));
+    addSequential(new AutoDriveToLimitSwitch(90, RobotMap.VISION_TARGET_ANGLE, 4, 0.35, true));
     addSequential(new ArmToPositionCommand(RobotMap.floorRevs));
     addSequential(new AutoDrive(-90, RobotMap.VISION_TARGET_ANGLE, 1.25, 0.25));
 

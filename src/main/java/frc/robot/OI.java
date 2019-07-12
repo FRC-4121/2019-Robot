@@ -101,9 +101,9 @@ public class OI {
 		cargoShipPlace = new JoystickButton(leftJoy, 3);
 		cargoRocket1Place = new JoystickButton(leftJoy, 5);
 		cargoRocket2Place = new JoystickButton(leftJoy, 6);
-		// hatchPickup = new JoystickButton(rightJoy, 9);
-		// hatchPlace = new JoystickButton(rightJoy, 7);
-		uberHatch = new JoystickButton(leftJoy, 4);
+		hatchPickup = new JoystickButton(rightJoy, 9);
+		hatchPlace = new JoystickButton(rightJoy, 7);
+		//uberHatch = new JoystickButton(leftJoy, 4);
 		hatchLevel2 = new JoystickButton(rightJoy, 11);
 
 		autoAlign = new JoystickButton(leftJoy, 1);
@@ -131,10 +131,10 @@ public class OI {
 		cargoShipPlace.whenPressed(new AutoAssistCargoBallPlace());
 		cargoRocket1Place.whenPressed(new AutoAssistRocket1BallPlace());
 		cargoRocket2Place.whenPressed(new AutoAssistRocket2BallPlace());
-		// hatchPickup.whenPressed(new AutoAssistHatchPickup());
-		// hatchPlace.whenPressed(new AutoAssistHatchPlace());
-		uberHatch.whenPressed(new AutoAssistHatch(10));
-		hatchLevel2.whenPressed(new AutoAssistHatchLevel2());
+		hatchPickup.whenPressed(new AutoAssistHatchPickup());
+		hatchPlace.whenPressed(new AutoAssistHatchPlace());
+		//uberHatch.whenPressed(new AutoAssistHatch(10));
+		hatchLevel2.whenPressed(new ArmToPositionCommand(RobotMap.rocket2HatchRevs));
 		autoAlign.whenPressed(new AutoAssistAlignCommandGroup());
 
 	

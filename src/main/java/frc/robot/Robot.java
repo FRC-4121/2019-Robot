@@ -76,6 +76,8 @@ public class Robot extends TimedRobot {
 
 	//Declare commands
   private Command autonomousCommand;
+
+  public boolean firstDisabled;
   
   //Auto removed for 2019 season in order to stay out of our most-likely-teleoping teammates in sandstorm
   // //Declare Smart dashboard chooser
@@ -138,6 +140,7 @@ public class Robot extends TimedRobot {
     robotStop.setDouble(0.0);
     zeroGyro.setDouble(0.0);
     //zeroDisplace.setDouble(0.0);
+    firstDisabled = false;
     
     //Declare drive configuration
 		/* Allows for simple alteration of drive train type.  
@@ -204,7 +207,7 @@ public class Robot extends TimedRobot {
     driverCamera = camServer.startAutomaticCapture("Driver View", 1);
     driverCamera.setResolution(160, 120);
     driverCamera.setFPS(15);
-    driverCamera.setBrightness(50);
+    driverCamera.setBrightness(40);
 
     ballCamera = camServer.startAutomaticCapture("Ball View", 0);
     ballCamera.setResolution(160, 120);
@@ -267,7 +270,17 @@ public class Robot extends TimedRobot {
    * the robot is disabled.
    */
   @Override
-  public void disabledInit() {}
+  public void disabledInit() 
+  {
+    if(!firstDisabled)
+    {
+      firstDisabled = true;
+    }
+    else
+    {
+      robotStop.setDouble(1);
+    }
+  }
 
 
   @Override

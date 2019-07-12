@@ -34,7 +34,7 @@ public class MecanumDriveTrain extends GenericDriveTrain {
 
   //Initialize mecanum drive
   MecanumDrive mecanumDrive = new MecanumDrive(frontLeftMotor, frontRightMotor, backLeftMotor, backRightMotor);
-
+  
   //Teleop drive method
   @Override
   public void drive(double rightJoyX, double rightJoyY, double rightJoyZ, boolean useGyro) {
@@ -46,7 +46,7 @@ public class MecanumDriveTrain extends GenericDriveTrain {
 
     //Set properties of drive
     mecanumDrive.setSafetyEnabled(false);	
-    mecanumDrive.setMaxOutput(1.0);
+    mecanumDrive.setMaxOutput(0.95);
     
     //Get joystick values and scale
     speedX = rightJoyX * RobotMap.DRIVE_SPEED;
@@ -87,7 +87,7 @@ public class MecanumDriveTrain extends GenericDriveTrain {
 
     mecanumDrive.setSafetyEnabled(false);
 		
-		mecanumDrive.setMaxOutput(0.85);
+		mecanumDrive.setMaxOutput(0.95);
 
     mecanumDrive.drivePolar(speed, angle, rotation);
 
