@@ -79,14 +79,14 @@ public class Robot extends TimedRobot {
 
   public boolean firstDisabled;
   
-  //Auto removed for 2019 season in order to stay out of our most-likely-teleoping teammates in sandstorm
+  //Auto removed for 2019 season in order to stay out of our teammates' ways in sandstorm
   // //Declare Smart dashboard chooser
   // private SendableChooser<String> autoStyleChooser;
   // private SendableChooser<String> autoPositionChooser;
   // private SendableChooser<String> autoTargetChooser;
   // private SendableChooser<String> autoGamePieceChooser;
   
-  //Variables for auto logic
+  // //Variables for auto logic
   // public String myPosition;
   // public String myTarget;
   // public String myStyle = "Sandstorm";
@@ -213,7 +213,6 @@ public class Robot extends TimedRobot {
     ballCamera.setResolution(160, 120);
     ballCamera.setFPS(15);
     ballCamera.setBrightness(50);
-    
 	}
 
 
@@ -313,7 +312,7 @@ public class Robot extends TimedRobot {
     autonomousCommand = null;
 
     //Logic tree for choosing our auto program, currently removed because true auto is not sufficiently
-    //advantageous this season.  We don't want to autonomously get in the way of our alliance teammates.
+    //advantageous in the 2019 season.  We don't want to autonomously get in the way of our alliance teammates.
     // if(myStyle.equals("Sandstorm") || myStyle.equals(null))
     // {
     //   autonomousCommand = null;
@@ -496,7 +495,7 @@ public class Robot extends TimedRobot {
       autonomousCommand.cancel();
     }
 
-    //For testing only.  If used like this in comp it may screw up everything
+    //Zero the arm.  If problems ensue during a match, lower the arm all the way down and comment this out later
     Robot.arm.armMotor.setSelectedSensorPosition(0);
     Robot.arm.armMotor.set(ControlMode.Position, 0);
 

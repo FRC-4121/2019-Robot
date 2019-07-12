@@ -84,7 +84,7 @@ public class RobotMap {
 	public static final double kD_Arm = 1;
 	public static final double kFf_Arm = 0;
 
-
+	//These need to be readjusted due to the change in wheel height!
 	//Revolution variables for arm lift commands
 	public static final double floorRevs = 0.00;
 	public static final double hatchPickupLevel1Revs = .14;
