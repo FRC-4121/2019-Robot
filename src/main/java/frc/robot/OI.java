@@ -98,15 +98,15 @@ public class OI {
 		runIntake = new JoystickButton(rightJoy, 5);
 		runOuttake = new JoystickButton(rightJoy, 6);
 		
-		cargoShipPlace = new JoystickButton(leftJoy, 3);
-		cargoRocket1Place = new JoystickButton(leftJoy, 5);
-		cargoRocket2Place = new JoystickButton(leftJoy, 6);
-		hatchPickup = new JoystickButton(rightJoy, 9);
-		hatchPlace = new JoystickButton(rightJoy, 7);
+		// cargoShipPlace = new JoystickButton(leftJoy, 3);
+		// cargoRocket1Place = new JoystickButton(leftJoy, 5);
+		// cargoRocket2Place = new JoystickButton(leftJoy, 6);
+		// hatchPickup = new JoystickButton(rightJoy, 9);
+		// hatchPlace = new JoystickButton(rightJoy, 7);
 		//uberHatch = new JoystickButton(leftJoy, 4);
-		hatchLevel2 = new JoystickButton(rightJoy, 11);
+		// hatchLevel2 = new JoystickButton(rightJoy, 11);
 
-		autoAlign = new JoystickButton(leftJoy, 1);
+		// autoAlign = new JoystickButton(leftJoy, 1);
 		
 		//Configure Joystick button commands
 		killAutoCommand.whenPressed(new AutoAssistToggleKill());
@@ -128,14 +128,14 @@ public class OI {
 		liftArmToFloor.whenPressed(new ArmToPositionCommand(RobotMap.floorRevs));
 		
 		//Auto assist commands
-		cargoShipPlace.whenPressed(new AutoAssistCargoBallPlace());
-		cargoRocket1Place.whenPressed(new AutoAssistRocket1BallPlace());
-		cargoRocket2Place.whenPressed(new AutoAssistRocket2BallPlace());
-		hatchPickup.whenPressed(new AutoAssistHatchPickup());
-		hatchPlace.whenPressed(new AutoAssistHatchPlace());
-		//uberHatch.whenPressed(new AutoAssistHatch(10));
-		hatchLevel2.whenPressed(new ArmToPositionCommand(RobotMap.rocket2HatchRevs));
-		autoAlign.whenPressed(new AutoAssistAlignCommandGroup());
+		// cargoShipPlace.whenPressed(new AutoAssistCargoBallPlace());
+		// cargoRocket1Place.whenPressed(new AutoAssistRocket1BallPlace());
+		// cargoRocket2Place.whenPressed(new AutoAssistRocket2BallPlace());
+		// hatchPickup.whenPressed(new AutoAssistHatchPickup());
+		// hatchPlace.whenPressed(new AutoAssistHatchPlace());
+		// //uberHatch.whenPressed(new AutoAssistHatch(10));
+		// hatchLevel2.whenPressed(new ArmToPositionCommand(RobotMap.rocket2HatchRevs));
+		// autoAlign.whenPressed(new AutoAssistAlignCommandGroup());
 
 	
 	}
