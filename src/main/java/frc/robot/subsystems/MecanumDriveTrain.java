@@ -66,8 +66,8 @@ public class MecanumDriveTrain extends GenericDriveTrain {
 
     }
 
-    SmartDashboard.putString("Gyro Angle", Double.toString(gyroAngle));
-    SmartDashboard.putString("Gyro Yaw", Double.toString(Robot.gyroYaw.getDouble(0)));
+    // SmartDashboard.putString("Gyro Angle", Double.toString(gyroAngle));
+    // SmartDashboard.putString("Gyro Yaw", Double.toString(Robot.gyroYaw.getDouble(0)));
 
     SmartDashboard.putNumber("Front Left Drive", frontLeftMotor.getOutputCurrent());
     SmartDashboard.putNumber("Back Left Drive", backLeftMotor.getOutputCurrent());

@@ -105,44 +105,44 @@ public class Robot extends TimedRobot {
 	public void robotInit() {
     
 		//Initialize NetworkTables
-		dataTableInstance = NetworkTableInstance.getDefault();
-		visionTable = dataTableInstance.getTable("vision");
-		navxTable = dataTableInstance.getTable("navx");
+		// dataTableInstance = NetworkTableInstance.getDefault();
+		// visionTable = dataTableInstance.getTable("vision");
+		// navxTable = dataTableInstance.getTable("navx");
 
-    //Initialize NetworkTable entries
-    sendVision = visionTable.getEntry("SendVision");
-		robotStop = visionTable.getEntry("RobotStop");
-    writeVideo = visionTable.getEntry("WriteVideo");
-    ballOffset = visionTable.getEntry("BallOffset");
-    ballDistance = visionTable.getEntry("BallDistance");
-    ballAngle = visionTable.getEntry("BallAngle");
-    ballScreenPercent = visionTable.getEntry("BallScreenPercent");
-    foundBall = visionTable.getEntry("FoundBall");
-    tapeOffset = visionTable.getEntry("TapeOffset");
-    foundTape = visionTable.getEntry("FoundTape");
-    visionTargetDistance = visionTable.getEntry("VisionTargetDistance");
-    visionTargetAngle = visionTable.getEntry("VisionTargetAngle");
-    visionTargetOffset = visionTable.getEntry("VisionTargetOffset");
-    foundVisionTarget = visionTable.getEntry("FoundVisionTarget");
+    // //Initialize NetworkTable entries
+    // sendVision = visionTable.getEntry("SendVision");
+		// robotStop = visionTable.getEntry("RobotStop");
+    // writeVideo = visionTable.getEntry("WriteVideo");
+    // ballOffset = visionTable.getEntry("BallOffset");
+    // ballDistance = visionTable.getEntry("BallDistance");
+    // ballAngle = visionTable.getEntry("BallAngle");
+    // ballScreenPercent = visionTable.getEntry("BallScreenPercent");
+    // foundBall = visionTable.getEntry("FoundBall");
+    // tapeOffset = visionTable.getEntry("TapeOffset");
+    // foundTape = visionTable.getEntry("FoundTape");
+    // visionTargetDistance = visionTable.getEntry("VisionTargetDistance");
+    // visionTargetAngle = visionTable.getEntry("VisionTargetAngle");
+    // visionTargetOffset = visionTable.getEntry("VisionTargetOffset");
+    // foundVisionTarget = visionTable.getEntry("FoundVisionTarget");
     
-    driveAngle = navxTable.getEntry("GyroAngle");
-    gyroYaw = navxTable.getEntry("GyroYaw");
-    gyroPitch = navxTable.getEntry("GyroPitch");
-		yVelocity = navxTable.getEntry("YVelocity");
-		xVelocity = navxTable.getEntry("XVelocity");
-		yDisplacement = navxTable.getEntry("YDisplacement");
-		xDisplacement = navxTable.getEntry("XDisplacement");
-    zeroGyro = navxTable.getEntry("ZeroGyro");
-    //zeroDisplace = navxTable.getEntry("ZeroDisplace");
+    // driveAngle = navxTable.getEntry("GyroAngle");
+    // gyroYaw = navxTable.getEntry("GyroYaw");
+    // gyroPitch = navxTable.getEntry("GyroPitch");
+		// yVelocity = navxTable.getEntry("YVelocity");
+		// xVelocity = navxTable.getEntry("XVelocity");
+		// yDisplacement = navxTable.getEntry("YDisplacement");
+		// xDisplacement = navxTable.getEntry("XDisplacement");
+    // zeroGyro = navxTable.getEntry("ZeroGyro");
+    // //zeroDisplace = navxTable.getEntry("ZeroDisplace");
 
-    //Initialize NetworkTable values
-    sendVision.setBoolean(false);
-    robotStop.setDouble(0.0);
-    zeroGyro.setDouble(0.0);
-    //zeroDisplace.setDouble(0.0);
-    firstDisabled = false;
+    // //Initialize NetworkTable values
+    // sendVision.setBoolean(false);
+    // robotStop.setDouble(0.0);
+    // zeroGyro.setDouble(0.0);
+    // //zeroDisplace.setDouble(0.0);
+    // firstDisabled = false;
     
-    //Declare drive configuration
+    // //Declare drive configuration
 		/* Allows for simple alteration of drive train type.  
     * 1: West Coast
     * 2: Mecanum 
@@ -271,14 +271,14 @@ public class Robot extends TimedRobot {
   @Override
   public void disabledInit() 
   {
-    if(!firstDisabled)
-    {
-      firstDisabled = true;
-    }
-    else
-    {
-      robotStop.setDouble(1);
-    }
+    // if(!firstDisabled)
+    // {
+    //   firstDisabled = true;
+    // }
+    // else
+    // {
+    //   robotStop.setDouble(1);
+    // }
   }
 
 
@@ -302,7 +302,7 @@ public class Robot extends TimedRobot {
   @Override
   public void autonomousInit() {
     
-    zeroGyro.setDouble(1.0);
+    //zeroGyro.setDouble(1.0);
 
     // myStyle = autoStyleChooser.getSelected();
     // myPosition = autoPositionChooser.getSelected();
@@ -500,7 +500,7 @@ public class Robot extends TimedRobot {
     Robot.arm.armMotor.set(ControlMode.Position, 0);
 
     //Zero gyro and displacement
-    robotStop.setDouble(0.0);
+    //robotStop.setDouble(0.0);
     //zeroGyro.setDouble(1.0);
     //zeroDisplace.setDouble(1.0);
 
