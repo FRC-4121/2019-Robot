@@ -52,8 +52,8 @@ public class RobotMap {
 	public static final double INTAKE_SPEED = -1.0;
 	public static final double OUTTAKE_SPEED = .75;
 
-	public static final double ARM_SPEED_UP = 0.9;
-	public static final double ARM_SPEED_DOWN = -0.75;
+	public static final double ARM_SPEED_UP = 1.0;
+	public static final double ARM_SPEED_DOWN = -.5;
 
 	public static final double STOP_SPEED = 0;
 
@@ -87,8 +87,8 @@ public class RobotMap {
 	//These need to be readjusted due to the change in wheel height!
 	//Revolution variables for arm lift commands
 	public static final double floorRevs = 0.00;
-	public static final double hatchPickupLevel1Revs = .14;
-	public static final double cargoBallReleaseRevs = 0.778;
+	public static final double hatchPickupLevel1Revs = .22;
+	public static final double cargoBallReleaseRevs = 0.85;
 	public static final double rocket1BallRevs = .5;
 	public static final double rocket2BallRevs = 0;
 	public static final double rocket2HatchRevs = 0.7;

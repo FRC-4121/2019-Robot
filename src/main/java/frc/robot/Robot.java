@@ -207,7 +207,7 @@ public class Robot extends TimedRobot {
     driverCamera = camServer.startAutomaticCapture("Driver View", 1);
     driverCamera.setResolution(160, 120);
     driverCamera.setFPS(15);
-    driverCamera.setBrightness(40);
+    driverCamera.setBrightness(50);
 
     ballCamera = camServer.startAutomaticCapture("Ball View", 0);
     ballCamera.setResolution(160, 120);
